@@ -7,21 +7,21 @@ import { getFirstTitle } from '../cards/cards-list'
 
 const Relation = () => {
   const { id: mangaId } = useParams()
-  const { data: manga } = mangaApi.useMangaByID(mangaId)
+  const { data: manga, isFetching, isLoading } = mangaApi.useMangaByID(mangaId)
 
   const mangasIds = manga?.data?.relationships
     ?.map(id => id.id)
     .filter((id): id is string => id !== undefined)
 
-  const { data: relations } = mangaApi.useMangaSearchMany({
+  const { data: relations, isFetching: isRelationsFetching } = mangaApi.useMangaSearchMany({
     ids: mangasIds,
   })
 
-  function backgroundImageUrl(manga: Manga) {
-    return `/api/proxy?url=https://mangadex.org/covers/${manga.id}/${manga?.relationships?.find(obj => obj.type === 'cover_art')?.attributes?.fileName}`
-  }
+  // function backgroundImageUrl(manga: Manga) {
+  //   return `/api/proxy?url=https://mangadex.org/covers/${manga.id}/${manga?.relationships?.find(obj => obj.type === 'cover_art')?.attributes?.fileName}`
+  // }
 
-  if (!relations) return null
+  if (!relations?.data?.length || isFetching || isRelationsFetching || isLoading) return null
   return (
     <div className="border-1 border-yellow-800 m-1 flex flex-col items-center">
       <h1>Relation Manga</h1>

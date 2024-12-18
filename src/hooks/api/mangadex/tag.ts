@@ -14,7 +14,7 @@ export const tagsApi = {
         })) || [],
       refetchOnMount: false,
       refetchOnWindowFocus: false,
-      staleTime: 100000,
+      staleTime: 1000000,
       retry: 0,
     })
   },

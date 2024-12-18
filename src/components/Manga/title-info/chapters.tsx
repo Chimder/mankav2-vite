@@ -2,12 +2,12 @@ import { Chapter } from '@/shared/api/mangadex/generated'
 import { OffsetFilterTitle } from '@/shared/constants/filters'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import { Link, useParams, useSearchParams } from 'react-router-dom'
 
 import { feedApi } from '@/hooks/api/mangadex/feeds'
 
 import { Skeleton } from '../../ui/skeleton'
 import { PaginationButtons } from './pagination-title'
-import { Link, useParams, useSearchParams } from 'react-router-dom'
 
 dayjs.extend(relativeTime)
 
@@ -21,7 +21,7 @@ const Chapters = () => {
   const [searchParams] = useSearchParams()
   const { id: mangaId } = useParams()
   const name = searchParams.get('name')
-  const currentPage = Number(searchParams.get('page')) ||1
+  const currentPage = Number(searchParams.get('page')) || 1
   const { data: chapters, isFetching } = feedApi.useMangaFeed({
     id: mangaId?.toString(),
     offset: (currentPage - 1) * OffsetFilterTitle,
@@ -63,63 +63,68 @@ const Chapters = () => {
 
   console.log('BOOLE', filteredChapters)
   return (
-    <section className="">
-      <ul className="w-full p-5">
-        {isFetching ? (
-          Array.from({ length: 16 }, (_, index) => (
-            <div
-              key={`skeletonTitle-${index}`}
-              className="mx-0 my-1.5 flex h-[54px] border border-gray-600 p-1"
-            >
-              <Skeleton className="h-full w-full bg-slate-500" />
-            </div>
-          ))
-        ) : filteredChapters.length ? (
-          filteredChapters.map(chapter => (
-            <div
-              className="mx-0 my-1.5 flex min-h-[52px] flex-wrap border border-gray-900 p-1 text-lg hover:border-teal-300"
-              key={chapter.id}
-            >
-              <div className="flex grow flex-wrap items-center">
-                <div>
-                  Ch.{chapter.attributes?.chapter}{' '}
-                  {chapter.attributes?.title
-                    ? `- ${chapter.attributes.title}`
-                    : ''}
-                </div>
-                <div className="ml-4 flex flex-wrap">
-                  {chapter.attributes?.allTranslatedChapter?.map(chap => (
-                    <Link
-                      key={chap.id}
-                      className="ml-4 cursor-pointer text-teal-300 hover:underline"
-                      to={
-                        chap.attributes?.externalUrl ??
-                        `/chapter/${chap.id}?manga=${mangaId}&lang=${chap.attributes?.translatedLanguage}&name=${name}`
-                      }
-                    >
-                      {chap.attributes?.translatedLanguage}
-                    </Link>
-                  ))}
-                </div>
+    <div className="flex flex-col h-full">
+      <div className="flex-grow overflow-y-auto chapters-scrollbar">
+        <ul className="w-full p-5">
+          {isFetching ? (
+            Array.from({ length: 16 }, (_, index) => (
+              <div
+                key={`skeletonTitle-${index}`}
+                className="mx-0 my-1.5 flex h-[54px] border border-gray-600 p-1"
+              >
+                <Skeleton className="h-full w-full bg-slate-500" />
               </div>
+            ))
+          ) : filteredChapters.length ? (
+            filteredChapters.map(chapter => (
+              <div
+                className="mx-0 my-1.5 flex min-h-[52px] flex-wrap border border-gray-900 p-1 text-lg hover:border-teal-300"
+                key={chapter.id}
+              >
+                <div className="flex grow flex-wrap items-center">
+                  <div>
+                    Ch.{chapter.attributes?.chapter}{' '}
+                    {chapter.attributes?.title
+                      ? `- ${chapter.attributes.title}`
+                      : ''}
+                  </div>
+                  <div className="ml-4 flex flex-wrap">
+                    {chapter.attributes?.allTranslatedChapter?.map(chap => (
+                      <Link
+                        key={chap.id}
+                        className="ml-4 cursor-pointer text-teal-300 hover:underline"
+                        to={
+                          chap.attributes?.externalUrl ??
+                          `/chapter/${chap.id}?manga=${mangaId}&lang=${chap.attributes?.translatedLanguage}&name=${name}`
+                        }
+                      >
+                        {chap.attributes?.translatedLanguage}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
 
-              <div className="ml-auto self-end text-right">
-                {chapter.attributes?.publishAt
-                  ? dayjs(chapter.attributes.publishAt).fromNow()
-                  : 'No data'}
+                <div className="ml-auto self-end text-right">
+                  {chapter.attributes?.publishAt
+                    ? dayjs(chapter.attributes.publishAt).fromNow()
+                    : 'No data'}
+                </div>
               </div>
-            </div>
-          ))
-        ) : (
-          <div className="text-white">No chapters</div>
-        )}
-      </ul>
-      <PaginationButtons
-        key="pagin-title"
-        currentPage={currentPage}
-        totalItems={chapters?.total}
-      />
-    </section>
+            ))
+          ) : (
+            <div className="text-white">No chapters</div>
+          )}
+        </ul>
+      </div>
+
+      <div className="sticky bottom-0 left-0 right-0 z-10 bg-background/80 backdrop-blur-sm">
+        <PaginationButtons
+          key="pagin-title"
+          currentPage={currentPage}
+          totalItems={chapters?.total}
+        />
+      </div>
+    </div>
   )
 }
 

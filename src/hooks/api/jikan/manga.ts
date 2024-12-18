@@ -11,7 +11,7 @@ export const jikanMangaApi = {
   useMangaByName: ({ name }: { name: string | null; offset?: number }) => {
     return useQuery<MangaFull>({
       queryKey: [jikanMangaApi.baseKey, name],
-      queryFn: async ({ signal }) => {
+      queryFn: async () => {
         const res = await jikanInstance<{ data: MangaFull[] }>(
           {
             url: '/manga',
@@ -21,7 +21,6 @@ export const jikanMangaApi = {
               limit: 5,
             },
           },
-          { signal },
         )
 
         const foundManga = res.data.find(manga =>
@@ -48,11 +47,11 @@ export const jikanMangaApi = {
   useMangaCharacters: ({ id }: { id?: number }) => {
     return useQuery({
       queryKey: [jikanMangaApi.baseKey, 'chapters', id],
-      queryFn: async ({ signal }) => {
+      queryFn: async () => {
         if (!id) {
           return null
         }
-        return getMangaCharacters(id, { signal })
+        return getMangaCharacters(id)
       },
       refetchOnMount: false,
       enabled: Boolean(id),

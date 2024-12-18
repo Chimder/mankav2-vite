@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { CharacterImages } from '@/shared/api/jikan/generated'
+import { CharacterImages, PeopleImagesJpg } from '@/shared/api/jikan/generated'
 import { usePersoneStore } from '@/store/characters-people'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
 
@@ -10,41 +10,47 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
-import { Separator } from '@/components/ui/separator'
-import DialogCharactersPeople from '@/components/characters-people/dialog'
+import DialogCharactersPeople from '@/components/characters-voices/dialog'
 
+export function getCharacterImg(img?: CharacterImages | PeopleImagesJpg) {
+  return img?.jpg?.image_url ?? undefined
+}
 const Characters = () => {
   const [searchParams] = useSearchParams()
   const name = searchParams.get('name')
-  const { data: manga } = jikanMangaApi.useMangaByName({ name })
-  const { data: characters } = jikanMangaApi.useMangaCharacters({
-    id: manga?.mal_id,
-  })
+  const { data: manga, isFetching: isFetchingManga, isLoading: isLoadingManga } =
+    jikanMangaApi.useMangaByName({ name })
+  const { data: characters, isFetching: isFetchingCharacters, isLoading: isLoadingCharacters } =
+    jikanMangaApi.useMangaCharacters({ id: manga?.mal_id })
+
   const setPersone = usePersoneStore().setPersone
 
-  function getCharacterImg(img?: CharacterImages) {
-    return img?.jpg?.image_url ?? undefined
-  }
+
 
   const [isOpen, setIsOpen] = useState(false)
-
   async function handlePerson(id: number) {
     await setPersone(id, 'character')
     setIsOpen(true)
   }
+
   const firstSixCharacters = characters?.data?.slice(0, 6) || []
   const restCharacters = characters?.data?.slice(6) || []
 
+  const isLoading = isLoadingManga || isLoadingCharacters
+  const isFetching = isFetchingManga || isFetchingCharacters
+  if (isFetching || isLoading || !characters?.data?.length) {
+    return null;
+  }
+
   return (
     <div className="border-1  border-yellow-800 m-1 center flex-col">
-      {characters && <h1 className="text-lg text-yellow-700">Characters</h1>}
+      <h1 className="text-lg text-yellow-700">Characters</h1>
       <div className="">
         <ul className="flex center flex-wrap gap-2">
           {firstSixCharacters.map(character => (
             <div
               className="w-32 flex flex-col items-center"
-              // to={'/'}
-              key={character.character?.name}
+              key={`${character.character?.name} six`}
               onClick={() =>
                 handlePerson(character.character?.mal_id as number)
               }
@@ -77,7 +83,7 @@ const Characters = () => {
                   {restCharacters.map(character => (
                     <div
                       className="w-32 flex flex-col items-center"
-                      key={character.character?.name}
+                      key={`${character.character?.name}rest`}
                       onClick={() =>
                         handlePerson(character.character?.mal_id as number)
                       }

@@ -7,7 +7,7 @@ export default function Header() {
   console.log('HEader')
   // return
   return (
-    <div className="z-1000 w-full bg-header shadow-header">
+    <div className="z-50 h-[64px] sticky top-0 w-full bg-black shadow-header">
       <div className="center relative justify-between border-cyan-200 p-2">
         <div className="center flex-[1_1_33%]">
           <Link

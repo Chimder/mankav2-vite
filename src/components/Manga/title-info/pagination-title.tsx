@@ -2,7 +2,8 @@ import { OffsetFilterTitle } from '@/shared/constants/filters'
 import { cn } from '@/shared/lib/tailwind'
 
 import { Button } from '../../ui/button'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import { getFirstTitle } from '../cards/cards-list'
 
 export const PaginationButtons = ({
   currentPage = 1,
@@ -13,7 +14,8 @@ export const PaginationButtons = ({
   itemsPerPage?: number
   totalItems?: number
 }) => {
-  // const router = useRouter()
+  const [searchParams] = useSearchParams()
+  const name = searchParams.get('name')
   const { id } = useParams()
   const navigate = useNavigate()
   // const id = router.query.id as string
@@ -24,7 +26,7 @@ export const PaginationButtons = ({
 
   const handlePageChange = (page: number) => {
     if (page > 0 && page <= totalPages) {
-      navigate(`/title/${id}?page=${page}`)
+      navigate(`/title/${id}?name=${name}&page=${page}`)
     }
   }
 

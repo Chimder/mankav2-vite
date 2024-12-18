@@ -1,20 +1,18 @@
 import Chapters from '@/components/Manga/title-info/chapters'
-import Characters from '@/components/Manga/title-info/characters'
 import Info from '@/components/Manga/title-info/info'
-import Relation from '@/components/Manga/title-info/relation'
 
 function Title() {
   return (
-    <div className="flex h-full w-full border-green-400 px-[2px] text-white">
-      <div className="order-2 flex w-2/5 flex-col">
-        <div className="flex flex-col">
+    <div className="flex z-10 h-[calc(100vh-64px)] border-green-400 px-[2px] text-white">
+      <div className="order-2 flex w-2/5 flex-col overflow-hidden">
+        <div className="flex chapters-scrollbar flex-col overflow-y-auto">
           <Info />
-          <Characters />
-          <Relation />
         </div>
       </div>
-      <div className="w-3/5 border border-green-400 text-white">
-        <Chapters />
+      <div className="relative flex w-3/5 flex-col border border-green-400 text-white">
+        <div className="flex-grow overflow-y-auto">
+          <Chapters />
+        </div>
       </div>
     </div>
   )

@@ -25,7 +25,7 @@ const InputeSearch = () => {
     setIsListVisible(false)
   })
   return (
-    <section className="relative flex flex-col justify-center">
+    <section className="relative z-[100]  flex flex-col justify-center">
       <div className="flex">
         <input
           className="w-[clamp(200px,34vw,440px)] rounded-2xl border-none bg-gray-600 p-1.5 text-white outline-none placeholder:text-gray-400 focus:border-2 focus:border-cyan-400"
@@ -52,7 +52,7 @@ const InputeSearch = () => {
       </div>
       <ul
         ref={listRef}
-        className="absolute top-[58px] z-[1000] flex min-h-80 w-full flex-col rounded-md bg-black p-1 text-white"
+        className="absolute  top-[58px] z-50 flex min-h-80 w-full flex-col rounded-md bg-black p-1 text-white"
         style={{
           display: isListVisible && searchQuery.length !== 0 ? 'block' : 'none',
         }}
@@ -64,7 +64,7 @@ const InputeSearch = () => {
         ) : searchResults?.data?.length ? (
           searchResults.data.map(manga => (
             <div
-              className="mx-2 my-1 flex cursor-pointer rounded-sm border-[1px] border-indigo-400 bg-transparent"
+              className="mx-2 my-1 z-1000 flex cursor-pointer rounded-sm border-[1px] border-indigo-400 bg-transparent"
               onClick={() => {
                 setSearchQuery('')
                 setIsListVisible(false)
@@ -98,7 +98,6 @@ const InputeSearch = () => {
             </div>
           ))
         ) : searchQuery && !isFetching ? (
-          // Показ сообщения, если ничего не найдено
           <div className="py-4 text-center text-gray-400">
             No results found.
           </div>

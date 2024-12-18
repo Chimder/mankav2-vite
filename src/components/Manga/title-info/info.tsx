@@ -1,8 +1,10 @@
 import dayjs from 'dayjs'
-
-import { jikanMangaApi } from '@/hooks/api/jikan/manga'
-import { mangaApi } from '@/hooks/api/mangadex/manga'
 import { useParams } from 'react-router-dom'
+
+import { mangaApi } from '@/hooks/api/mangadex/manga'
+import Characters from './characters'
+import Relation from './relation'
+
 
 type Props = {}
 
@@ -32,9 +34,7 @@ const Info = (props: Props) => {
           <div className="py-4">
             <div className="mx-0 my-3 text-sm">
               <span className="mb-2.5 mr-1 text-sm">Title:</span>
-              <span className="text-base">
-                {title}
-              </span>
+              <span className="text-base">{title}</span>
             </div>
             <div className="title">
               <span className="head">Created:</span>
@@ -80,6 +80,9 @@ const Info = (props: Props) => {
           </div>
         </div>
       </div>
+
+      <Characters />
+      <Relation />
     </section>
   )
 }
