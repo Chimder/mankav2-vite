@@ -1,9 +1,10 @@
+import { useEffect, useRef } from 'react'
 import { LocalizedString, MangaList } from '@/shared/api/mangadex/generated'
+import { cn } from '@/shared/lib/tailwind'
 import { useCardSwitcherStore } from '@/store/card-switcher'
+import { Link } from 'react-router-dom'
 
 import { Skeleton } from '../../ui/skeleton'
-import { Link } from 'react-router-dom'
-import { cn } from '@/shared/lib/tailwind'
 
 type Props = {
   mangas: MangaList | undefined
@@ -15,7 +16,7 @@ export function getFirstTitle(title?: LocalizedString) {
     return title.en
   }
   if (title && title['ja-ro']) {
-    return title['ja-ro'];
+    return title['ja-ro']
   }
   if (title && typeof title === 'object') {
     const val = Object.values(title)
@@ -26,7 +27,7 @@ const CardsList = ({ mangas, isFetching }: Props) => {
   const cardView = useCardSwitcherStore().type
 
   return (
-    <div>
+    <div className="h-full">
       <ul className={cn(cardView)}>
         {isFetching
           ? Array.from({ length: 10 }).map((_, index) => (

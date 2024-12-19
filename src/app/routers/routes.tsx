@@ -1,6 +1,7 @@
 import Chapter from '@/pages/chapter'
 import Home from '@/pages/home'
 import SearchManga from '@/pages/search'
+import Test from '@/pages/test'
 import Title from '@/pages/title'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
@@ -38,6 +39,10 @@ export default function Routes() {
         {
           path: 'chapter/:id',
           element: <Chapter />,
+        },
+        {
+          path: 'test',
+          element: <Test />,
         },
       ],
     },

@@ -3,6 +3,7 @@ import {
   CharacterFull,
   GetCharacterFullById200,
   GetPersonFullById200,
+  PersonFull,
 } from '@/shared/api/jikan/generated'
 import { usePersoneStore } from '@/store/characters-people'
 
@@ -34,8 +35,6 @@ function DialogCharactersPeople({ isOpen, setIsOpen }: Props) {
   }
 
   console.log('DADTTA', data)
-  console.log('typeee', personeType)
-  console.log('IDDD', personeId)
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
@@ -47,7 +46,7 @@ function DialogCharactersPeople({ isOpen, setIsOpen }: Props) {
         <DialogTitle></DialogTitle>
 
         {personeType === 'voices' ? (
-          <Voices key={`voices`} voices={data?.data as GetPersonFullById200} />
+          <Voices key={`voices`} voices={data?.data as PersonFull} />
         ) : (
           <Characters
             key={`characters`}

@@ -1,38 +1,36 @@
 import React, { ReactElement, Suspense, useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import axios, { AxiosError } from 'axios'
 
 import { jikanMangaApi } from '@/hooks/api/jikan/manga'
 
-// import s from './test.module.css'
+async function searchAnime(query: string, page = 1) {
+  try {
+    const response = await axios.get(
+      `https://api.consumet.org/anime/9anime/${query}`,
+      {
+        params: { page },
+      },
+    )
+    console.log('Результаты поиска:', response.data.results)
+  } catch (error) {
+    console.log('Ошибка поиска аниме:')
+  }
+}
+
+searchAnime('naruto')
 
 function Test() {
-  const name = `WataMote: No Matter How I Look at It, It's You Guys' Fault I'm Not Popular!`
-  const { data } = jikanMangaApi.useMangaByName({ name })
-
-  const { data: characters } = jikanMangaApi.useMangaCharacters({
-    id: data?.mal_id,
+  const { data: test } = useQuery({
+    queryKey: ['dsad'],
+    queryFn: () => searchAnime('dandadan'),
   })
-  console.log(
-    '<><<><<>',
-    `No Matter How I Look at It, It's You Guys' Fault I'm Not Popular!`
-    .toLowerCase()
-    .trim()
-    .includes(
-        name
-          .toLowerCase()
-          .trim(),
-      ),
-  )
-  console.log('TRIMED', name.toLowerCase())
-  console.log('data>>>', data)
+  console.log('data>>>', test)
 
   return (
     <Suspense fallback={<div className="text-5xl text-white">loading....</div>}>
       <div className="h-full w-full">
-        <ul>
-          <li key={data?.mal_id}>
-            <p className="text-white">{data?.mal_id}</p>
-          </li>
-        </ul>
+        <ul></ul>
         <div className="text-6xl text-amber-300">Test text</div>
       </div>
     </Suspense>

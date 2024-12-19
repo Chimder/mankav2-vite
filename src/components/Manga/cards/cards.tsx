@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import Icons from '@/assets/svg/icons'
 import { OffsetFilter } from '@/shared/constants/filters'
 import { cn } from '@/shared/lib/tailwind'
@@ -18,8 +19,7 @@ const Cards = () => {
   const status = useFilterStore().status
   const sortBy = useFilterStore().sortBy
 
-  console.log('SORT', sortBy)
-  console.log('RESET')
+
   const { data: mangas, isFetching } = mangaApi.useMangaSearch({
     status,
     tags,
@@ -39,7 +39,7 @@ const Cards = () => {
 
   console.log('MANGAINFO', mangas)
   return (
-    <section className="flex-[1_1_0%]">
+    <section className="h-full flex-[1_1_0%]">
       <div className="mr-10 flex justify-end pt-2">
         <div
           onClick={() => selectCardFormat('two')}
@@ -61,7 +61,7 @@ const Cards = () => {
         </div>
       </div>
 
-      <div>
+      <div >
         <CardsList mangas={mangas} isFetching={isFetching} />
       </div>
 

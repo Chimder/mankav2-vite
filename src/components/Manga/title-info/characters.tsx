@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/accordion'
 import DialogCharactersPeople from '@/components/characters-voices/dialog'
 
-export function getCharacterImg(img?: CharacterImages | PeopleImagesJpg) {
+export function getCharacterImg(img?: CharacterImages) {
   return img?.jpg?.image_url ?? undefined
 }
 const Characters = () => {
