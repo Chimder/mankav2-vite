@@ -2,30 +2,12 @@ import React, { ReactElement, Suspense, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import axios, { AxiosError } from 'axios'
 
+import { aniwatchApi } from '@/hooks/api/aniwatch/anime'
 import { jikanMangaApi } from '@/hooks/api/jikan/manga'
 
-async function searchAnime(query: string, page = 1) {
-  try {
-    const response = await axios.get(
-      `https://api.consumet.org/anime/9anime/${query}`,
-      {
-        params: { page },
-      },
-    )
-    console.log('Результаты поиска:', response.data.results)
-  } catch (error) {
-    console.log('Ошибка поиска аниме:')
-  }
-}
-
-searchAnime('naruto')
-
 function Test() {
-  const { data: test } = useQuery({
-    queryKey: ['dsad'],
-    queryFn: () => searchAnime('dandadan'),
-  })
-  console.log('data>>>', test)
+  const { data } = aniwatchApi.useAnimeByName({ name: 'Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e 3rd Season' })
+  console.log('data>>>', data)
 
   return (
     <Suspense fallback={<div className="text-5xl text-white">loading....</div>}>
