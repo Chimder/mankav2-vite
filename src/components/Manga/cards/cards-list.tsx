@@ -4,6 +4,8 @@ import { cn } from '@/shared/lib/tailwind'
 import { useCardSwitcherStore } from '@/store/card-switcher'
 import { Link } from 'react-router-dom'
 
+import { PATH } from '@/app/routers/path-constants'
+
 import { Skeleton } from '../../ui/skeleton'
 
 type Props = {
@@ -42,7 +44,7 @@ const CardsList = ({ mangas, isFetching }: Props) => {
             ? mangas?.data?.map(manga => (
                 <Link
                   className="flex w-[280px] flex-col overflow-hidden rounded-xl border-1 border-red-200 pb-1 text-white hover:border-red-400"
-                  to={`/title/${manga?.id}?name=${getFirstTitle(manga.attributes?.title)}`}
+                  to={`${PATH.MANGA.getTitlePath(manga?.id)}?name=${getFirstTitle(manga.attributes?.title)}`}
                   key={manga?.id}
                 >
                   <img
@@ -61,7 +63,7 @@ const CardsList = ({ mangas, isFetching }: Props) => {
             : mangas?.data?.map(manga => (
                 <Link
                   className="flex overflow-hidden border-1 border-gray-500 text-white"
-                  to={`/title/${manga?.id}?name=${getFirstTitle(manga.attributes?.title)}`}
+                  to={`${PATH.MANGA.getTitlePath(manga.id)}?name=${getFirstTitle(manga.attributes?.title)}`}
                   key={manga?.id}
                 >
                   <img

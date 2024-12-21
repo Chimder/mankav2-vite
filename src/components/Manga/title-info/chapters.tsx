@@ -8,6 +8,7 @@ import { feedApi } from '@/hooks/api/mangadex/feeds'
 
 import { Skeleton } from '../../ui/skeleton'
 import { PaginationButtons } from './pagination-title'
+import { PATH } from '@/app/routers/path-constants'
 
 dayjs.extend(relativeTime)
 
@@ -95,7 +96,7 @@ const Chapters = () => {
                         className="ml-4 cursor-pointer text-teal-300 hover:underline"
                         to={
                           chap.attributes?.externalUrl ??
-                          `/chapter/${chap.id}?manga=${mangaId}&lang=${chap.attributes?.translatedLanguage}&name=${name}`
+                          `${PATH.MANGA.getChapterPath(chap.id)}?manga=${mangaId}&lang=${chap.attributes?.translatedLanguage}&name=${name}`
                         }
                       >
                         {chap.attributes?.translatedLanguage}

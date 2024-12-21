@@ -2,7 +2,7 @@ import { findBestMatches } from '@/shared/utils/find-best-matches'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
-import { AnimeByNameType } from './types'
+import { AnimeByIdType, AnimeByNameType, AnimeVideoType } from './types'
 
 const url = import.meta.env.VITE_ANIWATCH!
 const instance = axios.create({
@@ -40,11 +40,13 @@ export const aniwatchApi = {
     })
   },
 
-  useAnimeInfoById: ({ id }: { id: string }) => {
+  useAnimeInfoById: ({ id }: { id?: string }) => {
     return useQuery({
       queryKey: [aniwatchApi.baseKey, 'info', id],
       queryFn: async ({ signal }) => {
-        const res = await instance.get(`/anime/${id}`, { signal })
+        const res = await instance.get<AnimeByIdType>(`/anime/${id}`, {
+          signal,
+        })
         return res.data
       },
       refetchOnMount: false,
@@ -54,17 +56,17 @@ export const aniwatchApi = {
       retry: 0,
     })
   },
-  useAnimeEpisodesById: ({ episodeId }: { episodeId: string }) => {
+  useAnimeEpisodesById: ({ animeId }: { animeId?: string }) => {
     return useQuery({
-      queryKey: [aniwatchApi.baseKey, 'episodes', episodeId],
+      queryKey: [aniwatchApi.baseKey, 'episodes', animeId],
       queryFn: async ({ signal }) => {
-        const res = await instance.get(`/anime/${episodeId}/episodes`, {
+        const res = await instance.get<AnimeVideoType>(`/anime/${animeId}/episodes`, {
           signal,
         })
         return res.data
       },
       refetchOnMount: false,
-      enabled: Boolean(episodeId),
+      enabled: Boolean(animeId),
       refetchOnWindowFocus: false,
       staleTime: 100000,
       retry: 0,

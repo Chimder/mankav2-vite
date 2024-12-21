@@ -3,11 +3,11 @@ import { useFilterStore } from '@/store/filter-slice'
 
 import { mangaApi } from '@/hooks/api/mangadex/manga'
 import { tagsApi } from '@/hooks/api/mangadex/tag'
+import { queryClient } from '@/app/providers/tanstack-query'
 
 import { Separator } from '../../ui/separator'
 import AccordionSection from './accordion'
 import AccordionSortBy from './accordion-sort-by'
-import { queryClient } from '@/app/providers/tanstack-query'
 
 export const FilterMangaBar = () => {
   const reset = useFilterStore().reset
@@ -29,7 +29,7 @@ export const FilterMangaBar = () => {
   }
   console.log('TESADSa', tags)
   return (
-    <div className="filterBar pt-[64px] sticky right-1 top-0 flex h-screen w-[300px] flex-col gap-2.5 self-start overflow-y-scroll bg-black p-2.5 text-white">
+    <div className="filterBar sticky right-1 top-0 flex h-screen w-[300px] flex-col gap-2.5 self-start overflow-y-scroll bg-black p-2.5 pt-[64px] text-white">
       <div className="flex w-full">
         <div
           className="center mr-1 w-8/12 cursor-pointer rounded-md border-1 border-green-400 bg-transparent px-3 py-2 text-base text-white decoration-green-400 hover:bg-transparent hover:underline"

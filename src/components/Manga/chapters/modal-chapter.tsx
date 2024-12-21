@@ -6,6 +6,8 @@ import {
 import { cn } from '@/shared/lib/tailwind'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
 
+import { PATH } from '@/app/routers/path-constants'
+
 import {
   Dialog,
   DialogContent,
@@ -35,10 +37,6 @@ function ModalChapter({ chapters, children, chapterData }: Props) {
   const { id: chapterId } = useParams()
   const lang = searchParams.get('lang')
   const mangaId = searchParams.get('manga')
-  // const lang = searchParams.query?.lang as string
-  // const chapterId = router.query?.id as string
-  // const mangaId = router.query?.manga as string
-  console.log('DAD<<<<<', chapterData)
 
   const [searchPageQuery, setSearchPageQuery] = useState('')
   const [highlightedChapter, setHighlightedChapter] = useState<string | null>(
@@ -77,14 +75,14 @@ function ModalChapter({ chapters, children, chapterData }: Props) {
         <div className="flex flex-col">
           <Link
             className="font-logo mr-10 cursor-pointer text-6xl text-cyan-300 decoration-cyan-300 hover:underline"
-            to={'/'}
+            to={PATH.MANGA.MAIN}
           >
             <h1 className="">MankA</h1>
           </Link>
 
           <Link
             className="mt-4 text-2xl text-white decoration-white hover:underline"
-            to={`/title/${mangaId}?name=${title}`}
+            to={`${PATH.MANGA.getTitlePath(mangaId)}?name=${title}`}
           >
             {title}
           </Link>
@@ -111,7 +109,7 @@ function ModalChapter({ chapters, children, chapterData }: Props) {
                 ref={el => {
                   if (chapter) refs.current[chapter] = el
                 }}
-                to={`/chapter/${id}?manga=${mangaId}&lang=${lang}&name=${title}`}
+                to={`${PATH.MANGA.getChapterPath(id)}?manga=${mangaId}&lang=${lang}&name=${title}`}
               >
                 <option value={`${count}`}>Chapter {chapter}</option>
               </Link>

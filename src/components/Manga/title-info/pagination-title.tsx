@@ -1,8 +1,10 @@
 import { OffsetFilterTitle } from '@/shared/constants/filters'
 import { cn } from '@/shared/lib/tailwind'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
+
+import { PATH } from '@/app/routers/path-constants'
 
 import { Button } from '../../ui/button'
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { getFirstTitle } from '../cards/cards-list'
 
 export const PaginationButtons = ({
@@ -26,7 +28,7 @@ export const PaginationButtons = ({
 
   const handlePageChange = (page: number) => {
     if (page > 0 && page <= totalPages) {
-      navigate(`/title/${id}?name=${name}&page=${page}`)
+      navigate(`${PATH.MANGA.getTitlePath(id)}?name=${name}&page=${page}`)
     }
   }
 

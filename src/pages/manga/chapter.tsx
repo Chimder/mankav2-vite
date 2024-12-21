@@ -7,7 +7,7 @@ import usePageTrack from '@/hooks/use-chapter-tracker'
 import ExternalChapter from '@/components/external-chapter'
 import ModalChapter from '@/components/Manga/chapters/modal-chapter'
 
-function Chapter() {
+function MangaChapter() {
   const [searchParams] = useSearchParams()
   const { id } = useParams()
   const lang = searchParams.get('lang') as string
@@ -90,7 +90,7 @@ function Chapter() {
   )
 }
 
-Chapter.getLayout = function getLayout(page: ReactElement) {
+MangaChapter.getLayout = function getLayout(page: ReactElement) {
   return <>{page}</>
 }
-export default Chapter
+export default MangaChapter

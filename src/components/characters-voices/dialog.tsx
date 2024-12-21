@@ -39,7 +39,7 @@ function DialogCharactersPeople({ isOpen, setIsOpen }: Props) {
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent
-        className="max-w-[1200px] w-[80vw] h-[90vh] flex flex-col items-center justify-center p-2"
+        className="flex h-[90vh] w-[80vw] max-w-[1200px] flex-col items-center justify-center p-2"
         onPointerDownOutside={handleClose}
         onEscapeKeyDown={handleClose}
       >

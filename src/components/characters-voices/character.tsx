@@ -2,6 +2,8 @@ import { CharacterFull } from '@/shared/api/jikan/generated'
 import { usePersoneStore } from '@/store/characters-people'
 import { Link } from 'react-router-dom'
 
+import { PATH } from '@/app/routers/path-constants'
+
 import { getCharacterImg } from '../Manga/title-info/characters'
 
 type Props = {
@@ -15,7 +17,6 @@ function Characters({ character }: Props) {
     setPersone(getPeople()?.mal_id as number, 'voices')
   }
 
-
   function getPeople() {
     return (
       character?.voices &&
@@ -24,10 +25,10 @@ function Characters({ character }: Props) {
   }
   if (!character) return null
   return (
-    <section className="w-full h-full overflow-y-scroll filterBar">
-      <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 mb-6">
+    <section className="filterBar h-full w-full overflow-y-scroll">
+      <div className="mb-6 flex flex-col space-y-4 md:flex-row md:space-x-6 md:space-y-0">
         <img
-          className="w-56 h-72 mx-auto md:mx-0 object-cover"
+          className="mx-auto h-72 w-56 object-cover md:mx-0"
           src={getCharacterImg(character.images)}
         />
         <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2">
@@ -53,24 +54,24 @@ function Characters({ character }: Props) {
       </div>
 
       <div className="w-full">
-        <h1 className="text-xl font-semibold mb-4">Anime Roles</h1>
+        <h1 className="mb-4 text-xl font-semibold">Anime Roles</h1>
         <div className="space-y-4">
           {character.anime?.map(manga => (
             <div
               key={manga.anime?.title}
-              className="group flex flex-col items-center justify-between w-full border border-border p-4 rounded-lg hover:bg-accent/10 transition-colors md:flex-row"
+              className="group flex w-full flex-col items-center justify-between rounded-lg border border-border p-4 transition-colors hover:bg-accent/10 md:flex-row"
             >
               <label
-                className="flex items-center space-x-4 mb-2 md:mb-0 cursor-pointer"
+                className="mb-2 flex cursor-pointer items-center space-x-4 md:mb-0"
                 // onClick={() => handleReset()}
               >
                 <img
-                  className="w-20 h-24 object-cover rounded"
+                  className="h-24 w-20 rounded object-cover"
                   src={getCharacterImg(manga.anime?.images)}
                   alt={manga.role}
                 />
                 <div>
-                  <div className="font-medium group-hover:text-primary transition-colors ">
+                  <div className="font-medium transition-colors group-hover:text-primary">
                     {manga.anime?.title}
                   </div>
                   <div className="text-muted-foreground">{manga.role}</div>
@@ -85,7 +86,7 @@ function Characters({ character }: Props) {
                 </div>
                 {getPeople()?.images?.jpg?.image_url && (
                   <img
-                    className="w-20 h-24 object-cover rounded cursor-pointer"
+                    className="h-24 w-20 cursor-pointer rounded object-cover"
                     src={getPeople()?.images?.jpg?.image_url!}
                     alt="Voice Actor"
                   />
@@ -96,27 +97,27 @@ function Characters({ character }: Props) {
         </div>
       </div>
 
-      <div className="w-full mt-6">
-        <h1 className="text-xl font-semibold mb-4">Manga Roles</h1>
+      <div className="mt-6 w-full">
+        <h1 className="mb-4 text-xl font-semibold">Manga Roles</h1>
         <div className="space-y-4">
           {character.manga?.map(manga => (
             <div
               key={`${manga.manga?.title}mangaa`}
-              className="group flex flex-col md:flex-row items-center justify-between w-full border border-border p-4 rounded-lg hover:bg-accent/10 transition-colors"
+              className="group flex w-full flex-col items-center justify-between rounded-lg border border-border p-4 transition-colors hover:bg-accent/10 md:flex-row"
             >
               <Link
-                className="flex items-center space-x-4 mb-2 md:mb-0 cursor-pointer"
-                to={`/`}
-                // to={`/title/${manga?.id}?name=${getFirstTitle(manga.attributes?.title)}`}
+                className="mb-2 flex cursor-pointer items-center space-x-4 md:mb-0"
+                to={'/'}
+                // to={`${PATH.MANGA.getTitlePath(manga.manga.)}/title/${manga?.id}?name=${getFirstTitle(manga.attributes?.title)}`}
                 // onClick={() => handleReset()}
               >
                 <img
-                  className="w-20 h-24 object-cover rounded cursor-pointer "
+                  className="h-24 w-20 cursor-pointer rounded object-cover"
                   src={getCharacterImg(manga.manga?.images)}
                   alt={manga.manga?.title}
                 />
                 <div>
-                  <div className="font-medium group-hover:text-primary transition-colors cursor-pointer">
+                  <div className="cursor-pointer font-medium transition-colors group-hover:text-primary">
                     {manga.manga?.title}
                   </div>
                   <div className="text-muted-foreground">{manga.role}</div>
@@ -128,7 +129,7 @@ function Characters({ character }: Props) {
                 </div>
                 {getPeople()?.images?.jpg?.image_url && (
                   <img
-                    className="w-20 h-24 object-cover rounded cursor-pointer "
+                    className="h-24 w-20 cursor-pointer rounded object-cover"
                     src={getPeople()?.images?.jpg?.image_url!}
                     alt="Voice Actor"
                   />

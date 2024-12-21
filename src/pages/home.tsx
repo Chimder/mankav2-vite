@@ -1,7 +1,11 @@
-export default function Home() {
+import React from 'react'
+
+type Props = {}
+
+function Home({}: Props) {
   return (
-    <div className="bg-black text-white">
-      <footer>Homeeee</footer>
-    </div>
+    <div>Home</div>
   )
 }
+
+export default Home

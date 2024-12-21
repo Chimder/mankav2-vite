@@ -19,7 +19,6 @@ const Cards = () => {
   const status = useFilterStore().status
   const sortBy = useFilterStore().sortBy
 
-
   const { data: mangas, isFetching } = mangaApi.useMangaSearch({
     status,
     tags,
@@ -61,7 +60,7 @@ const Cards = () => {
         </div>
       </div>
 
-      <div >
+      <div>
         <CardsList mangas={mangas} isFetching={isFetching} />
       </div>
 

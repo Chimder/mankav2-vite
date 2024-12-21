@@ -3,7 +3,7 @@ import { ScrollRestoration } from 'react-router-dom'
 import Chapters from '@/components/Manga/title-info/chapters'
 import Info from '@/components/Manga/title-info/info'
 
-function Title() {
+function MangaTitle() {
   return (
     <div className="flex z-10 h-[calc(100vh-64px)] border-green-400 px-[2px] text-white">
       <ScrollRestoration />
@@ -21,4 +21,4 @@ function Title() {
   )
 }
 
-export default Title
+export default MangaTitle

@@ -2,7 +2,7 @@ import Cards from '@/components/Manga/cards/cards'
 import { FilterMangaBar } from '@/components/Manga/filter-manga-bar/filter-manga-bar'
 import { ScrollRestoration } from 'react-router-dom'
 
-function SearchManga() {
+function MangaSearch() {
   return (
     <div className="flex w-full h-full flex-col items-center bg-black ">
       <div className="flex w-full h-full">
@@ -14,4 +14,4 @@ function SearchManga() {
   )
 }
 
-export default SearchManga
+export default MangaSearch

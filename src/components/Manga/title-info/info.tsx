@@ -2,9 +2,9 @@ import dayjs from 'dayjs'
 import { useParams } from 'react-router-dom'
 
 import { mangaApi } from '@/hooks/api/mangadex/manga'
+
 import Characters from './characters'
 import Relation from './relation'
-
 
 type Props = {}
 
@@ -24,7 +24,7 @@ const Info = (props: Props) => {
 
   return (
     <section className="">
-      <div className=" flex flex-col items-center justify-center border-[1px] border-green-400">
+      <div className="flex flex-col items-center justify-center border-[1px] border-green-400">
         <img
           className="relative z-10 h-[440px] w-[310px]"
           src={backgroundImageUrl}

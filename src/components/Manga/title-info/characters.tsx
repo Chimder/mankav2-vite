@@ -18,14 +18,18 @@ export function getCharacterImg(img?: CharacterImages) {
 const Characters = () => {
   const [searchParams] = useSearchParams()
   const name = searchParams.get('name')
-  const { data: manga, isFetching: isFetchingManga, isLoading: isLoadingManga } =
-    jikanMangaApi.useMangaByName({ name })
-  const { data: characters, isFetching: isFetchingCharacters, isLoading: isLoadingCharacters } =
-    jikanMangaApi.useMangaCharacters({ id: manga?.mal_id })
+  const {
+    data: manga,
+    isFetching: isFetchingManga,
+    isLoading: isLoadingManga,
+  } = jikanMangaApi.useMangaByName({ name })
+  const {
+    data: characters,
+    isFetching: isFetchingCharacters,
+    isLoading: isLoadingCharacters,
+  } = jikanMangaApi.useMangaCharacters({ id: manga?.mal_id })
 
   const setPersone = usePersoneStore().setPersone
-
-
 
   const [isOpen, setIsOpen] = useState(false)
   async function handlePerson(id: number) {
@@ -39,30 +43,30 @@ const Characters = () => {
   const isLoading = isLoadingManga || isLoadingCharacters
   const isFetching = isFetchingManga || isFetchingCharacters
   if (isFetching || isLoading || !characters?.data?.length) {
-    return null;
+    return null
   }
 
   return (
-    <div className="border-1  border-yellow-800 m-1 center flex-col">
+    <div className="center m-1 flex-col border-1 border-yellow-800">
       <h1 className="text-lg text-yellow-700">Characters</h1>
       <div className="">
-        <ul className="flex center flex-wrap gap-2">
+        <ul className="center flex flex-wrap gap-2">
           {firstSixCharacters.map(character => (
             <div
-              className="w-32 flex flex-col items-center"
+              className="flex w-32 flex-col items-center"
               key={`${character.character?.name} six`}
               onClick={() =>
                 handlePerson(character.character?.mal_id as number)
               }
             >
-              <div className="w-32 h-40 mb-2 overflow-hidden flex items-center justify-center">
+              <div className="mb-2 flex h-40 w-32 items-center justify-center overflow-hidden">
                 <img
-                  className="w-full h-full object-cover"
+                  className="h-full w-full object-cover"
                   src={getCharacterImg(character.character?.images)}
                   alt={character.character?.name}
                 />
               </div>
-              <p className="text-center text-sm line-clamp-2 h-10">
+              <p className="line-clamp-2 h-10 text-center text-sm">
                 {character.character?.name}
               </p>
             </div>
@@ -74,28 +78,28 @@ const Characters = () => {
           <Accordion
             type="single"
             collapsible
-            className="w-full border-0 mb-1 mt-4"
+            className="mb-1 mt-4 w-full border-0"
           >
             <AccordionItem value="all-characters border-0">
-              <AccordionTrigger className="flex border-0 justify-center w-6 h-6"></AccordionTrigger>
+              <AccordionTrigger className="flex h-6 w-6 justify-center border-0"></AccordionTrigger>
               <AccordionContent className="border-0">
-                <ul className="flex center flex-wrap gap-2">
+                <ul className="center flex flex-wrap gap-2">
                   {restCharacters.map(character => (
                     <div
-                      className="w-32 flex flex-col items-center"
+                      className="flex w-32 flex-col items-center"
                       key={`${character.character?.name}rest`}
                       onClick={() =>
                         handlePerson(character.character?.mal_id as number)
                       }
                     >
-                      <div className="w-32 h-40 mb-2 overflow-hidden flex items-center justify-center">
+                      <div className="mb-2 flex h-40 w-32 items-center justify-center overflow-hidden">
                         <img
-                          className="w-full h-full object-cover"
+                          className="h-full w-full object-cover"
                           src={getCharacterImg(character.character?.images)}
                           alt={character.character?.name}
                         />
                       </div>
-                      <p className="text-center text-sm line-clamp-2 h-10">
+                      <p className="line-clamp-2 h-10 text-center text-sm">
                         {character.character?.name}
                       </p>
                     </div>

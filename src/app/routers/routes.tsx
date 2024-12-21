@@ -1,8 +1,10 @@
-import Chapter from '@/pages/chapter'
+import AnimeMain from '@/pages/anime'
+import AnimeTitle from '@/pages/anime/title'
 import Home from '@/pages/home'
-import SearchManga from '@/pages/search'
-import Test from '@/pages/test'
-import Title from '@/pages/title'
+import MangaMain from '@/pages/manga'
+import MangaChapter from '@/pages/manga/chapter'
+import MangaSearch from '@/pages/manga/search'
+import MangaTitle from '@/pages/manga/title'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import Layout from './layout'
@@ -15,34 +17,50 @@ export default function Routes() {
         {
           path: '/',
           element: <Home />,
-          // async lazy() {
-          //   let { loader, Home } = await import('../../pages/home')
-          //   return { loader: loader(queryClient), Component: Home }
-          // },
         },
         {
-          path: 'search',
-          element: <SearchManga />,
-          // async lazy() {
-          //   let { loader, Streamer } = await import('../../pages/streamer')
-          //   return { loader: loader(queryClient), Component: Streamer }
-          // },
+          path: 'manga',
+          // element: <MangaLayout />,
+          children: [
+            {
+              path: '',
+              element: <MangaMain />,
+            },
+            {
+              path: 'search',
+              element: <MangaSearch />,
+            },
+            {
+              path: 'title/:id',
+              element: <MangaTitle />,
+            },
+            {
+              path: 'chapter/:id',
+              element: <MangaChapter />,
+            },
+          ],
         },
         {
-          path: 'chapter/:id',
-          element: <Chapter />,
-        },
-        {
-          path: 'title/:id',
-          element: <Title />,
-        },
-        {
-          path: 'chapter/:id',
-          element: <Chapter />,
-        },
-        {
-          path: 'test',
-          element: <Test />,
+          path: 'anime',
+          // element: <AnimeLayout />,
+          children: [
+            {
+              path: '',
+              element: <AnimeMain />,
+            },
+            {
+              path: 'search',
+              // element: <AnimeSearch />,
+            },
+            {
+              path: 'title/:id',
+              element: <AnimeTitle />,
+            },
+            {
+              path: 'chapter/:id',
+              // element: <AnimeChapter />,
+            },
+          ],
         },
       ],
     },

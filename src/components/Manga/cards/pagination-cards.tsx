@@ -1,7 +1,9 @@
 import { cn } from '@/shared/lib/tailwind'
+import { useNavigate } from 'react-router-dom'
+
+import { PATH } from '@/app/routers/path-constants'
 
 import { Button } from '../../ui/button'
-import { useNavigate } from 'react-router-dom'
 
 export const PaginationButtons = ({
   currentPage = 1,
@@ -16,7 +18,7 @@ export const PaginationButtons = ({
 
   const handlePageChange = (page: number) => {
     if (page > 0 && page <= totalPages) {
-      navigate(`/search?page=${page}`)
+      navigate(`${PATH.MANGA.SEARCH}?page=${page}`)
     }
   }
 

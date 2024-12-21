@@ -43,3 +43,121 @@ export interface Episodes2 {
 }
 
 export interface SearchFilters {}
+
+// /////////////////////
+export interface AnimeByIdType {
+  success: boolean
+  data: AnimeByIdData
+}
+
+export interface AnimeByIdData {
+  anime: AnimeById
+  seasons: Season[]
+  mostPopularAnimes: any[]
+  relatedAnimes: RelatedAnime[]
+  recommendedAnimes: RecommendedAnime[]
+}
+
+export interface AnimeById {
+  info: Info
+  moreInfo: MoreInfo
+}
+
+export interface Info {
+  id: string
+  anilistId: number
+  malId: number
+  name: string
+  poster: string
+  description: string
+  stats: Stats
+  promotionalVideos: PromotionalVideo[]
+  charactersVoiceActors: any[]
+}
+
+export interface Stats {
+  rating: string
+  quality: string
+  episodes: Episodes
+  type: string
+  duration: string
+}
+
+export interface Episodes {
+  sub: number
+  dub: number
+}
+
+export interface PromotionalVideo {
+  title: string
+  source: string
+  thumbnail: string
+}
+
+export interface MoreInfo {
+  japanese: string
+  synonyms: string
+  aired: string
+  premiered: string
+  duration: string
+  status: string
+  malscore: string
+  genres: string[]
+  studios: string
+  producers: string[]
+}
+
+export interface Season {
+  id: string
+  name: string
+  title: string
+  poster: string
+  isCurrent: boolean
+}
+
+export interface RelatedAnime {
+  id: string
+  name: string
+  jname: string
+  poster: string
+  episodes: Episodes2
+  type: string
+}
+
+export interface Episodes2 {
+  sub: number
+  dub: number
+}
+
+export interface RecommendedAnime {
+  id: string
+  name: string
+  jname: string
+  poster: string
+  duration: string
+  type: string
+  rating?: string
+  episodes: Episodes3
+}
+
+export interface Episodes3 {
+  sub: number
+  dub?: number
+}
+///////////////video
+export interface AnimeVideoType {
+  success: boolean
+  data: AnimeVideoData
+}
+
+export interface AnimeVideoData {
+  totalEpisodes: number
+  episodes: VideoEpisode[]
+}
+
+export interface VideoEpisode {
+  title: string
+  episodeId: string
+  number: number
+  isFiller: boolean
+}

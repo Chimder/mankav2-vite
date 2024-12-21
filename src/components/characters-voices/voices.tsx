@@ -1,6 +1,9 @@
+import { useState } from 'react'
 import { PeopleImages, PersonFull } from '@/shared/api/jikan/generated'
 import { usePersoneStore } from '@/store/characters-people'
 import dayjs from 'dayjs'
+
+import { DialogAnime } from './dialog-anime'
 
 type Props = {
   voices: PersonFull
@@ -13,16 +16,25 @@ export function getPersoneImg(img?: PeopleImages) {
 function Voices({ voices }: Props) {
   const setPersone = usePersoneStore().setPersone
 
+  const [animeName, setAnimeName] = useState('')
+  const [isOpen, setIsOpen] = useState(false)
+  function handleAnimeName(name?: string) {
+    if (!name) return null
+    setAnimeName(name)
+    setIsOpen(true)
+  }
+
   function handleSetCharacter(characterId?: number) {
     if (!characterId) return null
     setPersone(characterId, 'character')
   }
+
   if (!voices) return null
   return (
-    <section className="w-full h-full overflow-y-scroll filterBar">
-      <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 mb-6">
+    <section className="filterBar h-full w-full overflow-y-scroll">
+      <div className="mb-6 flex flex-col space-y-4 md:flex-row md:space-x-6 md:space-y-0">
         <img
-          className="w-56 h-72 mx-auto md:mx-0 object-cover"
+          className="mx-auto h-72 w-56 object-cover md:mx-0"
           src={getPersoneImg(voices.images)}
         />
         <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2">
@@ -45,11 +57,14 @@ function Voices({ voices }: Props) {
           voices.voices.map(anime => (
             <div
               key={`${anime.character?.name} ${anime.anime?.title} ${anime.character?.mal_id} voicesAnime`}
-              className="group flex flex-co mb-2 items-center justify-between w-full border border-border p-4 rounded-lg hover:bg-accent/10 transition-colors md:flex-row"
+              className="flex-co group mb-2 flex w-full items-center justify-between rounded-lg border border-border p-4 transition-colors hover:bg-accent/10 md:flex-row"
             >
-              <div className="center">
+              <div
+                onClick={() => handleAnimeName(anime.anime?.title)}
+                className="center"
+              >
                 <img
-                  className="w-20 h-24 object-cover rounded"
+                  className="h-24 w-20 rounded object-cover"
                   src={getPersoneImg(anime.anime?.images)}
                 />
                 <div className="ml-4">{anime.anime?.title}</div>
@@ -59,18 +74,24 @@ function Voices({ voices }: Props) {
                 onClick={() => handleSetCharacter(anime.character?.mal_id)}
                 className="center cursor-pointer"
               >
-                <div className="flex flex-col items-end mr-4">
+                <div className="mr-4 flex flex-col items-end">
                   <div>{anime.character?.name}</div>
                   <div>{anime.role}</div>
                 </div>
                 <img
-                  className="w-20 h-24 object-cover rounded"
+                  className="h-24 w-20 rounded object-cover"
                   src={getPersoneImg(anime.character?.images)}
                 />
               </div>
             </div>
           ))}
       </div>
+      <DialogAnime
+        name={animeName}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        key={'dialogAnime'}
+      />
     </section>
   )
 }
