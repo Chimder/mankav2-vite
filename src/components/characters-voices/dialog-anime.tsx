@@ -28,7 +28,10 @@ export function DialogAnime({ isOpen, setIsOpen, name }: Props) {
         <DialogTitle></DialogTitle>
         <div className="flex justify-evenly">
           {data?.map(anime => (
-            <Link to={`${PATH.ANIME.getTitlePath(anime.id)}`}>
+            <Link
+              key={`${anime.id}${anime.name}`}
+              to={`${PATH.ANIME.getTitlePath(anime.id)}`}
+            >
               <img src={anime.poster} alt="" />
               <h1>{anime.name}</h1>
             </Link>

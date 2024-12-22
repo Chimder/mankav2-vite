@@ -11,7 +11,7 @@ function AnimeVideo() {
   // const {data} = aniwatchApi.useAnimeEpisodeSources({animeEpisodeId,catygory,server})
   // const {data} = aniwatchApi.useAnimeEpisodesServers({episodeId})
   return (
-    <div className="h-full overflow-hidden pb-6">
+    <div className="h-full overflow-hidden overflow-y-scroll pb-6">
       <EpisodesList
         key={`${videoList?.data?.totalEpisodes}${id}`}
         video={videoList?.data}

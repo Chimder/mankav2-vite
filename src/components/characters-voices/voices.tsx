@@ -36,6 +36,7 @@ function Voices({ voices }: Props) {
         <img
           className="mx-auto h-72 w-56 object-cover md:mx-0"
           src={getPersoneImg(voices.images)}
+          alt=''
         />
         <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2">
           <dt className="font-bold">Name:</dt>
@@ -66,6 +67,7 @@ function Voices({ voices }: Props) {
                 <img
                   className="h-24 w-20 rounded object-cover"
                   src={getPersoneImg(anime.anime?.images)}
+                  alt=''
                 />
                 <div className="ml-4">{anime.anime?.title}</div>
               </div>
@@ -81,6 +83,7 @@ function Voices({ voices }: Props) {
                 <img
                   className="h-24 w-20 rounded object-cover"
                   src={getPersoneImg(anime.character?.images)}
+                  alt=''
                 />
               </div>
             </div>

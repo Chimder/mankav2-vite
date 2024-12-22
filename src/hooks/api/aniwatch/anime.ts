@@ -1,10 +1,12 @@
 import { findBestMatches } from '@/shared/utils/find-best-matches'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
+
 import type {
   AnimeByIdType,
   AnimeByNameType,
   AnimeServerType,
+  AnimeSources,
   AnimeVideoType,
 } from './types'
 
@@ -13,7 +15,7 @@ const instance = axios.create({
   baseURL: `${url}/api/v2/hianime`,
   headers: {
     'Content-Type': 'application/json',
-    Accept: '*/*',
+    'Accept': '*/*',
   },
 })
 
@@ -108,7 +110,7 @@ export const aniwatchApi = {
     return useQuery({
       queryKey: [aniwatchApi.baseKey, animeEpisodeId, server, catygory],
       queryFn: async ({ signal }) => {
-        const res = await instance.get('/episode/sources', {
+        const res = await instance.get<AnimeSources>('/episode/sources', {
           params: { animeEpisodeId, server, catygory },
           signal,
         })
