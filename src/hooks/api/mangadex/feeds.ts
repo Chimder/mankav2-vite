@@ -6,12 +6,13 @@ export const feedApi = {
   useMangaFeed: ({ id, offset }: { id?: string; offset: number }) => {
     return useQuery({
       queryKey: [feedApi.baseKey, id, offset],
-      queryFn: ({ signal }) => getMangaIdFeed(
+      queryFn: ({ signal }) =>
+        getMangaIdFeed(
           id!,
           {
-            'limit': 96,
-            'offset': offset,
-            'order': { chapter: 'desc', volume: 'desc' },
+            limit: 96,
+            offset: offset,
+            order: { chapter: 'desc', volume: 'desc' },
             'includes[]': ['scanlation_group', 'user'],
             'contentRating[]': ['safe', 'suggestive'],
           },

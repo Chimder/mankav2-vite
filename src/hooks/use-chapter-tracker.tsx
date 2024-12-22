@@ -30,10 +30,8 @@ function usePageTrack(
           const imageRef = imageRefs.current[i]
           if (imageRef) {
             const rect = imageRef.getBoundingClientRect()
-            if (
-              rect.top <= window.innerHeight / 2 &&
-              rect.bottom >= window.innerHeight / 2
-            ) {
+            if (rect.top <= window.innerHeight / 2 &&
+              rect.bottom >= window.innerHeight / 2) {
               setCurrentPage(prev => ({ ...prev, page: i + 1 }))
               break
             }
@@ -44,7 +42,7 @@ function usePageTrack(
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [currentPage.chapterId, id, totalPages, imageRefs])
+  }, [currentPage.chapterId, id, imageRefs])
 
   return { currentPage, setCurrentPage }
 }

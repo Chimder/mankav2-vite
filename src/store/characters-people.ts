@@ -19,12 +19,12 @@ export const personeStore = create<PersoneAction>()(
     type: 'character',
     setPersone: async (id, type) => {
       await set(state => {
-        ; (state.id = id), (state.type = type)
+        ;(state.id = id), (state.type = type)
       })
     },
     resetPersone: async () => {
       await set(state => {
-        (state.id = undefined), (state.type = "character")
+        ;(state.id = undefined), (state.type = 'character')
       })
     },
   })),

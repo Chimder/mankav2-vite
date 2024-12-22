@@ -6,7 +6,9 @@ import { aniwatchApi } from '@/hooks/api/aniwatch/anime'
 import { jikanMangaApi } from '@/hooks/api/jikan/manga'
 
 function Test() {
-  const { data } = aniwatchApi.useAnimeByName({ name: 'Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e 3rd Season' })
+  const { data } = aniwatchApi.useAnimeByName({
+    name: 'Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e 3rd Season',
+  })
   console.log('data>>>', data)
 
   return (

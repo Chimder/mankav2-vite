@@ -10,10 +10,18 @@ type Props = {
 function EpisodesList({ video }: Props) {
   // const {data} = aniwatchApi.
   console.log('VIDEO', video)
+  const id = 'dandadan-19319?ep=130044'
   const [episodeId, setEpisodeId] = useState('')
   const { data } = aniwatchApi.useAnimeEpisodesServers({
-    episodeId: 'dandadan-19319?ep=130044',
+    episodeId: id,
   })
+  const server = data?.data
+  const { data: ana } = aniwatchApi.useAnimeEpisodeSources({
+    animeEpisodeId: server?.episodeId,
+    server: server?.sub[0].serverName,
+    catygory: 'sub',
+  })
+
   console.log('EPISE', data)
   if (!video || !video.episodes.length) return null
   return (

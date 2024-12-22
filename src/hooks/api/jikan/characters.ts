@@ -6,15 +6,18 @@ import { useQuery } from '@tanstack/react-query'
 
 export const jikanCharacterPeopleApi = {
   baseKey: 'jikanManga',
-  usePersoneById: ({ id, type }: { id?: number, type?: "character" | "voices" }) => {
+  usePersoneById: ({
+    id,
+    type,
+  }: { id?: number; type?: 'character' | 'voices' }) => {
     return useQuery({
       queryKey: [jikanCharacterPeopleApi.baseKey, type, 'characters', id],
       queryFn: async ({ signal }) => {
-        if (!id) return undefined;
+        if (!id) return undefined
 
-        return type === "character"
+        return type === 'character'
           ? await getCharacterFullById(id, { signal })
-          : await getPersonFullById(id, { signal });
+          : await getPersonFullById(id, { signal })
       },
       refetchOnMount: false,
       enabled: Boolean(id),

@@ -1,12 +1,10 @@
-import { useParams } from 'react-router-dom'
-
 import { aniwatchApi } from '@/hooks/api/aniwatch/anime'
-
+import { useParams } from 'react-router-dom'
 import EpisodesList from './episodes-list'
 
 type Props = {}
 
-function AnimeVideo({}: Props) {
+function AnimeVideo() {
   const { id } = useParams()
   const { data: videoList } = aniwatchApi.useAnimeEpisodesById({ animeId: id })
 

@@ -16,6 +16,7 @@ function AnimeRelation({ animes }: Props) {
         <div className="flex flex-row flex-wrap justify-center gap-3">
           {animes.map(anime => (
             <Link
+              key={anime.id}
               to={PATH.ANIME.getTitlePath(anime.id)}
               className="flex w-32 flex-col items-center"
             >

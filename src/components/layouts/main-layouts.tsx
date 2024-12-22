@@ -8,7 +8,7 @@ export default function MainLayout({
   return (
     <nav className="h-screen overflow-x-hidden bg-black">
       <Header />
-      <main className='h-full' >{children}</main>
+      <main className="h-full">{children}</main>
     </nav>
   )
 }

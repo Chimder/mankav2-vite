@@ -19,8 +19,7 @@ function Characters({ character }: Props) {
 
   function getPeople() {
     return (
-      character?.voices &&
-      character.voices?.find(per => per.language === 'Japanese')?.person
+      character?.voices?.find(per => per.language === 'Japanese')?.person
     )
   }
   if (!character) return null
@@ -30,6 +29,7 @@ function Characters({ character }: Props) {
         <img
           className="mx-auto h-72 w-56 object-cover md:mx-0"
           src={getCharacterImg(character.images)}
+          alt=""
         />
         <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2">
           <dt className="font-bold">Name:</dt>

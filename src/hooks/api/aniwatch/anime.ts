@@ -1,15 +1,19 @@
 import { findBestMatches } from '@/shared/utils/find-best-matches'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
-
-import { AnimeByIdType, AnimeByNameType, AnimeVideoType } from './types'
+import type {
+  AnimeByIdType,
+  AnimeByNameType,
+  AnimeServerType,
+  AnimeVideoType,
+} from './types'
 
 const url = import.meta.env.VITE_ANIWATCH!
 const instance = axios.create({
   baseURL: `${url}/api/v2/hianime`,
   headers: {
     'Content-Type': 'application/json',
-    'Accept': '*/*',
+    Accept: '*/*',
   },
 })
 
@@ -60,9 +64,12 @@ export const aniwatchApi = {
     return useQuery({
       queryKey: [aniwatchApi.baseKey, 'episodes', animeId],
       queryFn: async ({ signal }) => {
-        const res = await instance.get<AnimeVideoType>(`/anime/${animeId}/episodes`, {
-          signal,
-        })
+        const res = await instance.get<AnimeVideoType>(
+          `/anime/${animeId}/episodes`,
+          {
+            signal,
+          },
+        )
         return res.data
       },
       refetchOnMount: false,
@@ -76,7 +83,7 @@ export const aniwatchApi = {
     return useQuery({
       queryKey: [aniwatchApi.baseKey, 'episode server', episodeId],
       queryFn: async ({ signal }) => {
-        const res = await instance.get('/episode/servers', {
+        const res = await instance.get<AnimeServerType>('/episode/servers', {
           params: { animeEpisodeId: episodeId },
           signal,
         })
@@ -94,9 +101,9 @@ export const aniwatchApi = {
     server,
     catygory,
   }: {
-    animeEpisodeId: string
-    server: string
-    catygory: 'sub' | 'dub' | 'raw'
+    animeEpisodeId?: string
+    server?: string
+    catygory?: 'sub' | 'dub' | 'raw'
   }) => {
     return useQuery({
       queryKey: [aniwatchApi.baseKey, animeEpisodeId, server, catygory],
@@ -108,7 +115,7 @@ export const aniwatchApi = {
         return res.data
       },
       refetchOnMount: false,
-      enabled: Boolean(animeEpisodeId),
+      enabled: Boolean(animeEpisodeId && server && catygory),
       refetchOnWindowFocus: false,
       staleTime: 100000,
       retry: 0,

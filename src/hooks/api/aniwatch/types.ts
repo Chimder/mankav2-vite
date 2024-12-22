@@ -161,3 +161,26 @@ export interface VideoEpisode {
   number: number
   isFiller: boolean
 }
+/////////////////Episode server
+export interface AnimeServerType {
+  success: boolean
+  data: AnimeServerData
+}
+
+export interface AnimeServerData {
+  sub: Sub[]
+  dub: Dub[]
+  raw: any[]
+  episodeId: string
+  episodeNo: number
+}
+
+export interface Sub {
+  serverName: string
+  serverId: number
+}
+
+export interface Dub {
+  serverName: string
+  serverId: number
+}

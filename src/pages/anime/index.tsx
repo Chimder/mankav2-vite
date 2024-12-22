@@ -1,13 +1,10 @@
 import { aniwatchApi } from '@/hooks/api/aniwatch/anime'
 import React from 'react'
 
-type Props = {}
+// type Props = {}
 
-function AnimeMain({}: Props) {
-
-  return (
-    <div>AnimeMain</div>
-  )
+function AnimeMain() {
+  return <div>AnimeMain</div>
 }
 
 export default AnimeMain

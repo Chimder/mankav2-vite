@@ -41,11 +41,11 @@ export const mangaApi = {
       queryFn: ({ signal }) =>
         getSearchManga(
           {
-            'includedTagsMode': 'AND',
+            includedTagsMode: 'AND',
             'includes[]': ['manga', 'cover_art'],
-            'title': title,
-            'limit': 5,
-            'order': {
+            title: title,
+            limit: 5,
+            order: {
               relevance: 'desc',
             },
           },
@@ -67,16 +67,16 @@ export const mangaApi = {
     sortBy,
   }: Partial<mangaSearchOps>) => {
     const queryParams: GetSearchMangaParams = {
-      'includedTagsMode': 'AND' as GetSearchMangaIncludedTagsMode,
+      includedTagsMode: 'AND' as GetSearchMangaIncludedTagsMode,
       'includedTags[]': tags,
       ...(name && { title: name }),
       'includes[]': ['cover_art'],
       ...(status && { 'status[]': [status as GetSearchMangaStatusItem] }),
       'contentRating[]': ['safe', 'suggestive'],
       'ids[]': [],
-      'limit': OffsetFilter,
-      'offset': offset,
-      'order': sortBy
+      limit: OffsetFilter,
+      offset: offset,
+      order: sortBy
         ? {
             [sortBy.type]: sortBy.order,
           }

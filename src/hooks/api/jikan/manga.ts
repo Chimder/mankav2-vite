@@ -12,24 +12,27 @@ export const jikanMangaApi = {
     return useQuery<MangaFull>({
       queryKey: [jikanMangaApi.baseKey, name],
       queryFn: async () => {
-        const res = await jikanInstance<{ data: MangaFull[] }>(
-          {
-            url: '/manga',
-            method: 'GET',
-            params: {
-              q: name,
-              limit: 5,
-            },
+        const res = await jikanInstance<{ data: MangaFull[] }>({
+          url: '/manga',
+          method: 'GET',
+          params: {
+            q: name,
+            limit: 5,
           },
-        )
+        })
 
         const foundManga = res.data.find(manga =>
           manga.titles?.some(
             title =>
               title.title &&
-              (name?.toLowerCase().trim() === title.title.toLowerCase().trim() ||
-                name?.toLowerCase().includes(title.title.toLowerCase().trim()) ||
-                title.title.toLowerCase().includes(name?.toLowerCase().trim()!)),
+              (name?.toLowerCase().trim() ===
+                title.title.toLowerCase().trim() ||
+                name
+                  ?.toLowerCase()
+                  .includes(title.title.toLowerCase().trim()) ||
+                title.title
+                  .toLowerCase()
+                  .includes(name?.toLowerCase().trim()!)),
           ),
         )
 

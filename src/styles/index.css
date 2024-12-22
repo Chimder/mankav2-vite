@@ -1,6 +1,6 @@
-@import 'fonts';
-@import 'normalize';
-@import 'globals';
+@import "fonts";
+@import "normalize";
+@import "globals";
 
 @tailwind base;
 @tailwind components;

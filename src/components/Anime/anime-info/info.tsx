@@ -6,9 +6,9 @@ import { Badge } from '../../ui/badge'
 import AnimeRelation from './relation'
 import AnimeSeasons from './seasons'
 
-type Props = {}
+// type Props = {}
 
-function AnimeTitleInfo({}: Props) {
+function AnimeTitleInfo() {
   const { id } = useParams()
   const { data } = aniwatchApi.useAnimeInfoById({ id: id as string })
 

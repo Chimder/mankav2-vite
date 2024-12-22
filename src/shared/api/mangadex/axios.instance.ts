@@ -7,7 +7,7 @@ export const AXIOS_INSTANCE = Axios.create({
   // baseURL: '/api/proxyApi?url=',
   headers: {
     'Content-Type': 'application/json',
-    'Accept': '*/*',
+    Accept: '*/*',
     'User-Agent': 'ChimderManka',
   },
 })
