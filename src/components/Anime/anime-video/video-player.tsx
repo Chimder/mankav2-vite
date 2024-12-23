@@ -34,7 +34,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     const hlsSource = sources.find(source => source.type === 'hls')
 
     if (hlsSource && Hls.isSupported()) {
-      // Уничтожаем предыдущий экземпляр Hls если он существует
       if (hlsRef.current) {
         hlsRef.current.destroy()
       }
@@ -46,7 +45,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
       hlsRef.current = hls
 
-      // Обработка ошибок
       hls.on(Hls.Events.ERROR, (event, data) => {
         console.error('HLS Error:', data)
         if (data.fatal) {
@@ -75,7 +73,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
       video.addEventListener('timeupdate', handleTimeUpdate)
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      // Поддержка нативного HLS для Safari
       video.src = hlsSource?.url || ''
       video.addEventListener('timeupdate', handleTimeUpdate)
       video.addEventListener('loadedmetadata', () => {

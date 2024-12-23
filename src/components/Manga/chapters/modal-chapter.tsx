@@ -60,6 +60,10 @@ function ModalChapter({ chapters, children, chapterData }: Props) {
     } else if (chapterData?.data?.attributes?.chapter) {
       scrollToChapter(chapterData.data.attributes.chapter)
     }
+
+    return () => {
+    setHighlightedChapter(null)
+  }
   }, [chapterData?.data?.attributes?.chapter, searchPageQuery])
 
   const title = getFirstTitle(

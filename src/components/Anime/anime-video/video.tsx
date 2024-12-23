@@ -1,20 +1,23 @@
-import { aniwatchApi } from '@/hooks/api/aniwatch/anime'
+import { useRef } from 'react'
 import { useParams } from 'react-router-dom'
-import EpisodesList from './episodes-list'
+
+import { aniwatchApi } from '@/hooks/api/aniwatch/anime'
+
+import EpisodesList from './video-list'
 
 type Props = {}
 
 function AnimeVideo() {
   const { id } = useParams()
   const { data: videoList } = aniwatchApi.useAnimeEpisodesById({ animeId: id })
+  const containerRef = useRef<HTMLDivElement>(null)
 
-  // const {data} = aniwatchApi.useAnimeEpisodeSources({animeEpisodeId,catygory,server})
-  // const {data} = aniwatchApi.useAnimeEpisodesServers({episodeId})
   return (
-    <div className="h-full overflow-hidden overflow-y-scroll pb-6">
+    <div className="chapters-scrollbar h-full pb-6" ref={containerRef}>
       <EpisodesList
         key={`${videoList?.data?.totalEpisodes}${id}`}
         video={videoList?.data}
+        containerRef={containerRef}
       />
     </div>
   )
