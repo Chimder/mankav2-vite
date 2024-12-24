@@ -7,10 +7,9 @@ function AnimeTitle() {
   return (
     <div className="flex h-[calc(100vh-64px)] w-full">
       <AnimeTitleInfo />
-      <section className="relative overflow-y-auto flex w-3/5 flex-col border border-green-400 text-white">
+      <section className="relative flex w-3/5 flex-col border border-green-400 text-white">
         <AnimeVideo />
       </section>
-      {/* <div></div> */}
     </div>
   )
 }

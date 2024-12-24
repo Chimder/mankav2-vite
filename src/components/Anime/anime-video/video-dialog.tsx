@@ -5,15 +5,16 @@ import VideoPlayer from './video-player'
 
 type Props = {
   source?: SourcesData
+  isLoading: boolean
   isOpen?: boolean
   setIsOpen: (isOpen: boolean) => void
 }
-function VideoDialog({ source, isOpen, setIsOpen }: Props) {
+function VideoDialog({ source, isLoading, isOpen, setIsOpen }: Props) {
   function handleClose() {
     setIsOpen(false)
   }
 
-  if (!source) return null
+  // if (isLoading) return <div>Loading</div>
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>

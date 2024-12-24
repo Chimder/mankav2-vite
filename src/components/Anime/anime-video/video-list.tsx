@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { cn } from '@/shared/lib/tailwind'
 
 import { aniwatchApi } from '@/hooks/api/aniwatch/anime'
@@ -9,28 +9,25 @@ import VideoDialog from './video-dialog'
 
 type Props = {
   video?: AnimeVideoData
-  containerRef: React.RefObject<HTMLDivElement | null>
 }
 
-function EpisodesList({ video, containerRef }: Props) {
+function VideoList({ video }: Props) {
   const [isOpen, setIsOpen] = useState(false)
   const [episodeId, setEpisodeId] = useState('')
   const [searchPageQuery, setSearchPageQuery] = useState('')
   const [highlightedChapter, setHighlightedChapter] = useState<number | null>()
 
-  // const containerRef = useRef<HTMLDivElement>(null)
   const refEpisodes = useRef<Record<number, HTMLDivElement | null>>({})
 
   const { data: serverData } = aniwatchApi.useAnimeEpisodesServers({
     episodeId,
   })
-  const server = serverData?.data
-
-  const { data: sourceData } = aniwatchApi.useAnimeEpisodeSources({
-    animeEpisodeId: server?.episodeId,
-    server: server?.sub[0]?.serverName,
+  const { data: sourceData,isLoading } = aniwatchApi.useAnimeEpisodeSources({
+    animeEpisodeId: serverData?.data?.episodeId,
+    server: serverData?.data?.sub[0]?.serverName,
     catygory: 'sub',
   })
+
   function handleVideoDialog(episodeId: string) {
     setIsOpen(true)
     setEpisodeId(episodeId)
@@ -39,40 +36,39 @@ function EpisodesList({ video, containerRef }: Props) {
   useEffect(() => {
     function scrollTo(episode: number) {
       const ref = refEpisodes.current[episode]
-      if (!ref || !containerRef.current) return
-
-      const elementPosition = ref.getBoundingClientRect().top
-      const containerPosition = containerRef.current.getBoundingClientRect().top
-      const relativePosition = elementPosition - containerPosition
-
-      containerRef.current.scrollTo({
-        top:
-          containerRef.current.scrollTop +
-          relativePosition -
-          containerRef.current.clientHeight / 2,
-        behavior: 'smooth',
+      console.log('Scrolling to:', episode, 'Ref:', !!ref)
+      if (!ref) return
+      requestAnimationFrame(() => {
+        ref.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+        })
+        setHighlightedChapter(episode)
       })
-
-      setHighlightedChapter(episode)
     }
 
-    if (searchPageQuery && searchPageQuery !== '') {
-      scrollTo(Number(searchPageQuery))
-    } else if (video?.episodes[0]?.number) {
-      scrollTo(video.episodes[0].number)
+    if (video?.episodes?.length) {
+      if (searchPageQuery && searchPageQuery !== '') {
+        scrollTo(Number(searchPageQuery))
+      } else if (video.episodes[0]?.number) {
+        scrollTo(video.episodes[0].number)
+      }
     }
   }, [searchPageQuery, video?.episodes])
 
   if (!video || !video.episodes.length) return null
 
   return (
-    <div className="ref={containerRef} m-4 flex h-full flex-col">
+    <div
+      className="m-4 mt-10 flex h-full flex-col"
+      // ref={scrollContainerRef}
+    >
+      <Input
+        value={searchPageQuery}
+        onChange={e => setSearchPageQuery(e.target.value)}
+        className="absolute left-1/2 top-4 z-10 w-[32%] -translate-x-1/2 transform rounded-md border-2 !border-emerald-400 bg-black p-2 text-center text-lg text-white focus-visible:ring-0"
+      />
       <div className="m-4 flex h-full flex-col">
-        <Input
-          value={searchPageQuery}
-          onChange={e => setSearchPageQuery(e.target.value)}
-          className="center w-full bg-black text-center text-lg text-white"
-        />
         {video.episodes.map(video => (
           <div
             className={cn(
@@ -92,17 +88,16 @@ function EpisodesList({ video, containerRef }: Props) {
         ))}
       </div>
 
-      {sourceData?.data && (
         <div className="w-full">
           <VideoDialog
-            source={sourceData.data}
+          isLoading={isLoading}
+            source={sourceData?.data}
             setIsOpen={setIsOpen}
             isOpen={isOpen}
           />
         </div>
-      )}
     </div>
   )
 }
 
-export default EpisodesList
+export default VideoList

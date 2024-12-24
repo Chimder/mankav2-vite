@@ -6,6 +6,7 @@ import useAggregateChapter from '@/hooks/use-aggregate-chapter'
 import usePageTrack from '@/hooks/use-chapter-tracker'
 import ExternalChapter from '@/components/external-chapter'
 import ModalChapter from '@/components/Manga/chapters/modal-chapter'
+import { PATH } from '@/app/routers/path-constants'
 
 function MangaChapter() {
   const [searchParams] = useSearchParams()
@@ -72,14 +73,14 @@ function MangaChapter() {
           {!isFetching && nextChapter ? (
             <Link
               className="center flex h-10 w-1/2 rounded-sm border-2 border-blue-950 py-[34px] text-white hover:border-blue-700"
-              to={`/chapter/${nextChapter?.id}?manga=${manga}&lang=${lang}&name=${name}`}
+              to={`${PATH.MANGA.getChapterPath(nextChapter.id)}?manga=${manga}&lang=${lang}&name=${name}`}
             >
               Next
             </Link>
           ) : (
             <Link
               className="center flex h-10 w-1/2 rounded-sm border-2 border-blue-950 py-[34px] text-white hover:border-blue-700"
-              to={`/title/${manga}?name=${name}`}
+              to={`${PATH.MANGA.getTitlePath(manga)}?name=${name}`}
             >
               Return to Manga
             </Link>
