@@ -48,7 +48,7 @@ export const findBestMatches = (
       ),
     }))
     .sort((a, b) => b.score - a.score)
-    .filter(item => item.score >= 0.7)
+    .filter(item => item.score >= 0.5)
     .map(item => item.anime)
 
   return scoredAnimes.length > 0 ? scoredAnimes : null

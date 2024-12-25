@@ -7,13 +7,14 @@ import { DialogAnime } from './dialog-anime'
 
 type Props = {
   voices: PersonFull
+  handleClose: () => void
 }
 
 export function getPersoneImg(img?: PeopleImages) {
   if (img?.jpg?.image_url) return img.jpg.image_url
 }
 
-function Voices({ voices }: Props) {
+function Voices({ voices, handleClose }: Props) {
   const setPersone = usePersoneStore().setPersone
 
   const [animeName, setAnimeName] = useState('')
@@ -36,7 +37,7 @@ function Voices({ voices }: Props) {
         <img
           className="mx-auto h-72 w-56 object-cover md:mx-0"
           src={getPersoneImg(voices.images)}
-          alt=''
+          alt=""
         />
         <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2">
           <dt className="font-bold">Name:</dt>
@@ -67,7 +68,7 @@ function Voices({ voices }: Props) {
                 <img
                   className="h-24 w-20 rounded object-cover"
                   src={getPersoneImg(anime.anime?.images)}
-                  alt=''
+                  alt=""
                 />
                 <div className="ml-4">{anime.anime?.title}</div>
               </div>
@@ -83,7 +84,7 @@ function Voices({ voices }: Props) {
                 <img
                   className="h-24 w-20 rounded object-cover"
                   src={getPersoneImg(anime.character?.images)}
-                  alt=''
+                  alt=""
                 />
               </div>
             </div>
@@ -92,8 +93,8 @@ function Voices({ voices }: Props) {
       <DialogAnime
         name={animeName}
         isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        key={'dialogAnime'}
+        handleClose={handleClose}
+        key={'dialogAnimeVoice'}
       />
     </section>
   )

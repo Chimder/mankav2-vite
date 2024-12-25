@@ -1,3 +1,4 @@
+import { Manga } from '@/shared/api/mangadex/generated'
 import dayjs from 'dayjs'
 import { useParams } from 'react-router-dom'
 
@@ -8,33 +9,39 @@ import Relation from './relation'
 
 type Props = {}
 
+export const getMangaTitle = (manga?: Manga) => {
+  if (!manga?.attributes?.title) return undefined
+  manga.relationships
+  return (
+    manga.attributes.title.en ||
+    (manga.attributes.title && Object.values(manga.attributes.title)[0])
+  )
+}
+export const getMangaImg = (id?: string, manga?: Manga) => {
+  if (!id || !manga?.relationships) return undefined
+
+  return `${import.meta.env.VITE_IMG_PROXY!}/img/mangadex.org/covers/${id}/${
+    manga.relationships.find(obj => obj.type === 'cover_art')?.attributes
+      ?.fileName
+  }`
+}
 const Info = (props: Props) => {
   const { id: mangaId } = useParams()
-
   const { data: manga } = mangaApi.useMangaByID(mangaId)
-  const title =
-    manga?.data?.attributes?.title?.en ||
-    (manga?.data?.attributes?.title &&
-      Object.values(manga?.data?.attributes?.title)[0])
-
-  const backgroundImageUrl = `${import.meta.env.VITE_IMG_PROXY!}/img/mangadex.org/covers/${mangaId}/${
-    manga?.data?.relationships?.find(obj => obj.type === 'cover_art')
-      ?.attributes?.fileName
-  }`
 
   return (
     <section className="">
       <div className="flex flex-col items-center justify-center border-[1px] border-green-400">
         <img
           className="relative z-10 h-[440px] w-[310px]"
-          src={backgroundImageUrl}
+          src={getMangaImg(mangaId, manga?.data)}
           alt=""
         />
         <div className="flex h-full">
           <div className="py-4">
             <div className="mx-0 my-3 text-sm">
               <span className="mb-2.5 mr-1 text-sm">Title:</span>
-              <span className="text-base">{title}</span>
+              <span className="text-base">{getMangaTitle(manga?.data)}</span>
             </div>
             <div className="title">
               <span className="head">Created:</span>

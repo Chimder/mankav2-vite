@@ -7,6 +7,7 @@ import { useDebounce } from 'use-debounce'
 
 import { mangaApi } from '@/hooks/api/mangadex/manga'
 import useClickOutside from '@/hooks/use-click-outside'
+import { PATH } from '@/app/routers/path-constants'
 
 import { getFirstTitle } from '../Manga/cards/cards-list'
 import { Badge } from '../ui/badge'
@@ -69,7 +70,7 @@ const InputeSearch = () => {
                 setSearchQuery('')
                 setIsListVisible(false)
                 navigate(
-                  `/title/${manga.id}?name=${getFirstTitle(manga.attributes?.title)}`,
+                  `${PATH.MANGA.getTitlePath(manga.id)}?name=${getFirstTitle(manga.attributes?.title)}`,
                 )
               }}
               key={manga.id}

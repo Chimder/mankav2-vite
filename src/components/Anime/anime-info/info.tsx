@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { aniwatchApi } from '@/hooks/api/aniwatch/anime'
 
 import { Badge } from '../../ui/badge'
+import Characters from './characters'
 import AnimeRelation from './relation'
 import AnimeSeasons from './seasons'
 
@@ -70,6 +71,7 @@ function AnimeTitleInfo() {
             </div>
           </div>
         </div>
+        <Characters id={anime?.info.malId} />
         {seasons && <AnimeSeasons animes={seasons} key={`${id}SeasonAnime`} />}
         {relatedAnime && (
           <AnimeRelation animes={relatedAnime} key={`${id}RelatedAnime`} />

@@ -46,9 +46,14 @@ function DialogCharactersPeople({ isOpen, setIsOpen }: Props) {
         <DialogTitle></DialogTitle>
 
         {personeType === 'voices' ? (
-          <Voices key={`voices`} voices={data?.data as PersonFull} />
+          <Voices
+            handleClose={handleClose}
+            key={`voices`}
+            voices={data?.data as PersonFull}
+          />
         ) : (
           <Characters
+            handleClose={handleClose}
             key={`characters`}
             character={data?.data as CharacterFull}
           />

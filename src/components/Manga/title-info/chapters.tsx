@@ -62,7 +62,6 @@ const Chapters = () => {
 
   const filteredChapters = filterChapters(chapters?.data)
 
-  console.log('BOOLE', filteredChapters)
   return (
     <div className="flex flex-col h-full">
       <div className="flex-grow overflow-y-auto chapters-scrollbar">

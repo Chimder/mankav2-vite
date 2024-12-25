@@ -54,6 +54,7 @@ module.exports = {
     '@tanstack/query/stable-query-client': 'error',
     '@typescript-eslint/ban-types': 'warn',
     'jsx-a11y/no-static-element-interactions': 'off',
+    'jsx-a11y/label-has-associated-control': 'off',
     'jsx-a11y/click-events-have-key-events': 'off',
     'jsx-a11y/media-has-caption': 'warn',
     'jsx-a11y/no-noninteractive-element-interactions': 'off',

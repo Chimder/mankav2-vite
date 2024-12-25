@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import { CharacterImages } from '@/shared/api/jikan/generated'
 import { usePersoneStore } from '@/store/characters-people'
-import { useSearchParams } from 'react-router-dom'
 
-import { jikanMangaApi } from '@/hooks/api/jikan/manga'
+import { jikanAnimeApi } from '@/hooks/api/jikan/anime'
 import {
   Accordion,
   AccordionContent,
@@ -15,20 +14,17 @@ import DialogCharactersPeople from '@/components/characters-voices/dialog'
 export function getCharacterImg(img?: CharacterImages) {
   return img?.jpg?.image_url ?? undefined
 }
-const Characters = () => {
-  const [searchParams] = useSearchParams()
-  const name = searchParams.get('name')
-  const {
-    data: manga,
-    isFetching: isFetchingManga,
-    isLoading: isLoadingManga,
-  } = jikanMangaApi.useMangaByName({ name })
+type Props = {
+  id?: number
+}
+const Characters = ({ id }: Props) => {
   const {
     data: characters,
-    isFetching: isFetchingCharacters,
-    isLoading: isLoadingCharacters,
-  } = jikanMangaApi.useMangaCharacters({ id: manga?.mal_id })
+    isFetching,
+    isLoading,
+  } = jikanAnimeApi.useAnimeCharactersById({ id: Number(id) })
 
+  console.log('ADADUWUUW')
   const setPersone = usePersoneStore().setPersone
 
   const [isOpen, setIsOpen] = useState(false)
@@ -36,12 +32,13 @@ const Characters = () => {
     await setPersone(id, 'character')
     setIsOpen(true)
   }
+  console.log('IS', isOpen)
 
   const firstSixCharacters = characters?.data?.slice(0, 6) || []
   const restCharacters = characters?.data?.slice(6) || []
 
-  const isLoading = isLoadingManga || isLoadingCharacters
-  const isFetching = isFetchingManga || isFetchingCharacters
+  // const isLoading = isLoadingManga || isLoadingCharacters
+  // const isFetching = isFetchingManga || isFetchingCharacters
   if (isFetching || isLoading || !characters?.data?.length) {
     return null
   }

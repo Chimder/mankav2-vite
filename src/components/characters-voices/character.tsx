@@ -1,27 +1,43 @@
+import { useState } from 'react'
 import { CharacterFull } from '@/shared/api/jikan/generated'
 import { usePersoneStore } from '@/store/characters-people'
-import { Link } from 'react-router-dom'
-
-import { PATH } from '@/app/routers/path-constants'
 
 import { getCharacterImg } from '../Manga/title-info/characters'
+import { DialogAnime } from './dialog-anime'
+import { DialogManga } from './dialog-manga'
 
 type Props = {
   character?: CharacterFull
+  handleClose: () => void
 }
-function Characters({ character }: Props) {
-  const resetPersone = usePersoneStore().resetPersone
+function Characters({ character, handleClose }: Props) {
+  // const resetPersone = usePersoneStore().resetPersone
   const setPersone = usePersoneStore().setPersone
+
+  const [animeName, setAnimeName] = useState('')
+  const [isOpenAnime, setIsOpenAnime] = useState(false)
+  function handleAnimeName(name?: string) {
+    if (!name) return null
+    setAnimeName(name)
+    setIsOpenAnime(true)
+  }
+
+  const [mangaName, setMangaName] = useState('')
+  const [isOpen, setIsOpen] = useState(false)
+
+  function handleMangaName(name?: string) {
+    if (!name) return null
+    setMangaName(name)
+    setIsOpen(true)
+  }
 
   function handleSetPersone() {
     setPersone(getPeople()?.mal_id as number, 'voices')
   }
-
   function getPeople() {
-    return (
-      character?.voices?.find(per => per.language === 'Japanese')?.person
-    )
+    return character?.voices?.find(per => per.language === 'Japanese')?.person
   }
+
   if (!character) return null
   return (
     <section className="filterBar h-full w-full overflow-y-scroll">
@@ -53,6 +69,12 @@ function Characters({ character }: Props) {
         </dl>
       </div>
 
+      <DialogAnime
+        key={'DIALOG_ANIME'}
+        isOpen={isOpenAnime}
+        name={animeName}
+        handleClose={handleClose}
+      />
       <div className="w-full">
         <h1 className="mb-4 text-xl font-semibold">Anime Roles</h1>
         <div className="space-y-4">
@@ -60,11 +82,9 @@ function Characters({ character }: Props) {
             <div
               key={manga.anime?.title}
               className="group flex w-full flex-col items-center justify-between rounded-lg border border-border p-4 transition-colors hover:bg-accent/10 md:flex-row"
+              onClick={() => handleAnimeName(manga.anime?.title)}
             >
-              <label
-                className="mb-2 flex cursor-pointer items-center space-x-4 md:mb-0"
-                // onClick={() => handleReset()}
-              >
+              <label className="mb-2 flex cursor-pointer items-center space-x-4 md:mb-0">
                 <img
                   className="h-24 w-20 rounded object-cover"
                   src={getCharacterImg(manga.anime?.images)}
@@ -77,6 +97,7 @@ function Characters({ character }: Props) {
                   <div className="text-muted-foreground">{manga.role}</div>
                 </div>
               </label>
+
               <div
                 onClick={() => handleSetPersone()}
                 className="flex items-center"
@@ -97,6 +118,12 @@ function Characters({ character }: Props) {
         </div>
       </div>
 
+      <DialogManga
+        name={mangaName}
+        isOpen={isOpen}
+        handleClose={handleClose}
+        key={'DIALOG manga'}
+      />
       <div className="mt-6 w-full">
         <h1 className="mb-4 text-xl font-semibold">Manga Roles</h1>
         <div className="space-y-4">
@@ -105,11 +132,9 @@ function Characters({ character }: Props) {
               key={`${manga.manga?.title}mangaa`}
               className="group flex w-full flex-col items-center justify-between rounded-lg border border-border p-4 transition-colors hover:bg-accent/10 md:flex-row"
             >
-              <Link
+              <div
+                onClick={() => handleMangaName(manga.manga?.title)}
                 className="mb-2 flex cursor-pointer items-center space-x-4 md:mb-0"
-                to={'/'}
-                // to={`${PATH.MANGA.getTitlePath(manga.manga.)}/title/${manga?.id}?name=${getFirstTitle(manga.attributes?.title)}`}
-                // onClick={() => handleReset()}
               >
                 <img
                   className="h-24 w-20 cursor-pointer rounded object-cover"
@@ -122,8 +147,11 @@ function Characters({ character }: Props) {
                   </div>
                   <div className="text-muted-foreground">{manga.role}</div>
                 </div>
-              </Link>
-              <div className="flex items-center">
+              </div>
+              <div
+                onClick={() => handleSetPersone()}
+                className="flex items-center"
+              >
                 <div className="center mr-4 cursor-pointer">
                   {getPeople()?.name}
                 </div>
