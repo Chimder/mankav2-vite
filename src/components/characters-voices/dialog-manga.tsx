@@ -9,22 +9,20 @@ import { getMangaImg, getMangaTitle } from '../Manga/title-info/info'
 type Props = {
   name: string
   isOpen: boolean
+  setIsOpen: (isOpen: boolean) => void
   handleClose: () => void
 }
-export function DialogManga({ isOpen, handleClose, name }: Props) {
+export default function DialogManga({ isOpen,setIsOpen, handleClose, name }: Props) {
   const navigate = useNavigate()
   const { data } = mangaApi.useMangaSeachInput(name)
 
-  const handleCloseAndReset = () => {
-    handleClose()
-  }
   const handleAnimeClick = (mangaId?: string) => {
     handleClose()
     navigate(`${PATH.MANGA.getTitlePath(mangaId)}`)
   }
   if (!data) return null
   return (
-    <Dialog open={isOpen} onOpenChange={handleCloseAndReset}>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className="min-h-[310px] w-full max-w-[900px]">
         <DialogTitle></DialogTitle>
         <h1 className="center flex text-xl">Available Manga</h1>

@@ -1,31 +1,30 @@
-import { usePersoneStore } from '@/store/characters-people'
 import { useNavigate } from 'react-router-dom'
 
 import { aniwatchApi } from '@/hooks/api/aniwatch/anime'
-import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+} from '@/components/ui/dialog'
 import { PATH } from '@/app/routers/path-constants'
 
 type Props = {
   name: string
   isOpen: boolean
+  setIsOpen: (isOpen: boolean) => void
   handleClose: () => void
 }
-export function DialogAnime({ isOpen, handleClose, name }: Props) {
+export default function DialogAnime({ isOpen, setIsOpen, handleClose, name }: Props) {
   const navigate = useNavigate()
   const { data } = aniwatchApi.useAnimeByName({ name })
-  const resetPersone = usePersoneStore().resetPersone
 
-  const handleCloseAndReset = () => {
-    resetPersone()
-    handleClose()
-  }
   const handleAnimeClick = (animeId: string) => {
     handleClose()
     navigate(`${PATH.ANIME.getTitlePath(animeId)}`)
   }
   if (!data) return null
   return (
-    <Dialog open={isOpen} onOpenChange={handleCloseAndReset}>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className="min-h-[310px] w-full max-w-[900px]">
         <DialogTitle></DialogTitle>
         <div className="flex justify-evenly">

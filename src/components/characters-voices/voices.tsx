@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { lazy, useState } from 'react'
 import { PeopleImages, PersonFull } from '@/shared/api/jikan/generated'
 import { usePersoneStore } from '@/store/characters-people'
 import dayjs from 'dayjs'
 
-import { DialogAnime } from './dialog-anime'
+// import DialogAnime from './dialog-anime'
+const DialogAnime = lazy(() => import('./dialog-anime'))
 
 type Props = {
   voices: PersonFull
@@ -19,6 +20,7 @@ function Voices({ voices, handleClose }: Props) {
 
   const [animeName, setAnimeName] = useState('')
   const [isOpen, setIsOpen] = useState(false)
+
   function handleAnimeName(name?: string) {
     if (!name) return null
     setAnimeName(name)
@@ -93,6 +95,7 @@ function Voices({ voices, handleClose }: Props) {
       <DialogAnime
         name={animeName}
         isOpen={isOpen}
+        setIsOpen={setIsOpen}
         handleClose={handleClose}
         key={'dialogAnimeVoice'}
       />

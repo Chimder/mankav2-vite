@@ -1,11 +1,14 @@
-import { useState } from 'react'
+import { lazy, useState } from 'react'
 import { CharacterFull } from '@/shared/api/jikan/generated'
 import { usePersoneStore } from '@/store/characters-people'
 
 import { getCharacterImg } from '../Manga/title-info/characters'
-import { DialogAnime } from './dialog-anime'
-import { DialogManga } from './dialog-manga'
 
+// import { DialogAnime } from './dialog-anime'
+// import { DialogManga } from './dialog-manga'
+
+const DialogAnime = lazy(() => import('./dialog-anime'))
+const DialogManga = lazy(() => import('./dialog-manga'))
 type Props = {
   character?: CharacterFull
   handleClose: () => void
@@ -73,6 +76,7 @@ function Characters({ character, handleClose }: Props) {
         key={'DIALOG_ANIME'}
         isOpen={isOpenAnime}
         name={animeName}
+        setIsOpen={setIsOpenAnime}
         handleClose={handleClose}
       />
       <div className="w-full">
@@ -121,6 +125,7 @@ function Characters({ character, handleClose }: Props) {
       <DialogManga
         name={mangaName}
         isOpen={isOpen}
+        setIsOpen={setIsOpen}
         handleClose={handleClose}
         key={'DIALOG manga'}
       />

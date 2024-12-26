@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { lazy, useState } from 'react'
 import { CharacterImages } from '@/shared/api/jikan/generated'
 import { usePersoneStore } from '@/store/characters-people'
 import { useSearchParams } from 'react-router-dom'
@@ -10,7 +10,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
-import DialogCharactersPeople from '@/components/characters-voices/dialog'
+
+// import DialogCharactersPeople from '@/components/characters-voices/dialog'
+const DialogCharactersPeople = lazy(
+  () => import('../../../components/characters-voices/dialog'),
+)
 
 export function getCharacterImg(img?: CharacterImages) {
   return img?.jpg?.image_url ?? undefined

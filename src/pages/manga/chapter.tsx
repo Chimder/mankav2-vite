@@ -8,7 +8,7 @@ import ExternalChapter from '@/components/external-chapter'
 import ModalChapter from '@/components/Manga/chapters/modal-chapter'
 import { PATH } from '@/app/routers/path-constants'
 
-function MangaChapter() {
+export const MangaChapter = () => {
   const [searchParams] = useSearchParams()
   const { id } = useParams()
   const lang = searchParams.get('lang') as string
@@ -94,4 +94,3 @@ function MangaChapter() {
 MangaChapter.getLayout = function getLayout(page: ReactElement) {
   return <>{page}</>
 }
-export default MangaChapter

@@ -3,12 +3,17 @@ import { ScrollRestoration } from 'react-router-dom'
 import Chapters from '@/components/Manga/title-info/chapters'
 import Info from '@/components/Manga/title-info/info'
 
-function MangaTitle() {
+// const Chapters = lazy(
+//   () => import('../../components/Manga/title-info/characters'),
+// )
+// const Info = lazy(() => import('../../components/Manga/title-info/info'))
+
+export const MangaTitle = () => {
   return (
-    <div className="flex z-10 h-[calc(100vh-64px)] border-green-400 px-[2px] text-white">
+    <div className="z-10 flex h-[calc(100vh-64px)] border-green-400 px-[2px] text-white">
       <ScrollRestoration />
       <div className="order-2 flex w-2/5 flex-col overflow-hidden">
-        <div className="flex chapters-scrollbar flex-col overflow-y-auto">
+        <div className="chapters-scrollbar flex flex-col overflow-y-auto">
           <Info />
         </div>
       </div>
@@ -20,5 +25,3 @@ function MangaTitle() {
     </div>
   )
 }
-
-export default MangaTitle

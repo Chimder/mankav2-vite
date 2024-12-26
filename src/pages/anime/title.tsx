@@ -3,7 +3,7 @@ import AnimeVideo from '@/components/Anime/anime-video/video'
 
 type Props = {}
 
-function AnimeTitle() {
+export const AnimeTitle = () => {
   return (
     <div className="flex h-[calc(100vh-64px)] w-full">
       <AnimeTitleInfo />
@@ -13,5 +13,3 @@ function AnimeTitle() {
     </div>
   )
 }
-
-export default AnimeTitle

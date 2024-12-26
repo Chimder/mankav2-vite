@@ -1,11 +1,13 @@
-import Cards from '@/components/Manga/cards/cards'
-import { FilterMangaBar } from '@/components/Manga/filter-manga-bar/filter-manga-bar'
+import { Suspense } from 'react'
 import { ScrollRestoration } from 'react-router-dom'
 
-function MangaSearch() {
+import Cards from '@/components/Manga/cards/cards'
+import { FilterMangaBar } from '@/components/Manga/filter-manga-bar/filter-manga-bar'
+
+export const MangaSearch = () => {
   return (
-    <div className="flex w-full h-full flex-col items-center bg-black ">
-      <div className="flex w-full h-full">
+    <div className="flex h-full w-full flex-col items-center bg-black">
+      <div className="flex h-full w-full">
         <ScrollRestoration />
         <Cards />
         <FilterMangaBar />
@@ -13,5 +15,3 @@ function MangaSearch() {
     </div>
   )
 }
-
-export default MangaSearch
