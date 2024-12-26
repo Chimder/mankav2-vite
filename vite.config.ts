@@ -1,9 +1,7 @@
 import path from 'path'
 import react from '@vitejs/plugin-react'
-import cssNano from 'cssnano'
 import { defineConfig } from 'vite'
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react({
@@ -58,7 +56,6 @@ export default defineConfig({
           ],
           'vendor-utils': ['dayjs', 'axios', 'zustand', 'immer', 'zod'],
         },
-
       },
     },
 
@@ -106,13 +103,4 @@ export default defineConfig({
   },
 
   cacheDir: 'node_modules/.vite',
-
-  experimental: {
-    renderBuiltUrl: (filename: string, { hostType }) => {
-      if (hostType === 'js') {
-        return { runtime: `window.__toCdnUrl(${JSON.stringify(filename)})` }
-      }
-      return filename
-    },
-  },
 })
