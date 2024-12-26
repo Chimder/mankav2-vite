@@ -1,9 +1,8 @@
-import React, { ReactElement, Suspense, useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
-import axios, { AxiosError } from 'axios'
+import { Suspense } from 'react'
 
 import { aniwatchApi } from '@/hooks/api/aniwatch/anime'
-import { jikanMangaApi } from '@/hooks/api/jikan/manga'
+
+// import { jikanMangaApi } from '@/hooks/api/jikan/manga'
 
 function Test() {
   const { data } = aniwatchApi.useAnimeByName({

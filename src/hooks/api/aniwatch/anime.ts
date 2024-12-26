@@ -1,5 +1,5 @@
 import { findBestMatches } from '@/shared/utils/find-best-matches'
-import { queryOptions, useQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
 import type {
@@ -47,7 +47,7 @@ export const aniwatchApi = {
   },
 
   useAnimeInfoById: ({ id }: { id?: string }) => {
-    return queryOptions({
+    return useQuery({
       queryKey: [aniwatchApi.baseKey, 'info', id],
       queryFn: async ({ signal }) => {
         const res = await instance.get<AnimeByIdType>(`/anime/${id}`, {
@@ -63,7 +63,7 @@ export const aniwatchApi = {
     })
   },
   useAnimeEpisodesById: ({ animeId }: { animeId?: string }) => {
-    return queryOptions({
+    return useQuery({
       queryKey: [aniwatchApi.baseKey, 'episodes', animeId],
       queryFn: async ({ signal }) => {
         const res = await instance.get<AnimeVideoType>(

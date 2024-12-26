@@ -12,7 +12,12 @@ type Props = {
   setIsOpen: (isOpen: boolean) => void
   handleClose: () => void
 }
-export default function DialogManga({ isOpen,setIsOpen, handleClose, name }: Props) {
+export default function DialogManga({
+  isOpen,
+  setIsOpen,
+  handleClose,
+  name,
+}: Props) {
   const navigate = useNavigate()
   const { data } = mangaApi.useMangaSeachInput(name)
 
@@ -23,13 +28,13 @@ export default function DialogManga({ isOpen,setIsOpen, handleClose, name }: Pro
   if (!data) return null
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="min-h-[310px] w-full max-w-[900px]">
-        <DialogTitle></DialogTitle>
+      <DialogContent className="min-h-[420px] w-full max-w-[900px]">
+        {/* <DialogTitle></DialogTitle> */}
         <h1 className="center flex text-xl">Available Manga</h1>
         <div className="flex justify-evenly">
           {data.data?.map(manga => (
             <div
-              className="w-full"
+              className="h-40 w-32"
               key={`${manga.id}${manga.attributes?.title}`}
               onClick={() => handleAnimeClick(manga?.id)}
             >

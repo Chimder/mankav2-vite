@@ -1,11 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 
 import { aniwatchApi } from '@/hooks/api/aniwatch/anime'
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-} from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
 import { PATH } from '@/app/routers/path-constants'
 
 type Props = {
@@ -14,7 +10,12 @@ type Props = {
   setIsOpen: (isOpen: boolean) => void
   handleClose: () => void
 }
-export default function DialogAnime({ isOpen, setIsOpen, handleClose, name }: Props) {
+export default function DialogAnime({
+  isOpen,
+  setIsOpen,
+  handleClose,
+  name,
+}: Props) {
   const navigate = useNavigate()
   const { data } = aniwatchApi.useAnimeByName({ name })
 
@@ -26,7 +27,7 @@ export default function DialogAnime({ isOpen, setIsOpen, handleClose, name }: Pr
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className="min-h-[310px] w-full max-w-[900px]">
-        <DialogTitle></DialogTitle>
+        {/* <DialogTitle></DialogTitle> */}
         <div className="flex justify-evenly">
           {data?.map(anime => (
             <div

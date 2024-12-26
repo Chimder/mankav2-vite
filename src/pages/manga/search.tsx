@@ -1,4 +1,3 @@
-import { Suspense } from 'react'
 import { ScrollRestoration } from 'react-router-dom'
 
 import Cards from '@/components/Manga/cards/cards'
