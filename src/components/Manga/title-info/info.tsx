@@ -6,6 +6,7 @@ import { mangaApi } from '@/hooks/api/mangadex/manga'
 
 import Characters from './characters'
 import Relation from './relation'
+import { useSuspenseQuery } from '@tanstack/react-query'
 
 type Props = {}
 
@@ -27,7 +28,7 @@ export const getMangaImg = (id?: string, manga?: Manga) => {
 }
 const Info = (props: Props) => {
   const { id: mangaId } = useParams()
-  const { data: manga } = mangaApi.useMangaByID(mangaId)
+  const { data: manga } = useSuspenseQuery(mangaApi.useMangaByID(mangaId))
 
   return (
     <section className="">

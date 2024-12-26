@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import { MangaSearch } from '../../pages/manga/search'
+import { queryClient } from '../providers/tanstack-query'
 
 // import Layout from './layout'
 
@@ -45,8 +46,10 @@ export default function Routes() {
               path: 'title/:id',
               // element: <MangaTitle />,
               async lazy() {
-                let { MangaTitle } = await import('../../pages/manga/title')
-                return { Component: MangaTitle }
+                let { loader, MangaTitle } = await import(
+                  '../../pages/manga/title'
+                )
+                return { loader: loader(queryClient), Component: MangaTitle }
               },
             },
             // {

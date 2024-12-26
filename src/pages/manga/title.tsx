@@ -1,12 +1,29 @@
-import { ScrollRestoration } from 'react-router-dom'
+import { LoaderFunctionArgs, ScrollRestoration } from 'react-router-dom'
 
 import Chapters from '@/components/Manga/title-info/chapters'
 import Info from '@/components/Manga/title-info/info'
+import { QueryClient } from '@tanstack/react-query'
+import { mangaApi } from '@/hooks/api/mangadex/manga'
 
-// const Chapters = lazy(
 //   () => import('../../components/Manga/title-info/characters'),
 // )
 // const Info = lazy(() => import('../../components/Manga/title-info/info'))
+// const Chapters = lazy(
+
+
+export const loader =
+  (queryClient: QueryClient) =>
+  async ({ params }: LoaderFunctionArgs) => {
+    if (!params.id) {
+      console.log(params.id)
+      throw new Error('No contact ID provided')
+    }
+    const id = params.id
+
+    queryClient.ensureQueryData(mangaApi.useMangaByID(id))
+    // queryClient.ensureQueryData(useUserEmotes(id))
+    return id
+  }
 
 export const MangaTitle = () => {
   return (

@@ -1,3 +1,4 @@
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
 
 import { aniwatchApi } from '@/hooks/api/aniwatch/anime'
@@ -11,7 +12,9 @@ import AnimeSeasons from './seasons'
 
 function AnimeTitleInfo() {
   const { id } = useParams()
-  const { data } = aniwatchApi.useAnimeInfoById({ id: id as string })
+  const { data } = useSuspenseQuery(
+    aniwatchApi.useAnimeInfoById({ id: id as string }),
+  )
 
   const anime = data?.data.anime
   const relatedAnime = data?.data.relatedAnimes

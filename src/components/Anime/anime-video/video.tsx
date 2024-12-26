@@ -1,3 +1,4 @@
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
 
 import { aniwatchApi } from '@/hooks/api/aniwatch/anime'
@@ -8,10 +9,12 @@ type Props = {}
 
 function AnimeVideo() {
   const { id } = useParams()
-  const { data: videoList } = aniwatchApi.useAnimeEpisodesById({ animeId: id })
+  const { data: videoList } = useSuspenseQuery(
+    aniwatchApi.useAnimeEpisodesById({ animeId: id }),
+  )
 
   return (
-    <div className="chapters-scrollbar overflow-y-scroll h-full pb-6">
+    <div className="chapters-scrollbar h-full overflow-y-scroll pb-6">
       <VideoList
         key={`${videoList?.data?.totalEpisodes}${id}`}
         video={videoList?.data}

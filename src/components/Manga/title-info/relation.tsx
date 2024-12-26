@@ -1,4 +1,5 @@
 import { Manga } from '@/shared/api/mangadex/generated'
+import { useQuery } from '@tanstack/react-query'
 import { Link, useParams } from 'react-router-dom'
 
 import { mangaApi } from '@/hooks/api/mangadex/manga'
@@ -8,7 +9,11 @@ import { getFirstTitle } from '../cards/cards-list'
 
 const Relation = () => {
   const { id: mangaId } = useParams()
-  const { data: manga, isFetching, isLoading } = mangaApi.useMangaByID(mangaId)
+  const {
+    data: manga,
+    isFetching,
+    isLoading,
+  } = useQuery(mangaApi.useMangaByID(mangaId))
 
   const mangasIds = manga?.data?.relationships
     ?.map(id => id.id)
