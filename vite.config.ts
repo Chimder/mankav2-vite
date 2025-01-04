@@ -25,72 +25,59 @@ export default defineConfig({
     outDir: 'dist',
     rollupOptions: {
       // output: {
-      //   manualChunks: {
-      //     'vendor-react': ['react', 'react-dom', 'react-router-dom'],
-      //     'vendor-radix': [
-      //       '@radix-ui/react-accordion',
-      //       '@radix-ui/react-dialog',
-      //       '@radix-ui/react-icons',
-      //       '@radix-ui/react-select',
-      //       '@radix-ui/react-separator',
-      //       '@radix-ui/react-slot',
-      //       '@radix-ui/themes',
-      //     ],
-      //     'vendor-tanstack': ['@tanstack/react-query'],
-      //     'vendor-utils': ['dayjs', 'axios', 'zustand', 'immer', 'zod'],
+      //   manualChunks(id) {
+      //     if (
+      //       id.includes('node_modules/react') ||
+      //       id.includes('node_modules/react-dom') ||
+      //       id.includes('node_modules/react-router')
+      //     ) {
+      //       return 'core'
+      //     }
+      //     if (id.includes('node_modules')) {
+      //       if (
+      //         id.includes('@radix-ui') ||
+      //         id.includes('lucide-react') ||
+      //         id.includes('class-variance-authority')
+      //       ) {
+      //         return 'ui'
+      //       }
+      //       if (id.includes('@tanstack/react-query') || id.includes('axios')) {
+      //         return 'data'
+      //       }
+      //       return 'vendor'
+      //     }
+      //     if (id.includes('/components/Layout')) {
+      //       return 'layout'
+      //     }
+      //     if (id.includes('/components/')) {
+      //       return 'components'
+      //     }
+      //     return null
+      //   },
+      //   chunkFileNames: chunkInfo => {
+      //     if (
+      //       chunkInfo.name === 'core' ||
+      //       chunkInfo.name === 'ui' ||
+      //       chunkInfo.name === 'data' ||
+      //       chunkInfo.name === 'vendor' ||
+      //       chunkInfo.name === 'layout' ||
+      //       chunkInfo.name === 'components'
+      //     ) {
+      //       return 'assets/[name]-[hash].js'
+      //     }
+      //     return 'assets/[name].js'
       //   },
       // },
-      output: {
-        manualChunks(id) {
-          if (id.includes('/node_modules/')) {
-            return 'vendor'
-          }
-          if (id.includes('pages/manga/index')) {
-            return 'manga-main'
-          }
-          if (id.includes('pages/manga/search')) {
-            return 'manga-search'
-          }
-          if (id.includes('pages/manga/title')) {
-            return 'manga-title'
-          }
-          if (id.includes('pages/manga/chapter')) {
-            return 'manga-chapter'
-          }
-          if (id.includes('pages/anime')) {
-            return 'anime'
-          }
-          if (id.includes('pages/home')) {
-            return 'home'
-          }
-          return null
-        },
-      },
+    },
+    modulePreload: {
+      polyfill: false,
     },
   },
+
   preview: {
     port: 3000,
     strictPort: true,
     open: true,
     cors: true,
   },
-
-  // optimizeDeps: {
-  //   include: [
-  //     'react',
-  //     'react-dom',
-  //     'react-router-dom',
-  //     '@tanstack/react-query',
-  //     'axios',
-  //     'dayjs',
-  //     'zustand',
-  //     'immer',
-  //     'zod',
-  //     '@radix-ui/themes',
-  //   ],
-  //   exclude: [],
-  //   esbuildOptions: {
-  //     target: 'esnext',
-  //   },
-  // },
 })

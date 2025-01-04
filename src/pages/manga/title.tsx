@@ -13,7 +13,6 @@ import Info from '@/components/Manga/title-info/info'
 //   }
 
 export const MangaTitle = () => {
-
   return (
     <div className="z-10 flex h-[calc(100vh-64px)] border-green-400 bg-black px-[2px] text-white">
       <div className="order-2 flex w-2/5 flex-col overflow-hidden">
