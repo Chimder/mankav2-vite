@@ -1,5 +1,3 @@
-// import { Manga } from '@/shared/api/mangadex/generated'
-import { lazy } from 'react'
 import { Manga } from '@/shared/api/mangadex/generated'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import dayjs from 'dayjs'
@@ -7,11 +5,11 @@ import { useParams } from 'react-router-dom'
 
 import { mangaApi } from '@/hooks/api/mangadex/manga'
 
-// import Relation from './relation'
-// import { mangaApi } from '@/hooks/api/mangadex/manga'
-// import Characters from './characters'
-const Relation = lazy(() => import('./relation'))
-const CharactersList = lazy(() => import('./characters-list'))
+import CharactersList from './characters-list'
+import Relation from './relation'
+
+// const Relation = lazy(() => import('./relation'))
+// const CharactersList = lazy(() => import('./characters-list'))
 
 export const getMangaTitle = (manga?: Manga) => {
   if (!manga?.attributes?.title) return undefined

@@ -1,5 +1,5 @@
-import { lazy, useEffect, useState } from 'react'
-import { CharacterImages } from '@/shared/api/jikan/generated'
+import { lazy, useState } from 'react'
+import { getCharacterImg } from '@/shared/utils/get-character-img'
 import { usePersoneStore } from '@/store/characters-people'
 import { useSearchParams } from 'react-router-dom'
 
@@ -10,11 +10,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
-// import DialogCharactersPeople from '@/components/characters-voices/dialog'
 
-const DialogCharactersPeople = lazy(() => import('@/components/characters-voices/dialog'))
-
-import { getCharacterImg } from '@/shared/utils/get-character-img'
+const DialogCharactersPeople = lazy(
+  () => import('@/components/characters-voices/dialog'),
+)
 
 const CharactersList = () => {
   const [searchParams] = useSearchParams()

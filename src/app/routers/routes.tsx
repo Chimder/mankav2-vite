@@ -1,7 +1,4 @@
-import Test from '@/pages/test'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-
-import { queryClient } from '../providers/tanstack-query'
 
 export default function Routes() {
   const router = createBrowserRouter([
@@ -38,10 +35,8 @@ export default function Routes() {
             {
               path: 'title/:id',
               async lazy() {
-                let { MangaTitle, loader } = await import(
-                  '../../pages/manga/title'
-                )
-                return { loader: loader(queryClient), Component: MangaTitle }
+                let { MangaTitle } = await import('../../pages/manga/title')
+                return { Component: MangaTitle }
               },
             },
             {
