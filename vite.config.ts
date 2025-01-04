@@ -10,9 +10,7 @@ export default defineConfig({
       },
     }),
   ],
-
   base: '/',
-
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -20,22 +18,11 @@ export default defineConfig({
   },
 
   server: {
-    watch: {
-      usePolling: true,
-    },
-    host: true,
-    strictPort: true,
     port: 3000,
   },
 
   build: {
     outDir: 'dist',
-    target: 'esnext',
-    cssMinify: true,
-    cssCodeSplit: true,
-    modulePreload: {
-      polyfill: true,
-    },
     rollupOptions: {
       // output: {
       //   manualChunks: {
@@ -53,37 +40,39 @@ export default defineConfig({
       //     'vendor-utils': ['dayjs', 'axios', 'zustand', 'immer', 'zod'],
       //   },
       // },
-      // output: {
-      //   manualChunks(id) {
-      //     if (id.includes('/node_modules/')) {
-      //       return 'vendor'
-      //     }
-      //     if (id.includes('pages/manga/index')) {
-      //       return 'manga-main'
-      //     }
-      //     if (id.includes('pages/manga/search')) {
-      //       return 'manga-search'
-      //     }
-      //     if (id.includes('pages/manga/title')) {
-      //       return 'manga-title'
-      //     }
-      //     if (id.includes('pages/manga/chapter')) {
-      //       return 'manga-chapter'
-      //     }
-      //     if (id.includes('pages/anime')) {
-      //       return 'anime'
-      //     }
-      //     if (id.includes('pages/home')) {
-      //       return 'home'
-      //     }
-      //     return null
-      //   },
-      // },
+      output: {
+        manualChunks(id) {
+          if (id.includes('/node_modules/')) {
+            return 'vendor'
+          }
+          if (id.includes('pages/manga/index')) {
+            return 'manga-main'
+          }
+          if (id.includes('pages/manga/search')) {
+            return 'manga-search'
+          }
+          if (id.includes('pages/manga/title')) {
+            return 'manga-title'
+          }
+          if (id.includes('pages/manga/chapter')) {
+            return 'manga-chapter'
+          }
+          if (id.includes('pages/anime')) {
+            return 'anime'
+          }
+          if (id.includes('pages/home')) {
+            return 'home'
+          }
+          return null
+        },
+      },
     },
-
-    // assetsInlineLimit: 4096,
-    // sourcemap: false,
-    // chunkSizeWarningLimit: 1000,
+  },
+  preview: {
+    port: 3000,
+    strictPort: true,
+    open: true,
+    cors: true,
   },
 
   // optimizeDeps: {
@@ -104,11 +93,4 @@ export default defineConfig({
   //     target: 'esnext',
   //   },
   // },
-
-  preview: {
-    port: 3000,
-    strictPort: true,
-    open: true,
-    cors: true,
-  },
 })
