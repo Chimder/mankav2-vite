@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import Icons from '@/assets/svg/icons'
+import { PATH } from '@/shared/constants/path-constants'
 import { ReloadIcon } from '@radix-ui/react-icons'
 import dayjs from 'dayjs'
 import { useNavigate } from 'react-router-dom'
@@ -7,10 +8,9 @@ import { useDebounce } from 'use-debounce'
 
 import { mangaApi } from '@/hooks/api/mangadex/manga'
 import useClickOutside from '@/hooks/use-click-outside'
-import { PATH } from '@/app/routers/path-constants'
 
-import { getFirstTitle } from '../Manga/cards/cards-list'
 import { Badge } from '../ui/badge'
+import { getFirstTitle } from '@/shared/utils/get-first-title'
 
 const InputeSearch = () => {
   const navigate = useNavigate()
@@ -78,7 +78,7 @@ const InputeSearch = () => {
               <div className="min-h-[80px] min-w-[64px]">
                 <img
                   className="object-cover object-center"
-                  src={`${import.meta.env.VITE_IMG_PROXY!}/img/https://mangadex.org/covers/${manga?.id}/${manga?.relationships?.find(obj => obj.type === 'cover_art')?.attributes?.fileName}`}
+                  src={`${import.meta.env.VITE_IMG_PROXY!}/img/https://mangadex.org/covers/${manga?.id}/${manga?.relationships?.find(obj => obj.type === 'cover_art')?.attributes?.fileName}.256.jpg`}
                   width={60}
                   height={80}
                   alt=""

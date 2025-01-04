@@ -1,26 +1,34 @@
-import { useParams } from 'react-router-dom'
-
+import { useEffect, useRef } from 'react'
 import { aniwatchApi } from '@/hooks/api/aniwatch/anime'
 
-import { Badge } from '../../ui/badge'
 import Characters from './characters'
 import AnimeRelation from './relation'
 import AnimeSeasons from './seasons'
+import { useParams } from 'react-router-dom'
 
 // type Props = {}
 
 function AnimeTitleInfo() {
   const { id } = useParams()
   const { data } = aniwatchApi.useAnimeInfoById({ id: id as string })
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
 
   const anime = data?.data.anime
   const relatedAnime = data?.data.relatedAnimes
   const seasons = data?.data.seasons
 
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = 0
+    }
+  }, [id])
+
   return (
-    <>
-      <section className="filterBar order-2 flex w-2/5 flex-col items-start overflow-hidden overflow-y-scroll border border-green-400 px-[2px] text-white">
-        <div className="flex w-full flex-col items-center justify-center">
+      <section
+        ref={scrollContainerRef}
+        className="filterBar order-2 flex w-2/5 flex-col overflow-hidden overflow-y-scroll  text-white"
+      >
+        <div className="flex w-full flex-col items-center justify-center rounded-lg border-1 bg-primary">
           <img
             className="relative z-10 h-[440px] w-[310px]"
             src={anime?.info.poster}
@@ -58,14 +66,12 @@ function AnimeTitleInfo() {
               <div className="w-24 font-bold">Genres:</div>
               <div className="flex flex-wrap gap-2">
                 {anime?.moreInfo.genres.map(genre => (
-                  <Badge
-                    variant="outline"
-                    color="black"
+                  <div
                     key={genre}
-                    className="hover:bg-black"
+                    className="rounded-4xl mb-1 ml-[2px] inline-block rounded-2xl border-1 bg-transparent px-2 py-1 text-sm text-white"
                   >
                     {genre}
-                  </Badge>
+                  </div>
                 ))}
               </div>
             </div>
@@ -77,7 +83,6 @@ function AnimeTitleInfo() {
           <AnimeRelation animes={relatedAnime} key={`${id}RelatedAnime`} />
         )}
       </section>
-    </>
   )
 }
 

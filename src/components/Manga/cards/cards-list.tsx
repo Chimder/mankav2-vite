@@ -1,38 +1,26 @@
-import { useEffect, useRef } from 'react'
 import { LocalizedString, MangaList } from '@/shared/api/mangadex/generated'
+import { PATH } from '@/shared/constants/path-constants'
 import { cn } from '@/shared/lib/tailwind'
 import { useCardSwitcherStore } from '@/store/card-switcher'
 import { Link } from 'react-router-dom'
 
-import { PATH } from '@/app/routers/path-constants'
-
 import { Skeleton } from '../../ui/skeleton'
+import { getFirstTitle } from '@/shared/utils/get-first-title'
 
 type Props = {
   mangas: MangaList | undefined
   isFetching: boolean
 }
 
-export function getFirstTitle(title?: LocalizedString) {
-  if (title?.en) {
-    return title.en
-  }
-  if (title && title['ja-ro']) {
-    return title['ja-ro']
-  }
-  if (title && typeof title === 'object') {
-    const val = Object.values(title)
-    return val.length > 0 ? val[0] : undefined
-  }
-}
+
 const CardsList = ({ mangas, isFetching }: Props) => {
   const cardView = useCardSwitcherStore().type
 
   return (
     <div className="h-full">
       <ul className={cn(cardView)}>
-        {isFetching
-          ? Array.from({ length: 10 }).map((_, index) => (
+        {isFetching && cardView
+          ? Array.from({ length: 20 }).map((_, index) => (
               <Skeleton
                 className={
                   cardView == 'boxes' ? 'skeletonBoxes' : 'skeletonTwo'
@@ -43,15 +31,15 @@ const CardsList = ({ mangas, isFetching }: Props) => {
           : cardView == 'boxes'
             ? mangas?.data?.map(manga => (
                 <Link
-                  className="flex w-[280px] flex-col overflow-hidden rounded-xl border-1 border-red-200 pb-1 text-white hover:border-red-400"
+                  className="flex w-[260px] flex-col overflow-hidden rounded-xl pb-1 text-white hover:outline hover:outline-1 hover:outline-red-400"
                   to={`${PATH.MANGA.getTitlePath(manga?.id)}?name=${getFirstTitle(manga.attributes?.title)}`}
                   key={manga?.id}
                 >
                   <img
-                    className="h-[310px] w-[280px] rounded-xl object-cover"
-                    src={`${import.meta.env.VITE_IMG_PROXY}/img/mangadex.org/covers/${manga.id}/${manga.relationships?.find(obj => obj.type === 'cover_art')?.attributes?.fileName}`}
-                    width={280}
-                    height={310}
+                    className="h-[280px] w-[260px] rounded-xl object-cover"
+                    src={`${import.meta.env.VITE_IMG_PROXY}/img/mangadex.org/covers/${manga.id}/${manga.relationships?.find(obj => obj.type === 'cover_art')?.attributes?.fileName}.256.jpg`}
+                    width={260}
+                    height={280}
                     loading="lazy"
                     alt=""
                   />
@@ -62,13 +50,13 @@ const CardsList = ({ mangas, isFetching }: Props) => {
               ))
             : mangas?.data?.map(manga => (
                 <Link
-                  className="flex overflow-hidden border-1 border-gray-500 text-white"
+                  className="mt-1 flex overflow-hidden rounded-lg border-gray-500 text-white hover:outline hover:outline-1 hover:outline-red-400"
                   to={`${PATH.MANGA.getTitlePath(manga.id)}?name=${getFirstTitle(manga.attributes?.title)}`}
                   key={manga?.id}
                 >
                   <img
                     className="h-[180px] w-[140px] object-cover"
-                    src={`${import.meta.env.VITE_IMG_PROXY}/img/mangadex.org/covers/${manga.id}/${manga.relationships?.find(obj => obj.type === 'cover_art')?.attributes?.fileName}`}
+                    src={`${import.meta.env.VITE_IMG_PROXY}/img/mangadex.org/covers/${manga.id}/${manga.relationships?.find(obj => obj.type === 'cover_art')?.attributes?.fileName}.256.jpg`}
                     width={140}
                     height={180}
                     loading="lazy"
@@ -82,13 +70,13 @@ const CardsList = ({ mangas, isFetching }: Props) => {
                     <div className="mr-[2px] flex flex-wrap pb-[5px]">
                       {manga.attributes?.tags?.slice(0, 4)?.map(tag => (
                         <div
-                          className="rounded-4xl border-2 border-gray-400 bg-transparent p-1 text-sm"
+                          className="rounded-4xl rounded-xl border border-gray-400 bg-transparent p-1 text-sm"
                           key={tag.id}
                         >
                           {tag.attributes?.name?.en}
                         </div>
                       ))}
-                      <div className="rounded-4xl border-2 border-gray-400 bg-transparent p-1 text-sm">
+                      <div className="rounded-4xl rounded-xl border-2 border-gray-400 bg-transparent p-1 text-sm">
                         {manga.attributes?.status}
                       </div>
                     </div>

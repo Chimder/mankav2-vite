@@ -1,4 +1,3 @@
-import { findBestMatches } from '@/shared/utils/find-best-matches'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
@@ -9,9 +8,10 @@ import type {
   AnimeSources,
   AnimeVideoType,
 } from './types'
+import { findBestMatches } from '@/shared/utils/find-best-matches'
 
 const url = import.meta.env.VITE_ANIWATCH!
-const instance = axios.create({
+export const instance = axios.create({
   baseURL: `${url}/api/v2/hianime`,
   headers: {
     'Content-Type': 'application/json',

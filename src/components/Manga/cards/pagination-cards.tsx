@@ -1,9 +1,6 @@
+import { PATH } from '@/shared/constants/path-constants'
 import { cn } from '@/shared/lib/tailwind'
 import { useNavigate } from 'react-router-dom'
-
-import { PATH } from '@/app/routers/path-constants'
-
-import { Button } from '../../ui/button'
 
 export const PaginationButtons = ({
   currentPage = 1,
@@ -55,10 +52,12 @@ export const PaginationButtons = ({
   }
 
   const pages = getPageNumbers()
+  console.log('CURSSS', pages)
+  console.log('CURSS2222S', pages[0] == currentPage)
 
   return (
-    <div className="center mt-4">
-      <div className="border-[1px] border-yellow-800 p-2">
+    <div className="center mt-4 p-2">
+      <div className="border-[1px] border-yellow-800 p-1">
         {pages &&
           pages.map((page, index) =>
             page === -1 ? (
@@ -66,17 +65,17 @@ export const PaginationButtons = ({
                 ...
               </span>
             ) : (
-              <Button
+              <button
                 className={cn(
-                  'mx-1 text-white hover:bg-orange-700',
-                  page === currentPage && 'bg-orange-500',
+                  'mx-1 rounded-lg bg-background bg-slate-400 px-4 py-2 text-white hover:bg-orange-700',
+                  page == currentPage && '!bg-orange-400',
                 )}
                 key={page}
                 onClick={() => handlePageChange(page)}
                 // disabled={page === currentPage}
               >
                 {page}
-              </Button>
+              </button>
             ),
           )}
       </div>

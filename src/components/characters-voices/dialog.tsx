@@ -1,4 +1,5 @@
-import { ReactNode } from 'react'
+import { ReactNode, useCallback, useEffect } from 'react'
+import { jikanCharacterPeopleApi } from '@/hooks/api/jikan/characters'
 import {
   CharacterFull,
   GetCharacterFullById200,
@@ -7,11 +8,10 @@ import {
 } from '@/shared/api/jikan/generated'
 import { usePersoneStore } from '@/store/characters-people'
 
-import { jikanCharacterPeopleApi } from '@/hooks/api/jikan/characters'
-import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
-
+import { Dialog, DialogContent, DialogTitle } from '../ui/dialog'
 import Characters from './character'
 import Voices from './voices'
+import { useParams } from 'react-router-dom'
 
 type Props = {
   children?: ReactNode
@@ -19,7 +19,8 @@ type Props = {
   setIsOpen: (isOpen: boolean) => void
 }
 
-function DialogCharactersPeople({ isOpen, setIsOpen }: Props) {
+function DialogCharactersPeople({ isOpen = false, setIsOpen }: Props) {
+  const { id } = useParams()
   const personeId = usePersoneStore().id
   const personeType = usePersoneStore().type
 
@@ -30,16 +31,18 @@ function DialogCharactersPeople({ isOpen, setIsOpen }: Props) {
     data: GetCharacterFullById200 | GetPersonFullById200 | undefined
   }
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setIsOpen(false)
-  }
+  }, [setIsOpen])
 
-  console.log('DADTTA', data)
+  useEffect(() => {
+    handleClose()
+  }, [handleClose, id])
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent
-        className="flex h-[90vh] w-[80vw] max-w-[1200px] flex-col items-center justify-center p-2"
+        className="flex h-[90vh] w-[80vw] max-w-[1200px] flex-col items-center bg-black text-white justify-center p-2"
         onPointerDownOutside={handleClose}
         onEscapeKeyDown={handleClose}
       >

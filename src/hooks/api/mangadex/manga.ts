@@ -7,7 +7,7 @@ import {
   GetSearchMangaStatusItem,
 } from '@/shared/api/mangadex/generated'
 import { OffsetFilter } from '@/shared/constants/filters'
-import { keepPreviousData, useQuery } from '@tanstack/react-query'
+import { keepPreviousData, queryOptions, useQuery } from '@tanstack/react-query'
 
 export type mangaSearchOps = {
   tags?: string[]
@@ -20,7 +20,7 @@ export type mangaSearchOps = {
 export const mangaApi = {
   baseKey: 'manga',
   useMangaByID: (id?: string) => {
-    return useQuery({
+    return queryOptions({
       queryKey: [mangaApi.baseKey, id],
       queryFn: ({ signal }) =>
         getMangaId(
@@ -41,11 +41,11 @@ export const mangaApi = {
       queryFn: ({ signal }) =>
         getSearchManga(
           {
-            includedTagsMode: 'AND',
+            'includedTagsMode': 'AND',
             'includes[]': ['manga', 'cover_art'],
-            title: title,
-            limit: 5,
-            order: {
+            'title': title,
+            'limit': 5,
+            'order': {
               relevance: 'desc',
             },
           },
@@ -67,16 +67,16 @@ export const mangaApi = {
     sortBy,
   }: Partial<mangaSearchOps>) => {
     const queryParams: GetSearchMangaParams = {
-      includedTagsMode: 'AND' as GetSearchMangaIncludedTagsMode,
+      'includedTagsMode': 'AND' as GetSearchMangaIncludedTagsMode,
       'includedTags[]': tags,
       ...(name && { title: name }),
       'includes[]': ['cover_art'],
       ...(status && { 'status[]': [status as GetSearchMangaStatusItem] }),
       'contentRating[]': ['safe', 'suggestive'],
       'ids[]': [],
-      limit: OffsetFilter,
-      offset: offset,
-      order: sortBy
+      'limit': OffsetFilter,
+      'offset': offset,
+      'order': sortBy
         ? {
             [sortBy.type]: sortBy.order,
           }

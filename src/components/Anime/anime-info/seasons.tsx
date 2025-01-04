@@ -1,7 +1,6 @@
+import { Season } from '@/hooks/api/aniwatch/types'
+import { PATH } from '@/shared/constants/path-constants'
 import { Link } from 'react-router-dom'
-
-import type { Season } from '@/hooks/api/aniwatch/types'
-import { PATH } from '@/app/routers/path-constants'
 
 type Props = {
   animes: Season[]
@@ -10,7 +9,7 @@ type Props = {
 function AnimeSeasons({ animes }: Props) {
   if (!animes || !animes.length) return null
   return (
-    <div className="w-full">
+    <div className="center m-2 flex-col rounded-lg border-1 bg-primary">
       <div className="flex- flex-col">
         <h1 className="center mt-4">Seasons</h1>
         <div className="flex flex-row flex-wrap justify-center gap-3">

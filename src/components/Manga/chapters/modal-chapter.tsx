@@ -3,10 +3,9 @@ import {
   ChapterResponse,
   LocalizedString,
 } from '@/shared/api/mangadex/generated'
+import { PATH } from '@/shared/constants/path-constants'
 import { cn } from '@/shared/lib/tailwind'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
-
-import { PATH } from '@/app/routers/path-constants'
 
 import {
   Dialog,
@@ -15,7 +14,7 @@ import {
   DialogTrigger,
 } from '../../ui/dialog'
 import { Input } from '../../ui/input'
-import { getFirstTitle } from '../cards/cards-list'
+import { getFirstTitle } from '@/shared/utils/get-first-title'
 
 type flatAggregate = {
   chapter?: string
@@ -62,8 +61,8 @@ function ModalChapter({ chapters, children, chapterData }: Props) {
     }
 
     return () => {
-    setHighlightedChapter(null)
-  }
+      setHighlightedChapter(null)
+    }
   }, [chapterData?.data?.attributes?.chapter, searchPageQuery])
 
   const title = getFirstTitle(

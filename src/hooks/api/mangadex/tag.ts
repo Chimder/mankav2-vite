@@ -1,5 +1,5 @@
-import { getMangaTag } from '@/shared/api/mangadex/generated'
 import { useQuery } from '@tanstack/react-query'
+import { getMangaTag } from '@/shared/api/mangadex/generated'
 
 export const tagsApi = {
   baseKey: 'tags',

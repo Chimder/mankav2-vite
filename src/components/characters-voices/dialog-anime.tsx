@@ -1,8 +1,9 @@
-import { useNavigate } from 'react-router-dom'
+import { PATH } from '@/shared/constants/path-constants'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { aniwatchApi } from '@/hooks/api/aniwatch/anime'
-import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
-import { PATH } from '@/app/routers/path-constants'
+
+import { Dialog, DialogContent } from '../ui/dialog'
 
 type Props = {
   name: string
@@ -20,26 +21,26 @@ export default function DialogAnime({
   const { data } = aniwatchApi.useAnimeByName({ name })
 
   const handleAnimeClick = (animeId: string) => {
-    handleClose()
-    navigate(`${PATH.ANIME.getTitlePath(animeId)}`)
+    // navigate(`${PATH.ANIME.getTitlePath(animeId)}`)
+    // handleClose()
   }
   if (!data) return null
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="min-h-[310px] w-full max-w-[900px]">
+      <DialogContent className="min-h-[310px] w-full max-w-[900px] border-primary bg-black text-white">
         {/* <DialogTitle></DialogTitle> */}
         <div className="flex justify-evenly">
           {data?.map(anime => (
-            <div
+            <Link
+              to={PATH.ANIME.getTitlePath(anime.id)}
               key={`${anime.id}${anime.name}new`}
-              onClick={() => handleAnimeClick(anime.id)}
-              className="h-40 w-32"
+              className="h-40 w-32 cursor-pointer"
             >
               <div className="mb-2 h-40 w-32 overflow-hidden rounded-lg">
                 <img src={anime.poster} alt="" />
               </div>
               <h1>{anime.name}</h1>
-            </div>
+            </Link>
           ))}
         </div>
       </DialogContent>

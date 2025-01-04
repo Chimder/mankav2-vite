@@ -47,6 +47,7 @@
     "@eslint/compat": "^1.2.0",
     "@eslint/js": "^9.17.0",
     "@tanstack/eslint-plugin-query": "5.20.1",
+    "@types/node": "^22.10.5",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@typescript-eslint/eslint-plugin": "7.0.1",
@@ -81,7 +82,7 @@
     "stylelint-order": "^6.0.4",
     "stylelint-scss": "^6.10.0",
     "stylelint-use-nesting": "^6.0.0",
-    "tailwindcss": "^3.4.16",
+    "tailwindcss": "^3.4.17",
     "typescript": "~5.6.3",
     "typescript-eslint": "^8.18.1",
     "vite": "^6.0.1"

@@ -1,4 +1,4 @@
-import { lazy, useState } from 'react'
+import { lazy, useEffect, useState } from 'react'
 import { CharacterImages } from '@/shared/api/jikan/generated'
 import { usePersoneStore } from '@/store/characters-people'
 import { useSearchParams } from 'react-router-dom'
@@ -10,16 +10,13 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
-
 // import DialogCharactersPeople from '@/components/characters-voices/dialog'
-const DialogCharactersPeople = lazy(
-  () => import('../../../components/characters-voices/dialog'),
-)
 
-export function getCharacterImg(img?: CharacterImages) {
-  return img?.jpg?.image_url ?? undefined
-}
-const Characters = () => {
+const DialogCharactersPeople = lazy(() => import('@/components/characters-voices/dialog'))
+
+import { getCharacterImg } from '@/shared/utils/get-character-img'
+
+const CharactersList = () => {
   const [searchParams] = useSearchParams()
   const name = searchParams.get('name')
   const {
@@ -36,10 +33,15 @@ const Characters = () => {
   const setPersone = usePersoneStore().setPersone
 
   const [isOpen, setIsOpen] = useState(false)
-  async function handlePerson(id: number) {
-    await setPersone(id, 'character')
+
+  function handlePerson(id: number) {
+    setPersone(id, 'character')
     setIsOpen(true)
   }
+  // async function handlePerson(id: number) {
+  //   await setPersone(id, 'character')
+  //   setIsOpen(true)
+  // }
 
   const firstSixCharacters = characters?.data?.slice(0, 6) || []
   const restCharacters = characters?.data?.slice(6) || []
@@ -51,19 +53,19 @@ const Characters = () => {
   }
 
   return (
-    <div className="center m-1 flex-col border-1 border-yellow-800">
+    <div className="center m-2 flex-col rounded-lg border-1 bg-primary">
       <h1 className="text-lg text-yellow-700">Characters</h1>
       <div className="">
         <ul className="center flex flex-wrap gap-2">
           {firstSixCharacters.map(character => (
             <div
-              className="flex w-32 flex-col items-center"
+              className="flex w-28 flex-col items-center"
               key={`${character.character?.name} six`}
               onClick={() =>
                 handlePerson(character.character?.mal_id as number)
               }
             >
-              <div className="mb-2 flex h-40 w-32 items-center justify-center overflow-hidden">
+              <div className="h-38 mb-2 flex w-28 items-center justify-center overflow-hidden">
                 <img
                   className="h-full w-full object-cover"
                   src={getCharacterImg(character.character?.images)}
@@ -76,6 +78,7 @@ const Characters = () => {
             </div>
           ))}
         </ul>
+
         <DialogCharactersPeople setIsOpen={setIsOpen} isOpen={isOpen} />
 
         {restCharacters.length > 0 && (
@@ -90,13 +93,13 @@ const Characters = () => {
                 <ul className="center flex flex-wrap gap-2">
                   {restCharacters.map(character => (
                     <div
-                      className="flex w-32 flex-col items-center"
+                      className="flex w-28 flex-col items-center"
                       key={`${character.character?.name}rest`}
                       onClick={() =>
                         handlePerson(character.character?.mal_id as number)
                       }
                     >
-                      <div className="mb-2 flex h-40 w-32 items-center justify-center overflow-hidden">
+                      <div className="h-38 mb-2 flex w-28 items-center justify-center overflow-hidden">
                         <img
                           className="h-full w-full object-cover"
                           src={getCharacterImg(character.character?.images)}
@@ -118,4 +121,4 @@ const Characters = () => {
   )
 }
 
-export default Characters
+export default CharactersList

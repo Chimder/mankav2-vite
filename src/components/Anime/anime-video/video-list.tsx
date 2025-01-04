@@ -1,9 +1,8 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { cn } from '@/shared/lib/tailwind'
-
-import { aniwatchApi } from '@/hooks/api/aniwatch/anime'
-import { AnimeVideoData } from '@/hooks/api/aniwatch/types'
+// VideoList.tsx
+import { useEffect, useRef, useState } from 'react'
 import { Input } from '@/components/ui/input'
+import { AnimeVideoData } from '@/hooks/api/aniwatch/types'
+import { cn } from '@/shared/lib/tailwind'
 
 import VideoDialog from './video-dialog'
 
@@ -16,17 +15,7 @@ function VideoList({ video }: Props) {
   const [episodeId, setEpisodeId] = useState('')
   const [searchPageQuery, setSearchPageQuery] = useState('')
   const [highlightedChapter, setHighlightedChapter] = useState<number | null>()
-
   const refEpisodes = useRef<Record<number, HTMLDivElement | null>>({})
-
-  const { data: serverData } = aniwatchApi.useAnimeEpisodesServers({
-    episodeId,
-  })
-  const { data: sourceData,isLoading } = aniwatchApi.useAnimeEpisodeSources({
-    animeEpisodeId: serverData?.data?.episodeId,
-    server: serverData?.data?.sub[0]?.serverName,
-    catygory: 'sub',
-  })
 
   function handleVideoDialog(episodeId: string) {
     setIsOpen(true)
@@ -36,7 +25,6 @@ function VideoList({ video }: Props) {
   useEffect(() => {
     function scrollTo(episode: number) {
       const ref = refEpisodes.current[episode]
-      console.log('Scrolling to:', episode, 'Ref:', !!ref)
       if (!ref) return
       requestAnimationFrame(() => {
         ref.scrollIntoView({
@@ -59,10 +47,7 @@ function VideoList({ video }: Props) {
   if (!video || !video.episodes.length) return null
 
   return (
-    <div
-      className="m-4 mt-10 flex h-full flex-col"
-      // ref={scrollContainerRef}
-    >
+    <div className="m-4 mt-10 flex h-full flex-col">
       <Input
         value={searchPageQuery}
         onChange={e => setSearchPageQuery(e.target.value)}
@@ -88,14 +73,11 @@ function VideoList({ video }: Props) {
         ))}
       </div>
 
-        <div className="w-full">
-          <VideoDialog
-          isLoading={isLoading}
-            source={sourceData?.data}
-            setIsOpen={setIsOpen}
-            isOpen={isOpen}
-          />
-        </div>
+      <VideoDialog
+        episodeId={episodeId}
+        setIsOpen={setIsOpen}
+        isOpen={isOpen}
+      />
     </div>
   )
 }

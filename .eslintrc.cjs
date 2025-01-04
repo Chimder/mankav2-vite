@@ -12,6 +12,7 @@ module.exports = {
     es2023: true,
     node: true,
   },
+  ignorePatterns: ['!**/.server', '!**/.client'],
   settings: {
     react: {
       version: 'detect',
@@ -53,11 +54,11 @@ module.exports = {
     '@tanstack/query/no-rest-destructuring': 'warn',
     '@tanstack/query/stable-query-client': 'error',
     '@typescript-eslint/ban-types': 'warn',
+    'no-mixed-spaces-and-tabs': 'off',
     'jsx-a11y/no-static-element-interactions': 'off',
     'jsx-a11y/label-has-associated-control': 'off',
     'jsx-a11y/click-events-have-key-events': 'off',
     'jsx-a11y/media-has-caption': 'warn',
     'jsx-a11y/no-noninteractive-element-interactions': 'off',
-
   },
 }

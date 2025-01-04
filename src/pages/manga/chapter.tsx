@@ -1,4 +1,5 @@
 import { ReactElement, useRef } from 'react'
+import { PATH } from '@/shared/constants/path-constants'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
 
 import { chapterApi } from '@/hooks/api/mangadex/chapter'
@@ -6,7 +7,6 @@ import useAggregateChapter from '@/hooks/use-aggregate-chapter'
 import usePageTrack from '@/hooks/use-chapter-tracker'
 import ExternalChapter from '@/components/external-chapter'
 import ModalChapter from '@/components/Manga/chapters/modal-chapter'
-import { PATH } from '@/app/routers/path-constants'
 
 export const MangaChapter = () => {
   const [searchParams] = useSearchParams()
@@ -51,7 +51,10 @@ export const MangaChapter = () => {
                 chapters={flatAggregate}
               >
                 <img
-                  src={`${import.meta.env.VITE_IMG_PROXY!}/img/${encodeURIComponent(`${chapters.baseUrl}/data/${chapters.chapter?.hash}/${chapter}`)}`}
+                  src={`${import.meta.env
+                    .VITE_IMG_PROXY!}/img/${encodeURIComponent(
+                    `${chapters.baseUrl}/data/${chapters.chapter?.hash}/${chapter}`,
+                  )}`}
                   width={1100}
                   height={1100}
                   loading="eager"
@@ -73,7 +76,9 @@ export const MangaChapter = () => {
           {!isFetching && nextChapter ? (
             <Link
               className="center flex h-10 w-1/2 rounded-sm border-2 border-blue-950 py-[34px] text-white hover:border-blue-700"
-              to={`${PATH.MANGA.getChapterPath(nextChapter.id)}?manga=${manga}&lang=${lang}&name=${name}`}
+              to={`${PATH.MANGA.getChapterPath(
+                nextChapter.id,
+              )}?manga=${manga}&lang=${lang}&name=${name}`}
             >
               Next
             </Link>
@@ -91,6 +96,7 @@ export const MangaChapter = () => {
   )
 }
 
-MangaChapter.getLayout = function getLayout(page: ReactElement) {
-  return <>{page}</>
-}
+// MangaChapter.getLayout = function getLayout(page: ReactElement) {
+//   return <>{page}</>;
+
+// };

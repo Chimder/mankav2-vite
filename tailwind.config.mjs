@@ -2,15 +2,7 @@
 // module.exports = {
 export default {
   darkMode: ['class'],
-  // content: ['./src/**/*.{html,js}'],
-  // content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
-  content: [
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-
-    './src/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
+  content: ['./index.html', './src/**/*.{ts,tsx,js,jsx}'],
   theme: {
   	extend: {
   		borderWidth: {

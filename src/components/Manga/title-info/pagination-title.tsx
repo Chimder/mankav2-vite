@@ -1,13 +1,9 @@
 import { OffsetFilterTitle } from '@/shared/constants/filters'
+import { PATH } from '@/shared/constants/path-constants'
 import { cn } from '@/shared/lib/tailwind'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 
-import { PATH } from '@/app/routers/path-constants'
-
-import { Button } from '../../ui/button'
-import { getFirstTitle } from '../cards/cards-list'
-
-export const PaginationButtons = ({
+const PaginationButtons = ({
   currentPage = 1,
   itemsPerPage = OffsetFilterTitle,
   totalItems = 0,
@@ -76,19 +72,20 @@ export const PaginationButtons = ({
                 ...
               </span>
             ) : (
-              <Button
+              <button
                 className={cn(
-                  'mx-1 text-white hover:bg-orange-700',
-                  page === currentPage && 'bg-orange-500',
+                  'mx-1 rounded-lg bg-background bg-slate-400 px-4 py-2 text-white hover:bg-orange-700',
+                  page == currentPage && '!bg-orange-400',
                 )}
                 key={page}
                 onClick={() => handlePageChange(page)}
               >
                 {page}
-              </Button>
+              </button>
             ),
           )}
       </div>
     </div>
   )
 }
+export default PaginationButtons

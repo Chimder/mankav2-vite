@@ -1,10 +1,6 @@
-import { jikanInstance } from '@/shared/api/jikan/axios.instance'
-import {
-  getMangaCharacters,
-  getMangaRelations,
-  MangaFull,
-} from '@/shared/api/jikan/generated'
 import { useQuery } from '@tanstack/react-query'
+import { jikanInstance } from '@/shared/api/jikan/axios.instance';
+import { getMangaCharacters, getMangaRelations, MangaFull } from '@/shared/api/jikan/generated';
 
 export const jikanMangaApi = {
   baseKey: 'jikanManga',

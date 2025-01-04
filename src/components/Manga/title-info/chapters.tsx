@@ -1,5 +1,8 @@
+// import { Chapter } from '@/shared/api/mangadex/generated'
+import { lazy } from 'react'
 import { Chapter } from '@/shared/api/mangadex/generated'
 import { OffsetFilterTitle } from '@/shared/constants/filters'
+import { PATH } from '@/shared/constants/path-constants'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
@@ -7,8 +10,8 @@ import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { feedApi } from '@/hooks/api/mangadex/feeds'
 
 import { Skeleton } from '../../ui/skeleton'
-import { PaginationButtons } from './pagination-title'
-import { PATH } from '@/app/routers/path-constants'
+
+const PaginationButtons = lazy(() => import('./pagination-title'))
 
 dayjs.extend(relativeTime)
 
@@ -63,8 +66,8 @@ const Chapters = () => {
   const filteredChapters = filterChapters(chapters?.data)
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="flex-grow overflow-y-auto chapters-scrollbar">
+    <div className="flex h-full flex-col">
+      <div className="chapters-scrollbar flex-grow overflow-y-auto">
         <ul className="w-full p-5">
           {isFetching ? (
             Array.from({ length: 16 }, (_, index) => (
@@ -117,7 +120,7 @@ const Chapters = () => {
         </ul>
       </div>
 
-      <div className="sticky bottom-0 left-0 right-0 z-10 bg-background/80 backdrop-blur-sm">
+      <div className="sticky bottom-0 left-0 right-0 z-10 backdrop-blur-sm">
         <PaginationButtons
           key="pagin-title"
           currentPage={currentPage}

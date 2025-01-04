@@ -1,13 +1,17 @@
+// import { Manga } from '@/shared/api/mangadex/generated'
+import { lazy } from 'react'
 import { Manga } from '@/shared/api/mangadex/generated'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import dayjs from 'dayjs'
 import { useParams } from 'react-router-dom'
 
 import { mangaApi } from '@/hooks/api/mangadex/manga'
 
-import Characters from './characters'
-import Relation from './relation'
-
-type Props = {}
+// import Relation from './relation'
+// import { mangaApi } from '@/hooks/api/mangadex/manga'
+// import Characters from './characters'
+const Relation = lazy(() => import('./relation'))
+const CharactersList = lazy(() => import('./characters-list'))
 
 export const getMangaTitle = (manga?: Manga) => {
   if (!manga?.attributes?.title) return undefined
@@ -23,15 +27,15 @@ export const getMangaImg = (id?: string, manga?: Manga) => {
   return `${import.meta.env.VITE_IMG_PROXY!}/img/mangadex.org/covers/${id}/${
     manga.relationships.find(obj => obj.type === 'cover_art')?.attributes
       ?.fileName
-  }`
+  }.512.jpg`
 }
-const Info = (props: Props) => {
+const Info = () => {
   const { id: mangaId } = useParams()
-  const { data: manga } =  mangaApi.useMangaByID(mangaId)
+  const { data: manga } = useSuspenseQuery(mangaApi.useMangaByID(mangaId))
 
   return (
-    <section className="">
-      <div className="flex flex-col items-center justify-center border-[1px] border-green-400">
+    <section className="text-white">
+      <div className="mx-2 flex flex-col items-center justify-center rounded-lg border-1 bg-primary">
         <img
           className="relative z-10 h-[440px] w-[310px]"
           src={getMangaImg(mangaId, manga?.data)}
@@ -40,8 +44,10 @@ const Info = (props: Props) => {
         <div className="flex h-full">
           <div className="py-4">
             <div className="mx-0 my-3 text-sm">
-              <span className="mb-2.5 mr-1 text-sm">Title:</span>
-              <span className="text-base">{getMangaTitle(manga?.data)}</span>
+              {/* <span className="mb-2.5 mr-1 text-sm">Title:</span> */}
+              <span className="center text-lg text-blue-300">
+                {getMangaTitle(manga?.data)}
+              </span>
             </div>
             <div className="title">
               <span className="head">Created:</span>
@@ -60,7 +66,7 @@ const Info = (props: Props) => {
 
             <div className="titleGenres">
               <span className="head">Status: </span>
-              <div className="rounded-4xl mb-1 ml-[2px] inline-block border-1 bg-transparent px-2 py-1 text-sm">
+              <div className="rounded-4xl mb-1 ml-[2px] inline-block rounded-2xl border-1 bg-transparent px-2 py-1 text-sm">
                 {manga?.data?.attributes?.status}
               </div>
             </div>
@@ -68,7 +74,7 @@ const Info = (props: Props) => {
               <span className="head">Genres: </span>
               {manga?.data?.attributes?.tags?.slice(0, 5).map(tag => (
                 <div
-                  className="rounded-4xl mb-1 ml-[2px] inline-block border-1 bg-transparent px-2 py-1 text-sm"
+                  className="rounded-4xl mb-1 ml-[2px] inline-block rounded-2xl border-1 bg-transparent px-2 py-1 text-sm text-white"
                   key={tag.id}
                 >
                   {tag.attributes?.name?.en}
@@ -88,7 +94,7 @@ const Info = (props: Props) => {
         </div>
       </div>
 
-      <Characters />
+      <CharactersList />
       <Relation />
     </section>
   )

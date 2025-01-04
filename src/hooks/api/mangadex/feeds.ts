@@ -1,5 +1,5 @@
-import { getMangaIdFeed } from '@/shared/api/mangadex/generated'
 import { useQuery } from '@tanstack/react-query'
+import { getMangaIdFeed } from '@/shared/api/mangadex/generated';
 
 export const feedApi = {
   baseKey: 'feed',

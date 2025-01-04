@@ -1,13 +1,14 @@
+// import InputeSearch from './inpute-search'
+import { lazy } from 'react'
 import { Link } from 'react-router-dom'
 
 import { PATH } from '@/app/routers/path-constants'
 
 import { Button } from '../ui/button'
-import InputeSearch from './inpute-search'
+
+const InputeSearch = lazy(() => import('./inpute-search'))
 
 export default function Header() {
-  console.log('HEader')
-  // return
   return (
     <div className="sticky top-0 z-50 h-[64px] w-full bg-black shadow-header">
       <div className="center relative justify-between border-cyan-200 p-2">

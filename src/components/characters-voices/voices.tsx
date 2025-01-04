@@ -1,18 +1,17 @@
 import { lazy, useState } from 'react'
-import { PeopleImages, PersonFull } from '@/shared/api/jikan/generated'
+import { PersonFull } from '@/shared/api/jikan/generated'
 import { usePersoneStore } from '@/store/characters-people'
 import dayjs from 'dayjs'
 
+import DialogAnime from './dialog-anime'
+import { getPersoneImg } from '@/shared/utils/get-persone-img'
+
 // import DialogAnime from './dialog-anime'
-const DialogAnime = lazy(() => import('./dialog-anime'))
+// const DialogAnime = lazy(() => import('./dialog-anime'))
 
 type Props = {
   voices: PersonFull
   handleClose: () => void
-}
-
-export function getPersoneImg(img?: PeopleImages) {
-  if (img?.jpg?.image_url) return img.jpg.image_url
 }
 
 function Voices({ voices, handleClose }: Props) {

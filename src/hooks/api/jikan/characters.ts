@@ -1,8 +1,5 @@
-import {
-  getCharacterFullById,
-  getPersonFullById,
-} from '@/shared/api/jikan/generated'
 import { useQuery } from '@tanstack/react-query'
+import { getCharacterFullById, getPersonFullById } from '@/shared/api/jikan/generated';
 
 export const jikanCharacterPeopleApi = {
   baseKey: 'jikanManga',

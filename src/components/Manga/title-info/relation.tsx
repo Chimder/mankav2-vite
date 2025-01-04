@@ -1,14 +1,17 @@
-import { Manga } from '@/shared/api/mangadex/generated'
+import { PATH } from '@/shared/constants/path-constants'
+import { getFirstTitle } from '@/shared/utils/get-first-title'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { Link, useParams } from 'react-router-dom'
 
 import { mangaApi } from '@/hooks/api/mangadex/manga'
-import { PATH } from '@/app/routers/path-constants'
-
-import { getFirstTitle } from '../cards/cards-list'
 
 const Relation = () => {
   const { id: mangaId } = useParams()
-  const { data: manga, isFetching, isLoading } = mangaApi.useMangaByID(mangaId)
+  const {
+    data: manga,
+    isFetching,
+    isLoading,
+  } = useSuspenseQuery(mangaApi.useMangaByID(mangaId))
 
   const mangasIds = manga?.data?.relationships
     ?.map(id => id.id)
@@ -31,8 +34,8 @@ const Relation = () => {
   )
     return null
   return (
-    <div className="m-1 flex flex-col items-center border-1 border-yellow-800">
-      <h1>Relation Manga</h1>
+    <div className="m-2 flex flex-col items-center rounded-lg border-1 bg-primary">
+      <h1 className="text-lg text-green-200">Relation Manga</h1>
       <ul className="flex flex-row flex-wrap justify-center gap-3">
         {relations?.data?.map(manga => (
           <Link
@@ -43,7 +46,7 @@ const Relation = () => {
             <div className="mb-2 h-40 w-32 overflow-hidden rounded-lg">
               <img
                 className="h-full w-full object-cover"
-                src={`${import.meta.env.VITE_IMG_PROXY!}/img/mangadex.org/covers/${manga.id}/${manga?.relationships?.find(obj => obj.type === 'cover_art')?.attributes?.fileName}`}
+                src={`${import.meta.env.VITE_IMG_PROXY!}/img/mangadex.org/covers/${manga.id}/${manga?.relationships?.find(obj => obj.type === 'cover_art')?.attributes?.fileName}.256.jpg`}
                 loading="lazy"
                 alt={getFirstTitle(manga.attributes?.title)}
               />

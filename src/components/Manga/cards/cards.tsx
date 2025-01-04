@@ -1,4 +1,3 @@
-import { useEffect, useRef } from 'react'
 import Icons from '@/assets/svg/icons'
 import { OffsetFilter } from '@/shared/constants/filters'
 import { cn } from '@/shared/lib/tailwind'
@@ -32,14 +31,15 @@ const Cards = () => {
   const cardView = useCardSwitcherStore().type
   const setCardView = useCardSwitcherStore().setCardSwitcher
 
-  function selectCardFormat(value: typeof cardView) {
+  function selectCardFormat(value?: typeof cardView) {
+    if (!value) return
     setCardView(value)
   }
 
   console.log('MANGAINFO', mangas)
   return (
-    <section className="h-full flex-[1_1_0%]">
-      <div className="mr-10 flex justify-end pt-2">
+    <section className="">
+      <div className="sticky right-0 top-0 z-40 flex justify-end bg-black pt-2">
         <div
           onClick={() => selectCardFormat('two')}
           className={cn(
@@ -64,10 +64,12 @@ const Cards = () => {
         <CardsList mangas={mangas} isFetching={isFetching} />
       </div>
 
-      <PaginationButtons
-        currentPage={Number(currentPage)}
-        totalPages={Math.ceil(Number(mangas?.total) / OffsetFilter)}
-      />
+      <div className="h-h-full sticky bottom-0 left-1/2 z-40 mb-2 bg-black">
+        <PaginationButtons
+          currentPage={Number(currentPage)}
+          totalPages={Math.ceil(Number(mangas?.total) / OffsetFilter)}
+        />
+      </div>
     </section>
   )
 }
