@@ -27,9 +27,9 @@ export default function DialogAnime({
   if (!data) return null
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="min-h-[310px] w-full max-w-[900px] border-primary bg-black text-white">
+      <DialogContent className="h-[310px] w-full max-w-[900px] border-primary bg-black text-white">
         {/* <DialogTitle></DialogTitle> */}
-        <div className="flex justify-evenly">
+        <div className="center flex justify-evenly">
           {data?.map(anime => (
             <Link
               to={PATH.ANIME.getTitlePath(anime.id)}
@@ -39,7 +39,7 @@ export default function DialogAnime({
               <div className="mb-2 h-40 w-32 overflow-hidden rounded-lg">
                 <img src={anime.poster} alt="" />
               </div>
-              <h1>{anime.name}</h1>
+              <h1 className="line-clamp-2">{anime.name}</h1>
             </Link>
           ))}
         </div>

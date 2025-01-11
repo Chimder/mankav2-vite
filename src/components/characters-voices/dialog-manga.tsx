@@ -29,10 +29,10 @@ export default function DialogManga({
   if (!data) return null
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="min-h-[420px] w-full max-w-[900px]">
+      <DialogContent className="h-[310px] w-full max-w-[900px]">
         {/* <DialogTitle></DialogTitle> */}
-        <h1 className="center flex text-xl">Available Manga</h1>
-        <div className="flex justify-evenly">
+        {/* <h1 className="center flex text-xl">Available Manga</h1> */}
+        <div className="flex justify-evenly center">
           {data.data?.map(manga => (
             <Link
               className="h-40 w-32"
@@ -42,7 +42,9 @@ export default function DialogManga({
               <div className="mb-2 h-40 w-32 overflow-hidden rounded-lg">
                 <img className="" src={getMangaImg(manga.id, manga)} alt="" />
               </div>
-              <h1>{getFirstTitle(manga.attributes?.title)}</h1>
+              <h1 className="line-clamp-2">
+                {getFirstTitle(manga.attributes?.title)}
+              </h1>
             </Link>
           ))}
         </div>

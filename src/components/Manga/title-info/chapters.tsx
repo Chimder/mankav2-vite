@@ -33,11 +33,11 @@ const Chapters = () => {
   console.log('CAHPDWA>>>%$#%#', chapters)
 
   function filterChapters(chapters: Chapter[] | undefined): ExtendedChapter[] {
-    if (!chapters) return []
+    if (!chapters?.length) return []
 
     const groupedChapters = chapters.reduce(
       (acc, item) => {
-        const chapterNumber = item.attributes?.chapter
+        const chapterNumber = item.attributes?.chapter ?? '1'
         if (!chapterNumber) return acc
 
         if (!acc[chapterNumber]) {
@@ -63,6 +63,7 @@ const Chapters = () => {
     })
   }
 
+  console.log('CHA23432243', chapters?.data)
   const filteredChapters = filterChapters(chapters?.data)
 
   return (
