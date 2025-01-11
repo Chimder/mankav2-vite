@@ -22,12 +22,14 @@ export const mangaApi = {
   useMangaByID: (id?: string) => {
     return useQuery({
       queryKey: [mangaApi.baseKey, id],
-      queryFn: ({ signal }) =>
-        getMangaId(
+      queryFn: ({ signal }) => {
+        if (!id) return undefined
+        return getMangaId(
           id!,
           { 'includes[]': ['manga', 'cover_art', 'author'] },
           { signal },
-        ),
+        )
+      },
       refetchOnMount: false,
       enabled: Boolean(id),
       refetchOnWindowFocus: false,
@@ -119,6 +121,27 @@ export const mangaApi = {
           },
           { signal },
         ),
+      staleTime: 100000,
+      retry: 0,
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+    })
+  },
+  useMangaSearchFav: ({ ids }: { ids?: string[] }) => {
+    return useQuery({
+      queryKey: [mangaApi.baseKey, 'filterFavorites', ids?.length, ids],
+      queryFn: ({ signal }) => {
+        if (!ids?.length) return undefined
+        return getSearchManga(
+          {
+            'includes[]': ['cover_art'],
+
+            'contentRating[]': ['safe', 'suggestive', 'erotica'],
+            'ids[]': ids,
+          },
+          { signal },
+        )
+      },
       staleTime: 100000,
       retry: 0,
       refetchOnWindowFocus: false,

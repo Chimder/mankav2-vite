@@ -16,6 +16,14 @@ export default function Routes() {
           },
         },
         {
+          path: '/favorites',
+          async lazy() {
+            let { Favorites } = await import('../../pages/favorites')
+            return { Component: Favorites }
+          },
+        },
+
+        {
           path: 'manga',
           children: [
             {

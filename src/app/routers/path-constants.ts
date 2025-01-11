@@ -1,5 +1,6 @@
 export const PATH = {
   HOME: '/',
+  FAVORITES: '/favorites',
   MANGA: {
     MAIN: '/manga',
     SEARCH: '/manga/search',

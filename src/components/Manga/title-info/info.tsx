@@ -1,23 +1,15 @@
 import { Manga } from '@/shared/api/mangadex/generated'
+import { cn } from '@/shared/lib/tailwind'
+import { getFirstTitle } from '@/shared/utils/get-first-title'
 import dayjs from 'dayjs'
 import { useParams } from 'react-router-dom'
 
 import { mangaApi } from '@/hooks/api/mangadex/manga'
+import { useFavoriteManga } from '@/hooks/favorite-toggle/use-favorite-manga'
 
 import CharactersList from './characters-list'
 import Relation from './relation'
 
-// const Relation = lazy(() => import('./relation'))
-// const CharactersList = lazy(() => import('./characters-list'))
-
-export const getMangaTitle = (manga?: Manga) => {
-  if (!manga?.attributes?.title) return undefined
-  manga.relationships
-  return (
-    manga.attributes.title.en ||
-    (manga.attributes.title && Object.values(manga.attributes.title)[0])
-  )
-}
 export const getMangaImg = (id?: string, manga?: Manga) => {
   if (!id || !manga?.relationships) return undefined
 
@@ -26,12 +18,15 @@ export const getMangaImg = (id?: string, manga?: Manga) => {
       ?.fileName
   }.512.jpg`
 }
+
 const Info = () => {
   const { id: mangaId } = useParams()
   const { data: manga } = mangaApi.useMangaByID(mangaId)
 
+  const { isFavorite, handleToggleFavorite } = useFavoriteManga()
+
   return (
-    <section className="text-white">
+    <section className="w-full text-white">
       <div className="mx-2 flex flex-col items-center justify-center rounded-lg border-1 bg-primary">
         <img
           className="relative z-10 h-[440px] w-[310px]"
@@ -41,10 +36,20 @@ const Info = () => {
         <div className="flex h-full">
           <div className="py-4">
             <div className="mx-0 my-3 text-sm">
-              {/* <span className="mb-2.5 mr-1 text-sm">Title:</span> */}
               <span className="center text-lg text-blue-300">
-                {getMangaTitle(manga?.data)}
+                {getFirstTitle(manga?.data?.attributes?.title)}
               </span>
+              <div className="center">
+                <div
+                  onClick={handleToggleFavorite}
+                  className={cn(
+                    'my-1 cursor-pointer rounded-lg p-3',
+                    isFavorite ? 'bg-green-400' : 'bg-red-400',
+                  )}
+                >
+                  {isFavorite ? 'Remove from Favorite' : 'Add to Favorite'}
+                </div>
+              </div>
             </div>
             <div className="title">
               <span className="head">Created:</span>
@@ -58,9 +63,7 @@ const Info = () => {
             </div>
             <div className="title">
               <span className="head">Chapters:</span>
-              {/* <span className="text-sm">{chapters?.data?.length}</span> */}
             </div>
-
             <div className="titleGenres">
               <span className="head">Status: </span>
               <div className="rounded-4xl mb-1 ml-[2px] inline-block rounded-2xl border-1 bg-transparent px-2 py-1 text-sm">

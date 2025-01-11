@@ -1,5 +1,6 @@
 // import InputeSearch from './inpute-search'
 import { lazy } from 'react'
+import Icons from '@/assets/svg/icons'
 import { Link } from 'react-router-dom'
 
 import { PATH } from '@/app/routers/path-constants'
@@ -35,7 +36,14 @@ export default function Header() {
           </Link>
         </div>
         <InputeSearch />
-        <div className="flex flex-[1_2_33%] justify-end">USer</div>
+        <Link
+          to={PATH.FAVORITES}
+          className="mr-8 flex flex-[1_2_28%] justify-end text-red-500"
+        >
+          <div className="h-6 w-6 transition-transform duration-300 hover:scale-125 hover:text-red-600">
+            <Icons.Heart />
+          </div>
+        </Link>
       </div>
     </div>
   )

@@ -1,3 +1,4 @@
+import { findBestMatches } from '@/shared/utils/find-best-matches'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
@@ -8,7 +9,6 @@ import type {
   AnimeSources,
   AnimeVideoType,
 } from './types'
-import { findBestMatches } from '@/shared/utils/find-best-matches'
 
 const url = import.meta.env.VITE_ANIWATCH!
 export const instance = axios.create({
@@ -57,6 +57,32 @@ export const aniwatchApi = {
       },
       refetchOnMount: false,
       enabled: Boolean(id),
+      refetchOnWindowFocus: false,
+      staleTime: 100000,
+      retry: 0,
+    })
+  },
+  useAnimesInfoByIds: ({ ids }: { ids?: string[] }) => {
+    return useQuery({
+      queryKey: [aniwatchApi.baseKey, 'infoIds', ids],
+      queryFn: async ({ signal }) => {
+        if (!ids || ids.length === 0) return []
+
+        const promises = ids.map(async id => {
+          try {
+            const res = await instance.get<AnimeByIdType>(`/anime/${id}`, {
+              signal,
+            })
+            return res.data.data
+          } catch {
+            return null
+          }
+        })
+        const results = await Promise.all(promises)
+        return results.filter(anime => anime !== null && anime !== undefined)
+      },
+      refetchOnMount: false,
+      enabled: Boolean(ids),
       refetchOnWindowFocus: false,
       staleTime: 100000,
       retry: 0,

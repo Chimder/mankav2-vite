@@ -16,7 +16,7 @@ export const MangaTitle = () => {
   return (
     <div className="z-10 flex h-[calc(100vh-64px)] border-green-400 bg-black px-[2px] text-white">
       <div className="order-2 flex w-2/5 flex-col overflow-hidden">
-        <div className="chapters-scrollbar flex flex-col overflow-y-auto">
+        <div className="chapters-scrollbar w-full overflow-x-hidden flex flex-col overflow-y-auto">
           <Info />
         </div>
       </div>
