@@ -4,6 +4,7 @@ import { PATH } from '@/shared/constants/path-constants'
 import { getMangaImg, getMangaTitle } from '../Manga/title-info/info'
 import { Dialog, DialogContent } from '../ui/dialog'
 import { Link, useNavigate } from 'react-router-dom'
+import { getFirstTitle } from '@/shared/utils/get-first-title'
 
 type Props = {
   name: string
@@ -35,7 +36,7 @@ export default function DialogManga({
             <Link
               className="h-40 w-32"
               key={`${manga.id}${manga.attributes?.title}`}
-              to={PATH.MANGA.getTitlePath(manga?.id)}
+               to={`${PATH.MANGA.getTitlePath(manga?.id)}?name=${getFirstTitle(manga.attributes?.title)}`}
             >
               <div className="mb-2 h-40 w-32 overflow-hidden rounded-lg">
                 <img className="" src={getMangaImg(manga.id, manga)} alt="" />

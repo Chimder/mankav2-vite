@@ -1,4 +1,4 @@
-import { ReactElement, useRef } from 'react'
+import { useRef, useState } from 'react'
 import { PATH } from '@/shared/constants/path-constants'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
 
@@ -27,11 +27,17 @@ export const MangaChapter = () => {
 
   const { currentPage, setCurrentPage } = usePageTrack(imageRefs, totalPages)
 
+  const [isOpen, setIsOpen] = useState(false)
+  const handleModalChap = () => {
+    console.log('opne')
+    setIsOpen(!isOpen)
+  }
+
   return (
     <div className="center relative w-full flex-col bg-black">
       {/* <div className={s.current}>
         {currentPage.page} / {totalPages}
-      </div> */}
+        </div> */}
       {!externalUrl ? (
         chapters?.chapter?.data?.map((chapter, index) => (
           <div key={chapter}>
@@ -44,32 +50,35 @@ export const MangaChapter = () => {
               {/* {!imageLoaded[index] && (
                 <Skeleton className="h-[1100px] w-[1100px]" />
               )} */}
-              <ModalChapter
-                totalPages={totalPages}
-                chapterData={chapterData}
-                currentPage={currentPage.page}
-                chapters={flatAggregate}
-              >
-                <img
-                  src={`${import.meta.env
-                    .VITE_IMG_PROXY!}/img/${encodeURIComponent(
-                    `${chapters.baseUrl}/data/${chapters.chapter?.hash}/${chapter}`,
-                  )}`}
-                  width={1100}
-                  height={1100}
-                  loading="eager"
-                  alt="Manga page"
-                  // onLoad={() => handleImageLoad(index)}
-                  // onClick={isModalOpen ? closeModal : handleOpenModal}
-                  // onClick={handleOpenModal}
-                />
-              </ModalChapter>
+              <img
+                onClick={() => handleModalChap()}
+                src={`${import.meta.env
+                  .VITE_IMG_PROXY!}/img/${encodeURIComponent(
+                  `${chapters.baseUrl}/data/${chapters.chapter?.hash}/${chapter}`,
+                )}`}
+                width={1100}
+                height={1100}
+                loading="eager"
+                alt="Manga page"
+                // onLoad={() => handleImageLoad(index)}
+                // onClick={isModalOpen ? closeModal : handleOpenModal}
+                // onClick={handleOpenModal}
+              />
             </div>
           </div>
         ))
       ) : (
         <ExternalChapter key={1} externalUrl={''} />
       )}
+
+      <ModalChapter
+        setIsOpen={setIsOpen}
+        isOpen={isOpen}
+        totalPages={totalPages}
+        chapterData={chapterData}
+        currentPage={currentPage.page}
+        chapters={flatAggregate}
+      />
 
       {chapters?.chapter?.data && chapters.chapter.data.length > 0 && (
         <div className="center mt-4 w-full">
@@ -95,8 +104,3 @@ export const MangaChapter = () => {
     </div>
   )
 }
-
-// MangaChapter.getLayout = function getLayout(page: ReactElement) {
-//   return <>{page}</>;
-
-// };
