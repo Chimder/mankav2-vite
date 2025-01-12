@@ -1,6 +1,7 @@
-import { RelatedAnime } from '@/hooks/api/aniwatch/types'
 import { PATH } from '@/shared/constants/path-constants'
 import { Link } from 'react-router-dom'
+
+import { RelatedAnime } from '@/hooks/api/aniwatch/types'
 
 type Props = {
   animes: RelatedAnime[]
@@ -10,7 +11,7 @@ function AnimeRelation({ animes }: Props) {
   if (!animes || !animes.length) return null
 
   return (
-    <div className="m-2 rounded-lg border bg-primary">
+    <div className="rounded-lg border bg-primary">
       <div className="flex- flex-col">
         <h1 className="center mt-4">Relation</h1>
         <div className="flex flex-row flex-wrap justify-center gap-3">

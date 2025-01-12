@@ -42,7 +42,7 @@ const Characters = ({ id }: Props) => {
   }
 
   return (
-    <div className="center m-2 flex-col rounded-lg border-1 bg-primary shadow-header shadow-red-950">
+    <div className="center  flex-col rounded-lg border-1 bg-primary shadow-header ">
       <h1 className="text-lg text-yellow-700">Characters</h1>
       <div className="">
         <ul className="center flex flex-wrap gap-2">
@@ -56,7 +56,7 @@ const Characters = ({ id }: Props) => {
             >
               <div className="h-38 mb-2 flex w-28 items-center justify-center overflow-hidden">
                 <img
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover rounded-md"
                   src={getCharacterImg(character.character?.images)}
                   alt={character.character?.name}
                 />

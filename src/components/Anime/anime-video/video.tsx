@@ -10,7 +10,7 @@ function AnimeVideo() {
   const { data: videoList } = aniwatchApi.useAnimeEpisodesById({ animeId: id })
 
   return (
-    <div className="chapters-scrollbar h-full overflow-y-scroll pb-6">
+    <div className="chapters-scrollbar h-full overflow-y-scroll pb-6 bg-primary">
       <ScrollRestoration />
       <VideoList
         key={`${videoList?.data?.totalEpisodes}${id}`}

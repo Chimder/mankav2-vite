@@ -20,7 +20,7 @@ export const MangaTitle = () => {
           <Info />
         </div>
       </div>
-      <div className="relative flex w-3/5 flex-col rounded-lg border bg-primary text-white">
+      <div className="relative flex w-3/5 flex-col rounded-lg border border-border ml-1  bg-primary text-white">
         <div className="flex-grow overflow-y-auto">
           <Chapters />
         </div>

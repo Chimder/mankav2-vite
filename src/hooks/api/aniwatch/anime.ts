@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
 import type {
+  AnimeByIdData,
   AnimeByIdType,
   AnimeByNameType,
   AnimeServerType,
@@ -62,11 +63,17 @@ export const aniwatchApi = {
       retry: 0,
     })
   },
-  useAnimesInfoByIds: ({ ids }: { ids?: string[] }) => {
+  useAnimesInfoByIds: ({
+    ids,
+    type,
+  }: {
+    ids?: string[]
+    type: 'anime' | 'manga'
+  }) => {
     return useQuery({
-      queryKey: [aniwatchApi.baseKey, 'infoIds', ids],
+      queryKey: [aniwatchApi.baseKey, 'infoIds', ids, type],
       queryFn: async ({ signal }) => {
-        if (!ids || ids.length === 0) return []
+        if (!ids || ids.length === 0 || type !== 'anime') return undefined
 
         const promises = ids.map(async id => {
           try {
@@ -78,11 +85,13 @@ export const aniwatchApi = {
             return null
           }
         })
-        const results = await Promise.all(promises)
-        return results.filter(anime => anime !== null && anime !== undefined)
+        const results = await Promise.allSettled(promises)
+        return results.flatMap(result =>
+          result.status === 'fulfilled' && result.value ? [result.value] : [],
+        )
       },
       refetchOnMount: false,
-      enabled: Boolean(ids),
+      enabled: Boolean(ids?.length),
       refetchOnWindowFocus: false,
       staleTime: 100000,
       retry: 0,

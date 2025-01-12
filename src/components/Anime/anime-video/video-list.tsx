@@ -47,13 +47,13 @@ function VideoList({ video }: Props) {
   if (!video || !video.episodes.length) return null
 
   return (
-    <div className="m-4 mt-10 flex h-full flex-col">
+    <div className=" p-5 mt-10 flex h-full flex-col">
       <Input
         value={searchPageQuery}
         onChange={e => setSearchPageQuery(e.target.value)}
         className="absolute left-1/2 top-4 z-10 w-[32%] -translate-x-1/2 transform rounded-md border-2 !border-emerald-400 bg-black p-2 text-center text-lg text-white focus-visible:ring-0"
       />
-      <div className="m-4 flex h-full flex-col">
+      <div className=" flex h-full flex-col">
         {video.episodes.map(video => (
           <div
             className={cn(

@@ -1,10 +1,10 @@
 import { lazy, useState } from 'react'
 import { CharacterFull } from '@/shared/api/jikan/generated'
+import { getCharacterImg } from '@/shared/utils/get-character-img'
 import { usePersoneStore } from '@/store/characters-people'
 
 import DialogAnime from './dialog-anime'
 import DialogManga from './dialog-manga'
-import { getCharacterImg } from '@/shared/utils/get-character-img'
 
 type Props = {
   character?: CharacterFull
@@ -86,7 +86,7 @@ function Character({ character, handleClose }: Props) {
             >
               <label className="mb-2 flex cursor-pointer items-center space-x-4 md:mb-0">
                 <img
-                  className="h-24 w-20 rounded object-cover"
+                  className="h-24 w-20 rounded-sm object-cover"
                   src={getCharacterImg(manga.anime?.images)}
                   alt={manga.role}
                 />
@@ -107,7 +107,7 @@ function Character({ character, handleClose }: Props) {
                 </div>
                 {getPeople()?.images?.jpg?.image_url && (
                   <img
-                    className="h-24 w-20 cursor-pointer rounded object-cover"
+                    className="h-24 w-20 cursor-pointer rounded-sm object-cover"
                     src={getPeople()?.images?.jpg?.image_url!}
                     alt="Voice Actor"
                   />
@@ -138,7 +138,7 @@ function Character({ character, handleClose }: Props) {
                 className="mb-2 flex cursor-pointer items-center space-x-4 md:mb-0"
               >
                 <img
-                  className="h-24 w-20 cursor-pointer rounded object-cover"
+                  className="h-24 w-20 cursor-pointer rounded-sm object-cover"
                   src={getCharacterImg(manga.manga?.images)}
                   alt={manga.manga?.title}
                 />
@@ -158,7 +158,7 @@ function Character({ character, handleClose }: Props) {
                 </div>
                 {getPeople()?.images?.jpg?.image_url && (
                   <img
-                    className="h-24 w-20 cursor-pointer rounded object-cover"
+                    className="h-24 w-20 cursor-pointer rounded-sm object-cover"
                     src={getPeople()?.images?.jpg?.image_url!}
                     alt="Voice Actor"
                   />

@@ -24,7 +24,7 @@ export const AnimeTitle = () => {
   return (
     <div className="flex h-[calc(100vh-64px)] w-full bg-black">
       <AnimeTitleInfo />
-      <section className="relative flex w-3/5 flex-col border border-green-400 text-white">
+      <section className="relative mx-1 flex w-3/5 flex-col rounded-md border border-border text-white">
         <AnimeVideo />
       </section>
     </div>

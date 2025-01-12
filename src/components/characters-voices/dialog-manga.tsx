@@ -39,8 +39,8 @@ export default function DialogManga({
               key={`${manga.id}${manga.attributes?.title}`}
               to={`${PATH.MANGA.getTitlePath(manga?.id)}?name=${getFirstTitle(manga.attributes?.title)}`}
             >
-              <div className="mb-2 h-40 w-32 overflow-hidden rounded-lg">
-                <img className="" src={getMangaImg(manga.id, manga)} alt="" />
+              <div className="mb-2 h-40 w-32 overflow-hidden">
+                <img className="rounded-md" src={getMangaImg(manga.id, manga)} alt="" />
               </div>
               <h1 className="line-clamp-2">
                 {getFirstTitle(manga.attributes?.title)}
