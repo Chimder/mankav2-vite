@@ -52,6 +52,18 @@ export default {
       </svg>
     </div>
   ),
+  Arrow: (props: any) => (
+    <div {...props}>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        // width="24"
+        // height="24"
+        viewBox="0 0 24 24"
+      >
+        <path fill="none" stroke="currentColor" d="m15 5l-6 7l6 7" />
+      </svg>
+    </div>
+  ),
   closeInpute: (props: any) => (
     <div {...props}>
       <svg
@@ -68,10 +80,7 @@ export default {
     </div>
   ),
   Heart: (props: any) => (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 16 16"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
       <path
         fill="currentColor"
         d="M8 1.314C12.438-3.248 23.534 4.735 8 15C-7.534 4.736 3.562-3.248 8 1.314"

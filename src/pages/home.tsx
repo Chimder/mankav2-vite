@@ -1,6 +1,7 @@
 import { EmblaOptionsType } from 'embla-carousel'
 
 import { mangaApi } from '@/hooks/api/mangadex/manga'
+import Carousel from '@/components/swiper/Carousel'
 import EmblaCarousel from '@/components/swiper/EmblaCarousel'
 
 export const Home = () => {
@@ -10,7 +11,8 @@ export const Home = () => {
   return (
     <div>
       <h1>Home</h1>
-      <EmblaCarousel slides={data?.data} options={OPTIONS} />
+      {/* <EmblaCarousel slides={data?.data} options={OPTIONS} /> */}
+      {data?.data && <Carousel data={data.data} key={`fsdfsfsdfds`} />}
     </div>
   )
 }
