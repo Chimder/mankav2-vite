@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import Icons from '@/assets/svg/icons'
 import { PATH } from '@/shared/constants/path-constants'
+import { getFirstTitle } from '@/shared/utils/get-first-title'
 import { ReloadIcon } from '@radix-ui/react-icons'
 import dayjs from 'dayjs'
 import { useNavigate } from 'react-router-dom'
@@ -10,7 +11,6 @@ import { mangaApi } from '@/hooks/api/mangadex/manga'
 import useClickOutside from '@/hooks/use-click-outside'
 
 import { Badge } from '../ui/badge'
-import { getFirstTitle } from '@/shared/utils/get-first-title'
 
 const InputeSearch = () => {
   const navigate = useNavigate()
@@ -26,7 +26,7 @@ const InputeSearch = () => {
     setIsListVisible(false)
   })
   return (
-    <section className="relative z-[100] flex flex-col justify-center">
+    <section className="relative z-[100] mr-10 flex flex-col justify-center">
       <div className="flex">
         <input
           className="w-[clamp(200px,34vw,440px)] rounded-2xl border-none bg-gray-600 p-1.5 text-white outline-none placeholder:text-gray-400 focus:border-2 focus:border-cyan-400"

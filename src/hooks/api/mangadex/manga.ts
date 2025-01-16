@@ -134,7 +134,6 @@ export const mangaApi = {
         return getSearchManga(
           {
             'includes[]': ['cover_art'],
-
             'contentRating[]': ['safe', 'suggestive', 'erotica'],
             'ids[]': ids,
           },
@@ -154,8 +153,48 @@ export const mangaApi = {
         getSearchManga(
           {
             'includes[]': ['cover_art'],
-            'order': { followedCount: 'desc' },
             'contentRating[]': ['safe', 'suggestive', 'erotica'],
+            'order': { followedCount: 'desc' },
+            'limit': 18,
+            // 'ids[]': ids,
+          },
+          { signal },
+        ),
+      staleTime: 100000,
+      retry: 0,
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+    })
+  },
+  useMangaSearchLatest: () => {
+    return useQuery({
+      queryKey: [mangaApi.baseKey, 'Latest'],
+      queryFn: ({ signal }) =>
+        getSearchManga(
+          {
+            'includes[]': ['cover_art'],
+            'contentRating[]': ['safe', 'suggestive', 'erotica'],
+            'order': { latestUploadedChapter: 'desc' },
+            // 'ids[]': ids,
+          },
+          { signal },
+        ),
+      staleTime: 100000,
+      retry: 0,
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+    })
+  },
+  useMangaSearchRating: () => {
+    return useQuery({
+      queryKey: [mangaApi.baseKey, 'Rating'],
+      queryFn: ({ signal }) =>
+        getSearchManga(
+          {
+            'includes[]': ['cover_art'],
+            'contentRating[]': ['safe', 'suggestive', 'erotica'],
+            'order': { rating: 'desc' },
+            'limit': 18,
             // 'ids[]': ids,
           },
           { signal },
