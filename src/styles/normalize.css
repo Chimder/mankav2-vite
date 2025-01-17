@@ -39,10 +39,10 @@ ol[role="list"] {
 body {
   width: 100vw;
   height: 100vh;
+  overflow-x: hidden;
   font-family: sans-serif;
   line-height: 1.5;
   background-color: black;
-  overflow-x: hidden;
   /* background-color: var(--background); */
 }
 
@@ -54,7 +54,7 @@ button,
 input,
 label {
   line-height: 1.1;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 h1,

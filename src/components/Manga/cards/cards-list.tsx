@@ -1,17 +1,16 @@
 import { LocalizedString, MangaList } from '@/shared/api/mangadex/generated'
 import { PATH } from '@/shared/constants/path-constants'
 import { cn } from '@/shared/lib/tailwind'
+import { getFirstTitle } from '@/shared/utils/get-first-title'
 import { useCardSwitcherStore } from '@/store/card-switcher'
 import { Link } from 'react-router-dom'
 
 import { Skeleton } from '../../ui/skeleton'
-import { getFirstTitle } from '@/shared/utils/get-first-title'
 
 type Props = {
   mangas: MangaList | undefined
   isFetching: boolean
 }
-
 
 const CardsList = ({ mangas, isFetching }: Props) => {
   const cardView = useCardSwitcherStore().type
@@ -31,7 +30,7 @@ const CardsList = ({ mangas, isFetching }: Props) => {
           : cardView == 'boxes'
             ? mangas?.data?.map(manga => (
                 <Link
-                  className="flex w-[260px] flex-col overflow-hidden rounded-xl pb-1 text-white hover:outline hover:outline-1 hover:outline-red-400"
+                  className="flex w-[260px] flex-col overflow-hidden rounded-xl pb-1 text-white hover:outline hover:outline-1 hover:outline-red-400 lg:w-[200px] xsm:h-[200px] xsm:w-[150px]"
                   to={`${PATH.MANGA.getTitlePath(manga?.id)}?name=${getFirstTitle(manga.attributes?.title)}`}
                   key={manga?.id}
                 >
@@ -43,7 +42,7 @@ const CardsList = ({ mangas, isFetching }: Props) => {
                     loading="lazy"
                     alt=""
                   />
-                  <div className="ml-1 mt-1 line-clamp-2 min-h-[40px] w-full overflow-hidden text-ellipsis leading-[20px]">
+                  <div className="ml-1 mt-1 line-clamp-2 min-h-[40px] w-full overflow-hidden text-ellipsis leading-[20px] sm:hidden">
                     {getFirstTitle(manga.attributes?.title)}
                   </div>
                 </Link>
@@ -55,7 +54,7 @@ const CardsList = ({ mangas, isFetching }: Props) => {
                   key={manga?.id}
                 >
                   <img
-                    className="h-[180px] w-[140px] object-cover"
+                    className="h-[180px] w-[140px] object-cover lg:pr-2 sm:w-[150px]"
                     src={`${import.meta.env.VITE_IMG_PROXY}/img/mangadex.org/covers/${manga.id}/${manga.relationships?.find(obj => obj.type === 'cover_art')?.attributes?.fileName}.256.jpg`}
                     width={140}
                     height={180}
@@ -64,23 +63,23 @@ const CardsList = ({ mangas, isFetching }: Props) => {
                   />
 
                   <div className="flex flex-col">
-                    <div className="m-1 text-lg">
+                    <div className="m-1 text-lg md:text-sm">
                       {manga.attributes?.title?.en}
                     </div>
                     <div className="mr-[2px] flex flex-wrap pb-[5px]">
                       {manga.attributes?.tags?.slice(0, 4)?.map(tag => (
                         <div
-                          className="rounded-4xl rounded-xl border border-gray-400 bg-transparent p-1 text-sm"
+                          className="rounded-4xl m-1 rounded-xl border-gray-400 bg-transparent text-sm text-pink-400 md:text-xs"
                           key={tag.id}
                         >
                           {tag.attributes?.name?.en}
                         </div>
                       ))}
-                      <div className="rounded-4xl rounded-xl border-2 border-gray-400 bg-transparent p-1 text-sm">
+                      <div className="rounded-4xl rounded-xl bg-transparent p-1 text-sm text-green-800 md:text-xs">
                         {manga.attributes?.status}
                       </div>
                     </div>
-                    <div className="line-clamp-3 text-ellipsis">
+                    <div className="line-clamp-3 text-ellipsis md:text-sm">
                       {manga.attributes?.description?.en}
                     </div>
                   </div>

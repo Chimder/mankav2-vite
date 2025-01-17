@@ -1,6 +1,5 @@
 @import 'normalize';
 @import 'fonts';
-@import 'swiper';
 @import 'globals';
 
 @tailwind base;
@@ -77,5 +76,36 @@
 @layer components {
   .center {
     @apply flex items-center justify-center;
+  }
+  .mainHome {
+    @apply flex w-screen h-screen overflow-hidden;
+  }
+
+  .boxes {
+    @apply flex flex-wrap gap-8 justify-center w-full p-0 list-none md:gap-2 xsm:justify-evenly;
+  }
+
+  .two {
+    @apply grid grid-cols-2 gap-2 px-4 md:grid-cols-1;
+  }
+
+  .skeletonBoxes {
+    @apply w-full max-w-[260px] max-h-[280px] aspect-[260/280];
+  }
+
+  .skeletonTwo {
+    @apply w-full max-w-[740px] max-h-[180px] aspect-[140/180];
+  }
+
+  .title {
+    @apply my-3 text-sm leading-[1.4em];
+  }
+
+  .head {
+    @apply mr-1 mb-2 font-semibold;
+  }
+
+  .titleGenres {
+    @apply pt-2 pb-1 mb-2 text-sm leading-[1.4em];
   }
 }

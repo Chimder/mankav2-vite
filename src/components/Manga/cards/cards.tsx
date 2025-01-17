@@ -38,7 +38,7 @@ const Cards = () => {
 
   console.log('MANGAINFO', mangas)
   return (
-    <section className="">
+    <section className="lg:mx-1">
       <div className="sticky right-0 top-0 z-40 flex justify-end bg-black pt-2">
         <div
           onClick={() => selectCardFormat('two')}

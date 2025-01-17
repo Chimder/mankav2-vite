@@ -40,9 +40,9 @@ function Character({ character, handleClose }: Props) {
   if (!character) return null
   return (
     <section className="filterBar h-full w-full overflow-y-scroll">
-      <div className="mb-6 flex flex-col space-y-4 md:flex-row md:space-x-6 md:space-y-0">
+      <div className="mb-6 flex space-y-4 md:flex-row md:space-x-6 md:space-y-0">
         <img
-          className="mx-auto h-72 w-56 object-cover md:mx-0"
+          className="mr-8 h-72 w-56 object-cover md:mx-0"
           src={getCharacterImg(character.images)}
           alt=""
         />
@@ -81,7 +81,7 @@ function Character({ character, handleClose }: Props) {
           {character.anime?.map(manga => (
             <div
               key={manga.anime?.title}
-              className="flex w-full flex-col items-center justify-between rounded-lg border border-border p-4 transition-colors hover:bg-accent/10 md:flex-row"
+              className="flex w-full  items-center justify-between rounded-lg border border-border p-4 transition-colors hover:bg-accent/10 md:flex-row"
               onClick={() => handleAnimeName(manga.anime?.title)}
             >
               <label className="mb-2 flex cursor-pointer items-center space-x-4 md:mb-0">
@@ -131,7 +131,7 @@ function Character({ character, handleClose }: Props) {
           {character.manga?.map(manga => (
             <div
               key={`${manga.manga?.title}mangaa`}
-              className="flex w-full flex-col items-center justify-between rounded-lg border border-border p-4 transition-colors hover:bg-accent/10 md:flex-row"
+              className="flex w-full  items-center justify-between rounded-lg border border-border p-4 transition-colors hover:bg-accent/10 md:flex-row"
             >
               <div
                 onClick={() => handleMangaName(manga.manga?.title)}

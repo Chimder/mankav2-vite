@@ -29,6 +29,7 @@
     "clsx": "^2.1.1",
     "dayjs": "^1.11.13",
     "embla-carousel": "^8.5.2",
+    "embla-carousel-autoplay": "^8.5.2",
     "embla-carousel-react": "^8.5.2",
     "hls.js": "^1.5.18",
     "http-proxy-middleware": "^3.0.3",

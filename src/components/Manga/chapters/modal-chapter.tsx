@@ -95,7 +95,7 @@ function ModalChapter({
         <div className="flex flex-col">
           <Link
             className="font-logo mr-10 cursor-pointer text-6xl text-cyan-300 decoration-cyan-300 hover:underline"
-            to={PATH.MANGA.MAIN}
+            to={PATH.HOME}
           >
             <h1 className="">MankA</h1>
           </Link>

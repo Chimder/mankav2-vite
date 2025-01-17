@@ -1,18 +1,21 @@
+import { useState } from 'react'
 import Icons from '@/assets/svg/icons'
 import { Link } from 'react-router-dom'
 
 import { PATH } from '@/app/routers/path-constants'
 
 import { Button } from '../ui/button'
-import InputeSearch from './inpute-search'
+import SearchDialog from './search-dialog'
 
 export default function Header() {
+  const [isOpen, setIsOpen] = useState(false)
+
   return (
     <div className="sticky top-0 z-50 h-[64px] w-full bg-black shadow-header">
       <div className="relative flex h-full items-center border-cyan-200">
         <div className="flex w-full">
           {/* */}
-          <div className="flex w-1/5 ml-20 items-center">
+          <div className="flex w-1/5 items-center pl-20 lg:pl-8">
             <Link
               className="font-logo list-none text-6xl text-cyan-300"
               to={PATH.HOME}
@@ -36,12 +39,21 @@ export default function Header() {
                 Advanced Search
               </Button>
             </Link>
-            <InputeSearch />
+
+            <div
+              onClick={() => setIsOpen(true)}
+              className="mr-10 h-8 w-8 text-blue-400 transition-transform duration-300 hover:scale-125"
+            >
+              <Icons.Search />
+            </div>
+
+            <SearchDialog isOpen={isOpen} setIsOpen={setIsOpen} />
+
             <Link
               to={PATH.FAVORITES}
               className="mr-10 flex justify-end text-red-500"
             >
-              <div className="h-6 w-6 transition-transform duration-300 hover:scale-125 hover:text-red-600">
+              <div className="h-8 w-8 transition-transform duration-300 hover:scale-125 hover:text-red-600">
                 <Icons.Heart />
               </div>
             </Link>

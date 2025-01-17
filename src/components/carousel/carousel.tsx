@@ -16,24 +16,24 @@ import { PATH } from '@/app/routers/path-constants'
 type Props = {
   manga: Manga[]
 }
-export function CarouselPop({ manga }: Props) {
-  // const plugin = React.useRef(
-  // Autoplay({ delay: 3000, stopOnInteraction: true }),
-  // )
+export function CarouselMain({ manga }: Props) {
+  const plugin = React.useRef(
+    Autoplay({ delay: 3000, stopOnInteraction: true }),
+  )
 
   return (
     <div className="pl-16 pr-20 lg:pr-16">
       <Carousel
-        // plugins={[plugin.current]}
+        plugins={[plugin.current]}
         className="w-full"
-        // onMouseEnter={plugin.current.stop}
-        // onMouseLeave={plugin.current.reset}
+        onMouseEnter={plugin.current.stop}
+        onMouseLeave={plugin.current.reset}
       >
         <CarouselContent className="">
-          {manga.map(mangaItem => (
+          {manga.slice(0, 9).map(mangaItem => (
             <Link
               key={mangaItem.id}
-              className="flex-[0_0_16%] lg:flex-[0_0_22%] md:flex-[0_0_28%] sm:flex-[0_0_32%]"
+              className="flex-[0_0_33%]"
               to={`${PATH.MANGA.getTitlePath(mangaItem.id)}?name=${getFirstTitle(mangaItem.attributes?.title)}`}
             >
               <div className="px-2">
@@ -44,9 +44,9 @@ export function CarouselPop({ manga }: Props) {
                     )?.attributes?.fileName
                   }.512.jpg`}
                   alt={getFirstTitle(mangaItem.attributes?.title)}
-                  className="h-64 w-full rounded-lg object-cover lg:h-52 sm:h-40"
+                  className="h-80 w-full rounded-lg object-cover lg:h-56 sm:h-40"
                 />
-                <div className="mt-2 line-clamp-3 text-ellipsis text-center text-white md:text-xs">
+                <div className="mt-2 text-ellipsis text-center text-white md:line-clamp-3 md:text-xs">
                   {getFirstTitle(mangaItem.attributes?.title)}
                 </div>
               </div>
