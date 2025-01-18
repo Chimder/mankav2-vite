@@ -1,4 +1,5 @@
 import { lazy, useState } from 'react'
+import { getCharacterImg } from '@/shared/utils/get-character-img'
 import { usePersoneStore } from '@/store/characters-people'
 
 import { jikanAnimeApi } from '@/hooks/api/jikan/anime'
@@ -8,9 +9,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
+
 // import DialogCharactersPeople from '@/components/characters-voices/dialog'
-const DialogCharactersPeople = lazy(() => import('@/components/characters-voices/dialog'))
-import { getCharacterImg } from '@/shared/utils/get-character-img'
+const DialogCharactersPeople = lazy(
+  () => import('@/components/characters-voices/dialog'),
+)
 
 type Props = {
   id?: number
@@ -42,10 +45,10 @@ const Characters = ({ id }: Props) => {
   }
 
   return (
-    <div className="center  flex-col rounded-lg border-1 bg-primary shadow-header ">
+    <div className="center m-2 flex-col rounded-lg border-1 bg-primary sm:mx-0">
       <h1 className="text-lg text-yellow-700">Characters</h1>
       <div className="">
-        <ul className="center flex flex-wrap gap-2">
+        <ul className="center flex flex-wrap gap-2 lg:justify-evenly lg:gap-1">
           {firstSixCharacters.map(character => (
             <div
               className="flex w-28 flex-col items-center"
@@ -54,9 +57,9 @@ const Characters = ({ id }: Props) => {
                 handlePerson(character.character?.mal_id as number)
               }
             >
-              <div className="h-38 mb-2 flex w-28 items-center justify-center overflow-hidden">
+              <div className="h-38 mb-2 flex w-28 items-center justify-center overflow-hidden sm:h-32">
                 <img
-                  className="h-full w-full object-cover rounded-md"
+                  className="h-full w-full object-cover"
                   src={getCharacterImg(character.character?.images)}
                   alt={character.character?.name}
                 />
@@ -67,6 +70,7 @@ const Characters = ({ id }: Props) => {
             </div>
           ))}
         </ul>
+
         <DialogCharactersPeople setIsOpen={setIsOpen} isOpen={isOpen} />
 
         {restCharacters.length > 0 && (
@@ -78,16 +82,16 @@ const Characters = ({ id }: Props) => {
             <AccordionItem value="all-characters border-0">
               <AccordionTrigger className="flex h-6 w-6 justify-center border-0"></AccordionTrigger>
               <AccordionContent className="border-0">
-                <ul className="center flex flex-wrap gap-2">
+                <ul className="center flex flex-wrap gap-2 lg:justify-evenly lg:gap-1">
                   {restCharacters.map(character => (
                     <div
                       className="flex w-28 flex-col items-center"
-                      key={`${character.character?.name}rest`}
+                      key={`${character.character?.name} rest`}
                       onClick={() =>
                         handlePerson(character.character?.mal_id as number)
                       }
                     >
-                      <div className="h-38 mb-2 flex w-28 items-center justify-center overflow-hidden">
+                      <div className="h-38 mb-2 flex w-28 items-center justify-center overflow-hidden sm:h-32">
                         <img
                           className="h-full w-full object-cover"
                           src={getCharacterImg(character.character?.images)}

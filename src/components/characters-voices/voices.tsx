@@ -1,10 +1,10 @@
 import { lazy, useState } from 'react'
 import { PersonFull } from '@/shared/api/jikan/generated'
+import { getPersoneImg } from '@/shared/utils/get-persone-img'
 import { usePersoneStore } from '@/store/characters-people'
 import dayjs from 'dayjs'
 
 import DialogAnime from './dialog-anime'
-import { getPersoneImg } from '@/shared/utils/get-persone-img'
 
 // import DialogAnime from './dialog-anime'
 // const DialogAnime = lazy(() => import('./dialog-anime'))
@@ -41,15 +41,17 @@ function Voices({ voices, handleClose }: Props) {
           alt=""
         />
         <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2">
-          <dt className="font-bold">Name:</dt>
+          <dt className="font-bold transition-colors sm:ml-1 sm:text-xs sm:font-medium">
+            Name:
+          </dt>
           <dd>
             {voices.name} / {voices.given_name} / {voices.family_name}
           </dd>
-          <dt className="font-bold">Birthday:</dt>
+          <dt className="font-bold transition-colors sm:ml-1 sm:text-xs sm:font-medium">Birthday:</dt>
           <dd>{dayjs(voices.birthday).format('DD.MM.YYYY')}</dd>
           {voices.about && (
             <>
-              <dt className="font-bold">About:</dt>
+              <dt className="font-bold transition-colors sm:ml-1 sm:text-xs sm:font-medium">About:</dt>
               <dd>{voices.about}</dd>
             </>
           )}
@@ -60,27 +62,35 @@ function Voices({ voices, handleClose }: Props) {
           voices.voices.map(anime => (
             <div
               key={`${anime.character?.name} ${anime.anime?.title} ${anime.character?.mal_id} voicesAnime`}
-              className="flex-co group mb-2 flex w-full items-center justify-between rounded-lg border border-border p-4 transition-colors hover:bg-accent/10 md:flex-row"
+              className="grid w-full grid-cols-2 items-center justify-between rounded-lg border border-border p-4 transition-colors hover:bg-accent/10"
+              // className="flex-col group mb-2 flex w-full items-center justify-between rounded-lg border border-border p-4 transition-colors hover:bg-accent/10 md:flex-row"
             >
               <div
                 onClick={() => handleAnimeName(anime.anime?.title)}
-                className="center"
+                className="flex items-center justify-start"
               >
                 <img
                   className="h-24 w-20 rounded object-cover"
                   src={getPersoneImg(anime.anime?.images)}
                   alt=""
                 />
-                <div className="ml-4">{anime.anime?.title}</div>
+
+                <div className="ml-2 font-medium transition-colors sm:ml-1 sm:text-xs">
+                  {anime.anime?.title}
+                </div>
               </div>
 
               <div
                 onClick={() => handleSetCharacter(anime.character?.mal_id)}
-                className="center cursor-pointer"
+                className="center cursor-pointer justify-end"
               >
                 <div className="mr-4 flex flex-col items-end">
-                  <div>{anime.character?.name}</div>
-                  <div>{anime.role}</div>
+                  <div className="ml-2 font-medium transition-colors sm:ml-1 sm:text-xs">
+                    {anime.character?.name}
+                  </div>
+                  <div className="ml-2 font-medium transition-colors sm:ml-1 sm:text-xs">
+                    {anime.role}
+                  </div>
                 </div>
                 <img
                   className="h-24 w-20 rounded object-cover"

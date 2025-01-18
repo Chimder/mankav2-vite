@@ -49,12 +49,12 @@ const CardsList = ({ mangas, isFetching }: Props) => {
               ))
             : mangas?.data?.map(manga => (
                 <Link
-                  className="mt-1 flex overflow-hidden rounded-lg border-gray-500 text-white hover:outline hover:outline-1 hover:outline-red-400"
+                  className="mt-1 flex w-full  rounded-lg border-gray-500 text-white hover:outline hover:outline-1 hover:outline-red-400"
                   to={`${PATH.MANGA.getTitlePath(manga.id)}?name=${getFirstTitle(manga.attributes?.title)}`}
                   key={manga?.id}
                 >
                   <img
-                    className="h-[180px] w-[140px] object-cover lg:pr-2 sm:w-[150px]"
+                    className=" object-cover lg:pr-2 sm:w-[150px]"
                     src={`${import.meta.env.VITE_IMG_PROXY}/img/mangadex.org/covers/${manga.id}/${manga.relationships?.find(obj => obj.type === 'cover_art')?.attributes?.fileName}.256.jpg`}
                     width={140}
                     height={180}
@@ -62,7 +62,7 @@ const CardsList = ({ mangas, isFetching }: Props) => {
                     alt=""
                   />
 
-                  <div className="flex flex-col">
+                  <div className="flex flex-col w-full">
                     <div className="m-1 text-lg md:text-sm">
                       {manga.attributes?.title?.en}
                     </div>

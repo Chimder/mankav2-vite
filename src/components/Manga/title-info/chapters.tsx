@@ -69,7 +69,8 @@ const Chapters = () => {
   return (
     <div className="flex h-full flex-col">
       <div className="chapters-scrollbar flex-grow overflow-y-auto">
-        <ul className="w-full p-5">
+        <h1 className="mt-1 text-center text-xl text-lime-200">Chapters</h1>
+        <ul className="w-full px-5">
           {isFetching ? (
             Array.from({ length: 16 }, (_, index) => (
               <div

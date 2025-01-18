@@ -22,10 +22,11 @@ export const AnimeTitle = () => {
   // const { dehydratedState } = useLoaderData<typeof loader>()
 
   return (
-    <div className="flex h-[calc(100vh-64px)] w-full bg-black">
-      <AnimeTitleInfo />
+    <div className="z-10 flex h-[calc(100vh-64px)] border-green-400 bg-black text-white md:h-full md:flex-col">
+        <AnimeTitleInfo />
+
       <section className="relative mx-1 flex w-3/5 flex-col rounded-md border border-border text-white">
-        <AnimeVideo />
+        {/* <AnimeVideo /> */}
       </section>
     </div>
   )

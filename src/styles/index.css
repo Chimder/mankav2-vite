@@ -86,15 +86,15 @@
   }
 
   .two {
-    @apply grid grid-cols-2 gap-2 px-4 md:grid-cols-1;
+    @apply grid grid-cols-2 gap-2 px-4 md:grid-cols-1 sm:px-0;
   }
 
   .skeletonBoxes {
-    @apply w-full max-w-[260px] max-h-[280px] aspect-[260/280];
+    @apply w-full max-w-[260px] h-[280px] aspect-[260/280] lg:w-[200px] xsm:h-[200px] xsm:w-[150px] ;
   }
 
   .skeletonTwo {
-    @apply w-full max-w-[740px] max-h-[180px] aspect-[140/180];
+    @apply w-full  h-[180px] aspect-[140/180];
   }
 
   .title {

@@ -29,7 +29,7 @@ const Info = () => {
     <section className="w-full text-white">
       <div className="mx-1 flex flex-col items-center justify-center rounded-lg border-1 bg-primary">
         <img
-          className="relative z-10 h-[440px] w-[310px]"
+          className="relative z-10 h-[440px] w-[310px] lg:h-[360px] lg:w-[260px]"
           src={getMangaImg(mangaId, manga?.data)}
           alt=""
         />

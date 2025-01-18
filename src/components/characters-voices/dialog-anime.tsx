@@ -19,6 +19,7 @@ export default function DialogAnime({
 }: Props) {
   const navigate = useNavigate()
   const { data } = aniwatchApi.useAnimeByName({ name })
+  console.log("DADATA",data)
 
   const handleAnimeClick = (animeId: string) => {
     // navigate(`${PATH.ANIME.getTitlePath(animeId)}`)

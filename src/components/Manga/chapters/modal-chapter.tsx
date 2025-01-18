@@ -116,7 +116,7 @@ function ModalChapter({
             )}
           </div>
         </div>
-        <ul className="ml-4 flex w-full flex-col items-center overflow-scroll overflow-x-hidden bg-black">
+        <ul className="ml-2 flex w-full flex-col items-center overflow-scroll md:ml-0 overflow-x-hidden bg-black">
           <div className="w-full">
             {chapters?.toReversed()?.map(({ chapter, count, id }) => (
               <div

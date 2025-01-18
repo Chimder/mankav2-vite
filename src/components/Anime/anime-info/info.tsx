@@ -31,7 +31,7 @@ function AnimeTitleInfo() {
   return (
     <section
       ref={scrollContainerRef}
-      className="filterBar gap-y-2 order-2 pr-1 flex w-2/5 flex-col overflow-hidden overflow-y-scroll text-white"
+      className="filterBar gap-y-2 order-2 pr-1 flex w-2/5 md:w-full order-1 flex-col overflow-hidden overflow-y-scroll text-white"
     >
       <div className="flex w-full p-2 flex-col items-center justify-center rounded-lg border-1 bg-primary">
         <img

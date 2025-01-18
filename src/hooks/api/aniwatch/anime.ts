@@ -35,9 +35,9 @@ export const aniwatchApi = {
 
         const topAnimes = res.data.data.animes.slice(0, 5)
 
-        const ress = findBestMatches(name, topAnimes)
+        // const ress = findBestMatches(name, topAnimes)
 
-        return ress
+        return topAnimes
       },
       refetchOnMount: false,
       enabled: Boolean(name),
