@@ -1,7 +1,8 @@
+import { ScrollRestoration, useParams } from 'react-router-dom'
+
 import { aniwatchApi } from '@/hooks/api/aniwatch/anime'
 
 import VideoList from './video-list'
-import { ScrollRestoration, useParams } from 'react-router-dom'
 
 type Props = {}
 
@@ -10,7 +11,7 @@ function AnimeVideo() {
   const { data: videoList } = aniwatchApi.useAnimeEpisodesById({ animeId: id })
 
   return (
-    <div className="chapters-scrollbar h-full overflow-y-scroll pb-6 bg-primary">
+    <div className="filterBar h-full overflow-y-scroll bg-primary pb-6 ">
       <ScrollRestoration />
       <VideoList
         key={`${videoList?.data?.totalEpisodes}${id}`}

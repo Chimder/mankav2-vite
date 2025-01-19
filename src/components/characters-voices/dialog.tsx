@@ -40,9 +40,9 @@ function DialogCharactersPeople({ isOpen = false, setIsOpen }: Props) {
   }, [handleClose, id])
 
   return (
-    <Dialog open={isOpen} onOpenChange={handleClose}>
+    <Dialog  open={isOpen} onOpenChange={handleClose}>
       <DialogContent
-        className="flex h-[90vh] w-[80vw] max-w-[1200px] md:w-[99vw] md:h-[94vh] flex-col items-center bg-black text-white justify-center p-2"
+        className="flex chapters-scrollbar h-[90vh] w-[80vw] max-w-[1200px] md:w-[99vw] md:h-[94vh] flex-col items-center bg-black text-white justify-center p-2"
         onPointerDownOutside={handleClose}
         onEscapeKeyDown={handleClose}
       >

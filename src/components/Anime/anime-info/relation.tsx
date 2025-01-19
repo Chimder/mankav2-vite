@@ -11,7 +11,7 @@ function AnimeRelation({ animes }: Props) {
   if (!animes || !animes.length) return null
 
   return (
-    <div className="rounded-lg border bg-primary">
+    <div className="rounded-lg border bg-primary md:hidden">
       <div className="flex- flex-col">
         <h1 className="center mt-4">Relation</h1>
         <div className="flex flex-row flex-wrap justify-center gap-3">

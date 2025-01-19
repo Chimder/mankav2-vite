@@ -21,7 +21,7 @@ export const MangaChapter = () => {
   const { data: chapterData } = chapterApi.useMangaChapters(id as string)
   const { flatAggregate, nextChapter } = useAggregateChapter()
 
-  console.log('CHA{',chapterData)
+  console.log('CHA{', chapterData)
   const imageRefs = useRef<(HTMLDivElement | null)[]>([])
   const externalUrl = chapterData?.data?.attributes?.externalUrl
   const totalPages = chapters?.chapter?.data?.length || 0
@@ -69,7 +69,7 @@ export const MangaChapter = () => {
           </div>
         ))
       ) : (
-        <ExternalChapter key={"ExternalChapter"} externalUrl={externalUrl} />
+        <ExternalChapter key={'ExternalChapter'} externalUrl={externalUrl} />
       )}
 
       <ModalChapter

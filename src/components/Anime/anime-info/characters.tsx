@@ -25,7 +25,7 @@ const Characters = ({ id }: Props) => {
     isLoading,
   } = jikanAnimeApi.useAnimeCharactersById({ id: Number(id) })
 
-  console.log('ADADUWUUW')
+  // console.log('ADADUWUUW')
   const setPersone = usePersoneStore().setPersone
 
   const [isOpen, setIsOpen] = useState(false)
@@ -33,7 +33,7 @@ const Characters = ({ id }: Props) => {
     setPersone(id, 'character')
     setIsOpen(true)
   }
-  console.log('IS', isOpen)
+  // console.log('IS', isOpen)
 
   const firstSixCharacters = characters?.data?.slice(0, 6) || []
   const restCharacters = characters?.data?.slice(6) || []
@@ -45,7 +45,7 @@ const Characters = ({ id }: Props) => {
   }
 
   return (
-    <div className="center m-2 flex-col rounded-lg border-1 bg-primary sm:mx-0">
+    <div className="center m-2 md:m-0 flex-col rounded-lg border-1 bg-primary sm:mx-0">
       <h1 className="text-lg text-yellow-700">Characters</h1>
       <div className="">
         <ul className="center flex flex-wrap gap-2 lg:justify-evenly lg:gap-1">
