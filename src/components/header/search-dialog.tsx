@@ -29,7 +29,7 @@ function SearchDialog({ isOpen, setIsOpen }: Props) {
   }
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="flex h-[50vh] w-[50vw] flex-col items-center justify-center rounded-lg bg-black p-2">
+      <DialogContent className="flex h-[70vh] max-w-[700px] flex-col items-center justify-center rounded-lg bg-black p-2">
         <section className="relative flex h-full w-full flex-col justify-center pt-10">
           <div className="flex">
             <input
@@ -56,11 +56,11 @@ function SearchDialog({ isOpen, setIsOpen }: Props) {
                 <div
                   className="my-1 flex h-full w-full cursor-pointer rounded-sm border-[1px] bg-transparent hover:bg-slate-800"
                   onClick={() => {
-                    handleClose()
-                    setSearchQuery('')
                     navigate(
                       `${PATH.MANGA.getTitlePath(manga.id)}?name=${getFirstTitle(manga.attributes?.title)}`,
                     )
+                    handleClose()
+                    setSearchQuery('')
                   }}
                   key={manga.id}
                 >

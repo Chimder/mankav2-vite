@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Icons from '@/assets/svg/icons'
 import { Link } from 'react-router-dom'
 
+import useIsMobile from '@/hooks/use-is-mobile'
 import { PATH } from '@/app/routers/path-constants'
 
 import { Button } from '../ui/button'
@@ -9,6 +10,7 @@ import SearchDialog from './search-dialog'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
+  const isMobile = useIsMobile()
 
   return (
     <div className="sticky top-0 z-50 h-[64px] w-full bg-black shadow-header">
@@ -21,7 +23,7 @@ export default function Header() {
               to={PATH.HOME}
             >
               <h1 className="text-4xl decoration-cyan-200 hover:underline">
-                Manka
+                {isMobile ? 'M' : 'Manka'}
               </h1>
             </Link>
           </div>
@@ -33,7 +35,7 @@ export default function Header() {
               to={PATH.MANGA.SEARCH}
             >
               <Button
-                className="cursor-default text-green-400 decoration-green-400 hover:underline"
+                className="cursor-default text-green-400 decoration-green-400 hover:underline sm:text-sm"
                 variant={'link'}
               >
                 Advanced Search

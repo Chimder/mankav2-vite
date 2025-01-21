@@ -37,7 +37,7 @@ export const FilterMangaBar = () => {
   }
   console.log('TESADSa', tags)
   return (
-    <div className="flex-col gap-2.5 bg-black p-1 text-white">
+    <div className="flex-col gap-2.5 bg-black p-1 text-white  ">
       <div className="mb-1 flex w-full">
         <div
           className="center mr-1 w-8/12 cursor-pointer rounded-md border-1 border-green-400 bg-transparent px-3 py-2 text-base text-green-300 decoration-green-400 hover:bg-transparent hover:underline"
