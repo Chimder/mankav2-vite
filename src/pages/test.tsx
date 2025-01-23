@@ -5,15 +5,13 @@ export const Test = () => {
 
   const measuredRef = React.useCallback((node: HTMLDivElement) => {
     if (node !== null) {
-      node.scrollIntoView({behavior:'smooth'})
-
-
+      node.scrollIntoView({ behavior: 'smooth' })
     }
   }, [])
 
   return (
     <>
-    <div className='h-[1000px]'></div>
+      <div className="h-[1000px]"></div>
       <h1 className="h-10" ref={measuredRef}>
         Hello, world
       </h1>
