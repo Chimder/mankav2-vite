@@ -10,7 +10,10 @@ export default defineConfig({
         plugins: [['babel-plugin-react-compiler']],
       },
     }),
-    viteCompression(),
+    viteCompression({
+      algorithm: 'brotliCompress',
+    }),
+    // viteCompression({}),
   ],
   base: '/',
   resolve: {
@@ -37,24 +40,4 @@ export default defineConfig({
     open: true,
     cors: true,
   },
-
-
-
-
-  // optimizeDeps: {
-  //   include: [
-  //     'react',
-  //     'react-dom',
-  //     'react-router-dom',
-  //     '@tanstack/react-query',
-  //     '@tanstack/react-query-devtools',
-  //     'axios',
-  //     'zustand',
-  //     'immer',
-  //     'clsx',
-  //     'classnames',
-  //     'dayjs',
-  //   ],
-  //   exclude: ['@radix-ui/themes'],
-  // },
 })
