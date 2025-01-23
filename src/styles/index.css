@@ -82,7 +82,8 @@
   }
 
   .boxes {
-    @apply flex flex-wrap gap-8 justify-center w-full p-0 list-none md:gap-2 xsm:justify-evenly;
+    @apply flex flex-wrap gap-8 justify-center w-full p-0 list-none  ;
+    /* @apply flex flex-wrap  w-full p-0 list-none ; */
   }
 
   .two {

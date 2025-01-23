@@ -1,9 +1,9 @@
-import { PATH } from '@/shared/constants/path-constants'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { aniwatchApi } from '@/hooks/api/aniwatch/anime'
 
 import { Dialog, DialogContent } from '../ui/dialog'
+import { PATH } from '@/app/routers/path-constants'
 
 type Props = {
   name: string

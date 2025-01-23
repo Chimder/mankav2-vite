@@ -27,16 +27,16 @@ export const Favorites = () => {
 
   return (
     <div className="center mx-auto mt-10 w-full max-w-[1400px] flex-col">
-      <div className="center mb-6 gap-x-10">
+      <div className="center mb-6 gap-x-10 md:gap-x-4">
         <button
           onClick={() => setType('manga')}
-          className="w-full rounded-lg bg-orange-600 px-40 py-4 hover:bg-orange-500"
+          className="w-full rounded-lg bg-orange-600 px-40 py-4 hover:bg-orange-500 lg:px-32 sm:px-16"
         >
           Manga
         </button>
         <button
           onClick={() => setType('anime')}
-          className="w-full rounded-lg bg-teal-600 px-40 py-4 hover:bg-teal-500"
+          className="w-full rounded-lg bg-teal-600 px-40 py-4 hover:bg-teal-500 lg:px-32 sm:px-16"
         >
           Anime
         </button>
@@ -51,9 +51,9 @@ export const Favorites = () => {
           ) : mangasData?.data?.length ? (
             mangasData.data.map(manga => (
               <Link
-                className="flex w-[260px] flex-col overflow-hidden rounded-xl pb-1 text-white hover:outline hover:outline-1 hover:outline-red-400"
-                to={`${PATH.MANGA.getTitlePath(manga.id)}?name=${getFirstTitle(manga.attributes?.title)}`}
-                key={manga.id}
+                className="flex w-[260px] flex-col overflow-hidden rounded-xl pb-1 text-white hover:outline hover:outline-1 hover:outline-red-400 lg:w-[200px] xsm:h-[200px] xsm:w-[150px]"
+                to={`${PATH.MANGA.getTitlePath(manga?.id)}?name=${getFirstTitle(manga.attributes?.title)}`}
+                key={manga?.id}
               >
                 <img
                   className="h-[280px] w-[260px] rounded-xl object-cover"
@@ -63,7 +63,7 @@ export const Favorites = () => {
                   loading="lazy"
                   alt=""
                 />
-                <div className="ml-1 mt-1 line-clamp-2 min-h-[40px] w-full overflow-hidden text-ellipsis leading-[20px]">
+                <div className="ml-1 mt-1 line-clamp-2 min-h-[40px] w-full overflow-hidden text-ellipsis leading-[20px] sm:hidden">
                   {getFirstTitle(manga.attributes?.title)}
                 </div>
               </Link>

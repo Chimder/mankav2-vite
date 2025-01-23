@@ -1,7 +1,7 @@
-import { PATH } from '@/shared/constants/path-constants'
 import { Link } from 'react-router-dom'
 
 import { RelatedAnime } from '@/hooks/api/aniwatch/types'
+import { PATH } from '@/app/routers/path-constants'
 
 type Props = {
   animes: RelatedAnime[]

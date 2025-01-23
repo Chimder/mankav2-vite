@@ -1,11 +1,11 @@
 import { LocalizedString, MangaList } from '@/shared/api/mangadex/generated'
-import { PATH } from '@/shared/constants/path-constants'
 import { cn } from '@/shared/lib/tailwind'
 import { getFirstTitle } from '@/shared/utils/get-first-title'
 import { useCardSwitcherStore } from '@/store/card-switcher'
 import { Link } from 'react-router-dom'
 
 import { Skeleton } from '../../ui/skeleton'
+import { PATH } from '@/app/routers/path-constants'
 
 type Props = {
   mangas: MangaList | undefined

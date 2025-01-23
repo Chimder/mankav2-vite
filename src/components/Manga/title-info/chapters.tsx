@@ -2,7 +2,6 @@
 import { lazy } from 'react'
 import { Chapter } from '@/shared/api/mangadex/generated'
 import { OffsetFilterTitle } from '@/shared/constants/filters'
-import { PATH } from '@/shared/constants/path-constants'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
@@ -10,6 +9,7 @@ import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { feedApi } from '@/hooks/api/mangadex/feeds'
 
 import { Skeleton } from '../../ui/skeleton'
+import { PATH } from '@/app/routers/path-constants'
 
 const PaginationButtons = lazy(() => import('./pagination-title'))
 
@@ -30,7 +30,7 @@ const Chapters = () => {
     id: mangaId?.toString(),
     offset: (currentPage - 1) * OffsetFilterTitle,
   })
-  console.log('CAHPDWA>>>%$#%#', chapters)
+  // console.log('CAHPDWA>>>%$#%#', chapters)
 
   function filterChapters(chapters: Chapter[] | undefined): ExtendedChapter[] {
     if (!chapters?.length) return []
@@ -63,7 +63,7 @@ const Chapters = () => {
     })
   }
 
-  console.log('CHA23432243', chapters?.data)
+  // console.log('CHA23432243', chapters?.data)
   const filteredChapters = filterChapters(chapters?.data)
 
   return (

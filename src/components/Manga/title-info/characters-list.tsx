@@ -1,9 +1,11 @@
 import { lazy, useState } from 'react'
 import { getCharacterImg } from '@/shared/utils/get-character-img'
 import { usePersoneStore } from '@/store/characters-people'
-import { useSearchParams } from 'react-router-dom'
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { useParams, useSearchParams } from 'react-router-dom'
 
 import { jikanMangaApi } from '@/hooks/api/jikan/manga'
+import { mangaApi } from '@/hooks/api/mangadex/manga'
 import {
   Accordion,
   AccordionContent,
@@ -16,18 +18,16 @@ const DialogCharactersPeople = lazy(
 )
 
 const CharactersList = () => {
-  const [searchParams] = useSearchParams()
-  const name = searchParams.get('name')
-  const {
-    data: manga,
-    isFetching: isFetchingManga,
-    isLoading: isLoadingManga,
-  } = jikanMangaApi.useMangaByName({ name })
+  const { id: mangaId } = useParams()
+
+  const { data: manga } = useSuspenseQuery(mangaApi.useMangaByID(mangaId))
   const {
     data: characters,
     isFetching: isFetchingCharacters,
     isLoading: isLoadingCharacters,
-  } = jikanMangaApi.useMangaCharacters({ id: manga?.mal_id })
+  } = jikanMangaApi.useMangaCharacters({
+    id: Number(manga?.data?.attributes?.links?.mal),
+  })
 
   const setPersone = usePersoneStore().setPersone
 
@@ -45,8 +45,8 @@ const CharactersList = () => {
   const firstSixCharacters = characters?.data?.slice(0, 6) || []
   const restCharacters = characters?.data?.slice(6) || []
 
-  const isLoading = isLoadingManga || isLoadingCharacters
-  const isFetching = isFetchingManga || isFetchingCharacters
+  const isLoading = isLoadingCharacters
+  const isFetching = isFetchingCharacters
   if (isFetching || isLoading || !characters?.data?.length) {
     return null
   }

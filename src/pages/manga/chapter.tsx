@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react'
-import { PATH } from '@/shared/constants/path-constants'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
 
 import { chapterApi } from '@/hooks/api/mangadex/chapter'
@@ -7,6 +6,7 @@ import useAggregateChapter from '@/hooks/use-aggregate-chapter'
 import usePageTrack from '@/hooks/use-chapter-tracker'
 import ExternalChapter from '@/components/external-chapter'
 import ModalChapter from '@/components/Manga/chapters/modal-chapter'
+import { PATH } from '@/app/routers/path-constants'
 
 export const MangaChapter = () => {
   const [searchParams] = useSearchParams()

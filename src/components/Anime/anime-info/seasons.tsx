@@ -1,5 +1,5 @@
+import { PATH } from '@/app/routers/path-constants'
 import { Season } from '@/hooks/api/aniwatch/types'
-import { PATH } from '@/shared/constants/path-constants'
 import { Link } from 'react-router-dom'
 
 type Props = {

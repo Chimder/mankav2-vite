@@ -1,25 +1,23 @@
-import { Suspense } from 'react'
+import React from 'react'
 
-import { aniwatchApi } from '@/hooks/api/aniwatch/anime'
-import { Button } from '@/components/ui/button'
+export const Test = () => {
+  const [height, setHeight] = React.useState(0)
 
-// import { jikanMangaApi } from '@/hooks/api/jikan/manga'
+  const measuredRef = React.useCallback((node: HTMLDivElement) => {
+    if (node !== null) {
+      node.scrollIntoView({behavior:'smooth'})
 
-function Test() {
-  // const { data } = aniwatchApi.useAnimeByName({
-  //   name: 'Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e 3rd Season',
-  // })
-  // console.log('data>>>', data)
+
+    }
+  }, [])
 
   return (
-    <Suspense fallback={<div className="text-5xl text-white">loading....</div>}>
-      <div className="h-full w-full bg-primary">
-        <ul className="text-secondary">test ONe</ul>
-        <div className="text-6xl text-amber-500">Test text</div>
-        {/* <Button variant={'outline'}> butt</Button> */}
-      </div>
-    </Suspense>
+    <>
+    <div className='h-[1000px]'></div>
+      <h1 className="h-10" ref={measuredRef}>
+        Hello, world
+      </h1>
+      <h2>The above header is {Math.round(height)}px tall</h2>
+    </>
   )
 }
-
-export default Test

@@ -1,5 +1,5 @@
+import { PATH } from '@/app/routers/path-constants'
 import { OffsetFilterTitle } from '@/shared/constants/filters'
-import { PATH } from '@/shared/constants/path-constants'
 import { cn } from '@/shared/lib/tailwind'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 

@@ -1,16 +1,22 @@
+import { QueryClient } from '@tanstack/react-query'
+import { LoaderFunctionArgs } from 'react-router-dom'
+
+import { mangaApi } from '@/hooks/api/mangadex/manga'
 import Chapters from '@/components/Manga/title-info/chapters'
 import Info from '@/components/Manga/title-info/info'
 
-// export const loader =
-//   (queryClient: QueryClient) =>
-//   async ({ params }: LoaderFunctionArgs) => {
-//     const { id } = params
-//     if (!params.id) {
-//       throw new Error('No ID')
-//     }
-//     await queryClient.ensureQueryData(mangaApi.useMangaByID(id))
-//     return { id: id }
-//   }
+export const loader =
+  (queryClient: QueryClient) =>
+  async ({ params, request }: LoaderFunctionArgs) => {
+    const { id } = params
+    if (!params.id) {
+      throw new Error('No ID')
+    }
+    console.log('REQ', request)
+    queryClient.ensureQueryData(mangaApi.useMangaByID(id))
+    // await queryClient.ensureQueryData(jikanMangaApi.useMangaByName({ name }))
+    return { id: id }
+  }
 
 export const MangaTitle = () => {
   return (

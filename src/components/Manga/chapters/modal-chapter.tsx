@@ -3,7 +3,6 @@ import {
   ChapterResponse,
   LocalizedString,
 } from '@/shared/api/mangadex/generated'
-import { PATH } from '@/shared/constants/path-constants'
 import { cn } from '@/shared/lib/tailwind'
 import { getFirstTitle } from '@/shared/utils/get-first-title'
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
@@ -15,6 +14,7 @@ import {
   DialogTrigger,
 } from '../../ui/dialog'
 import { Input } from '../../ui/input'
+import { PATH } from '@/app/routers/path-constants'
 
 type flatAggregate = {
   chapter?: string

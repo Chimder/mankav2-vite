@@ -1,13 +1,24 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
+import { queryClient } from '../providers/tanstack-query'
+import { Layout } from './layout'
+
 export default function Routes() {
   const router = createBrowserRouter([
     {
-      async lazy() {
-        let { Layout } = await import('./layout')
-        return { Component: Layout }
-      },
+      // async lazy() {
+      //   let { Layout } = await import('./layout')
+      //   return { Component: Layout }
+      // },
+      element: <Layout />,
       children: [
+        {
+          path: '/test',
+          async lazy() {
+            let { Test } = await import('../../pages/test')
+            return { Component: Test }
+          },
+        },
         {
           path: '/',
           async lazy() {
@@ -43,8 +54,10 @@ export default function Routes() {
             {
               path: 'title/:id',
               async lazy() {
-                let { MangaTitle } = await import('../../pages/manga/title')
-                return { Component: MangaTitle }
+                let { MangaTitle, loader } = await import(
+                  '../../pages/manga/title'
+                )
+                return { loader: loader(queryClient), Component: MangaTitle }
               },
             },
             {

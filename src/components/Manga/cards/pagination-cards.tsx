@@ -1,4 +1,4 @@
-import { PATH } from '@/shared/constants/path-constants'
+import { PATH } from '@/app/routers/path-constants'
 import { cn } from '@/shared/lib/tailwind'
 import { useNavigate } from 'react-router-dom'
 

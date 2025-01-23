@@ -1,4 +1,3 @@
-import { PATH } from '@/shared/constants/path-constants'
 import { getFirstTitle } from '@/shared/utils/get-first-title'
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -6,6 +5,7 @@ import { mangaApi } from '@/hooks/api/mangadex/manga'
 
 import { getMangaImg } from '../Manga/title-info/info'
 import { Dialog, DialogContent } from '../ui/dialog'
+import { PATH } from '@/app/routers/path-constants'
 
 type Props = {
   name: string

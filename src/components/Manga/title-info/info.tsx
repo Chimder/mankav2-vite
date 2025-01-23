@@ -1,6 +1,7 @@
 import { Manga } from '@/shared/api/mangadex/generated'
 import { cn } from '@/shared/lib/tailwind'
 import { getFirstTitle } from '@/shared/utils/get-first-title'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import dayjs from 'dayjs'
 import { useParams } from 'react-router-dom'
 
@@ -21,7 +22,7 @@ export const getMangaImg = (id?: string, manga?: Manga) => {
 
 const Info = () => {
   const { id: mangaId } = useParams()
-  const { data: manga } = mangaApi.useMangaByID(mangaId)
+  const { data: manga } = useSuspenseQuery(mangaApi.useMangaByID(mangaId))
 
   const { isFavorite, handleToggleFavorite } = useFavoriteManga()
 
