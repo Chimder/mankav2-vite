@@ -1,5 +1,4 @@
 import { getFirstTitle } from '@/shared/utils/get-first-title'
-import { useSuspenseQuery } from '@tanstack/react-query'
 import { Link, useParams } from 'react-router-dom'
 
 import { mangaApi } from '@/hooks/api/mangadex/manga'
@@ -11,7 +10,7 @@ const Relation = () => {
     data: manga,
     isFetching,
     isLoading,
-  } = useSuspenseQuery(mangaApi.useMangaByID(mangaId))
+  } = mangaApi.useMangaByID(mangaId)
   const mangasIds = manga?.data?.relationships
     ?.map(id => id.id)
     .filter((id): id is string => id !== undefined)

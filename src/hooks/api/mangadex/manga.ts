@@ -20,7 +20,7 @@ export type mangaSearchOps = {
 export const mangaApi = {
   baseKey: 'manga',
   useMangaByID: (id?: string) => {
-    return queryOptions({
+    return useQuery({
       queryKey: [mangaApi.baseKey, id],
       queryFn: ({ signal }) => {
         if (!id) return undefined

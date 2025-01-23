@@ -1,37 +1,44 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-import { queryClient } from '../providers/tanstack-query'
+import { AnimeMain } from '../../pages/anime/index'
+import { AnimeTitle } from '../../pages/anime/title'
+import { Favorites } from '../../pages/favorites'
+import { Home } from '../../pages/home'
+import { MangaChapter } from '../../pages/manga/chapter'
+import { MangaMain } from '../../pages/manga/index'
+import { MangaSearch } from '../../pages/manga/search'
+import { MangaTitle } from '../../pages/manga/title'
+import { Test } from '../../pages/test'
 import { Layout } from './layout'
 
 export default function Routes() {
   const router = createBrowserRouter([
     {
-      // async lazy() {
-      //   let { Layout } = await import('./layout')
-      //   return { Component: Layout }
-      // },
       element: <Layout />,
       children: [
         {
           path: '/test',
-          async lazy() {
-            let { Test } = await import('../../pages/test')
-            return { Component: Test }
-          },
+          element: <Test />,
+          // async lazy() {
+          //   let { Test } = await import('../../pages/test')
+          //   return { Component: Test }
+          // },
         },
         {
           path: '/',
-          async lazy() {
-            let { Home } = await import('../../pages/home')
-            return { Component: Home }
-          },
+          element: <Home />,
+          // async lazy() {
+          //   let { Home } = await import('../../pages/home')
+          //   return { Component: Home }
+          // },
         },
         {
           path: '/favorites',
-          async lazy() {
-            let { Favorites } = await import('../../pages/favorites')
-            return { Component: Favorites }
-          },
+          element: <Favorites />,
+          // async lazy() {
+          //   let { Favorites } = await import('../../pages/favorites')
+          //   return { Component: Favorites }
+          // },
         },
 
         {
@@ -39,35 +46,37 @@ export default function Routes() {
           children: [
             {
               path: '',
-              async lazy() {
-                let { MangaMain } = await import('../../pages/manga/index')
-                return { Component: MangaMain }
-              },
+              element: <MangaMain />,
+              // async lazy() {
+              //   let { MangaMain } = await import('../../pages/manga/index')
+              //   return { Component: MangaMain }
+              // },
             },
             {
               path: 'search',
-              async lazy() {
-                let { MangaSearch } = await import('../../pages/manga/search')
-                return { Component: MangaSearch }
-              },
+              element: <MangaSearch />,
+              // async lazy() {
+              //   let { MangaSearch } = await import('../../pages/manga/search')
+              //   return { Component: MangaSearch }
+              // },
             },
             {
               path: 'title/:id',
-              async lazy() {
-                let { MangaTitle, loader } = await import(
-                  '../../pages/manga/title'
-                )
-                return { loader: loader(queryClient), Component: MangaTitle }
-              },
+              element: <MangaTitle />,
+              // async lazy() {
+              //   let { MangaTitle } = await import('../../pages/manga/title')
+              //   return { Component: MangaTitle }
+              // },
             },
             {
               path: 'chapter/:id',
-              async lazy() {
-                let { MangaChapter } = await import('../../pages/manga/chapter')
-                return {
-                  Component: MangaChapter,
-                }
-              },
+              element: <MangaChapter />,
+              // async lazy() {
+              //   let { MangaChapter } = await import('../../pages/manga/chapter')
+              //   return {
+              //     Component: MangaChapter,
+              //   }
+              // },
             },
           ],
         },
@@ -76,17 +85,19 @@ export default function Routes() {
           children: [
             {
               path: '',
-              async lazy() {
-                let { AnimeMain } = await import('../../pages/anime/index')
-                return { Component: AnimeMain }
-              },
+              element: <AnimeMain />,
+              // async lazy() {
+              //   let { AnimeMain } = await import('../../pages/anime/index')
+              //   return { Component: AnimeMain }
+              // },
             },
             {
               path: 'title/:id',
-              async lazy() {
-                let { AnimeTitle } = await import('../../pages/anime/title')
-                return { Component: AnimeTitle }
-              },
+              element: <AnimeTitle />,
+              // async lazy() {
+              //   let { AnimeTitle } = await import('../../pages/anime/title')
+              //   return { Component: AnimeTitle }
+              // },
             },
             // {
             //   path: 'search',

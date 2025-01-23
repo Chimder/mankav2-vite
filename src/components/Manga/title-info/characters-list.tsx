@@ -1,8 +1,7 @@
 import { lazy, useState } from 'react'
 import { getCharacterImg } from '@/shared/utils/get-character-img'
 import { usePersoneStore } from '@/store/characters-people'
-import { useSuspenseQuery } from '@tanstack/react-query'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 import { jikanMangaApi } from '@/hooks/api/jikan/manga'
 import { mangaApi } from '@/hooks/api/mangadex/manga'
@@ -20,7 +19,7 @@ const DialogCharactersPeople = lazy(
 const CharactersList = () => {
   const { id: mangaId } = useParams()
 
-  const { data: manga } = useSuspenseQuery(mangaApi.useMangaByID(mangaId))
+  const { data: manga } = mangaApi.useMangaByID(mangaId)
   const {
     data: characters,
     isFetching: isFetchingCharacters,

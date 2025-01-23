@@ -22,7 +22,7 @@ export const getMangaImg = (id?: string, manga?: Manga) => {
 
 const Info = () => {
   const { id: mangaId } = useParams()
-  const { data: manga } = useSuspenseQuery(mangaApi.useMangaByID(mangaId))
+  const { data: manga } = mangaApi.useMangaByID(mangaId)
 
   const { isFavorite, handleToggleFavorite } = useFavoriteManga()
 
