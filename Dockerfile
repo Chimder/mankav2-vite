@@ -32,6 +32,9 @@ RUN npm install -g pnpm
 ARG VITE_IMG_PROXY
 ARG VITE_ANIWATCH
 
+ENV VITE_IMG_PROXY=$VITE_IMG_PROXY
+ENV VITE_ANIWATCH=$VITE_ANIWATCH
+
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 
