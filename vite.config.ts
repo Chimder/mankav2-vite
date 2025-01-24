@@ -10,10 +10,10 @@ export default defineConfig({
         plugins: [['babel-plugin-react-compiler']],
       },
     }),
-    viteCompression({
-      algorithm: 'brotliCompress',
-    }),
-    // viteCompression({}),
+    viteCompression({}),
+    // viteCompression({
+    //   algorithm: 'brotliCompress',
+    // }),
   ],
   base: '/',
   resolve: {
