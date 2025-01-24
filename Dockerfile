@@ -29,6 +29,8 @@ FROM node:20-alpine AS build
 WORKDIR /app
 
 RUN npm install -g pnpm
+ARG VITE_IMG_PROXY
+ARG VITE_ANIWATCH
 
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
