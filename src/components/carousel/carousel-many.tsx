@@ -1,8 +1,5 @@
-/* eslint-disable react-compiler/react-compiler */
-import * as React from 'react'
 import { Manga } from '@/shared/api/mangadex/generated'
 import { getFirstTitle } from '@/shared/utils/get-first-title'
-import Autoplay from 'embla-carousel-autoplay'
 import { Link } from 'react-router-dom'
 
 import {

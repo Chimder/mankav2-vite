@@ -15,9 +15,9 @@ function Character({ character, handleClose }: Props) {
 
   const [animeName, setAnimeName] = useState('')
   const [isOpenAnime, setIsOpenAnime] = useState(false)
+
   function handleAnimeName(name?: string) {
     if (!name) return null
-    console.log('DSADADADADgdfgdg')
     setAnimeName(name)
     setIsOpenAnime(true)
   }

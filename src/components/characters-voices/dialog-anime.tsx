@@ -1,9 +1,9 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { aniwatchApi } from '@/hooks/api/aniwatch/anime'
+import { PATH } from '@/app/routers/path-constants'
 
 import { Dialog, DialogContent } from '../ui/dialog'
-import { PATH } from '@/app/routers/path-constants'
 
 type Props = {
   name: string
@@ -17,14 +17,13 @@ export default function DialogAnime({
   handleClose,
   name,
 }: Props) {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const { data } = aniwatchApi.useAnimeByName({ name })
-  console.log("DADATA",data)
 
-  const handleAnimeClick = (animeId: string) => {
-    // navigate(`${PATH.ANIME.getTitlePath(animeId)}`)
-    // handleClose()
-  }
+  // const handleAnimeClick = (animeId: string) => {
+  // navigate(`${PATH.ANIME.getTitlePath(animeId)}`)
+  // handleClose()
+  // }
   if (!data) return null
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>

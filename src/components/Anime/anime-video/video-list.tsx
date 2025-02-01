@@ -1,4 +1,3 @@
-// VideoList.tsx
 import { useEffect, useRef, useState } from 'react'
 import { cn } from '@/shared/lib/tailwind'
 
@@ -20,7 +19,6 @@ function VideoList({ video }: Props) {
   const refEpisodes = useRef<Record<number, HTMLDivElement | null>>({})
   const isMobile = useIsMobile()
 
-  console.log("ISMO",isMobile)
   function handleVideoDialog(episodeId: string) {
     setIsOpen(true)
     setEpisodeId(episodeId)
